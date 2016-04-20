@@ -1,4 +1,4 @@
-package com.example.armadallianonimi.emergencyphonenumbers;
+package com.example.armadillianonimi.emergencyphonenumbers;
 
 import org.junit.Test;
 

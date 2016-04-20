@@ -1,4 +1,4 @@
-package com.example.armadallianonimi.emergencyphonenumbers;
+package com.example.armadillianonimi.emergencyphonenumbers;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
