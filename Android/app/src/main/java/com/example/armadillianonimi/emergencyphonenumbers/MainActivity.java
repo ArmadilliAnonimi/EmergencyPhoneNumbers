@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 
 import android.support.v7.widget.Toolbar;
+import android.widget.TextView;
+
 import com.example.armadillianonimi.emergencyphonenumbers.ViewPagerAdapter;
 import com.example.armadillianonimi.emergencyphonenumbers.SlidingTabLayout;
 
@@ -25,10 +27,11 @@ public class MainActivity extends AppCompatActivity {
 
         // Creating The Toolbar and setting it as the Toolbar for the activity
         toolbar = (Toolbar) findViewById(R.id.tool_bar);
-        toolbar.setTitle("Switzerland");
+        toolbar.setTitle("");
         setSupportActionBar(toolbar);
 
-
+        TextView country = (TextView) findViewById(R.id.country);
+        country.setText("ciao");
         // Creating The ViewPagerAdapter and Passing Fragment Manager, Titles fot the Tabs and Number Of Tabs.
         adapter = new ViewPagerAdapter(getSupportFragmentManager(), Titles, numberOfTabs);
 

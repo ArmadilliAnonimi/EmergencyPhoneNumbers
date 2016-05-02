@@ -7,6 +7,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.armadillianonimi.emergencyphonenumbers.R;
+
 /**
  * Created by patrickbalestra on 14/03/2015.
  */
