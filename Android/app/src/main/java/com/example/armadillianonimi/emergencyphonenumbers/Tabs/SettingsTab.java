@@ -8,16 +8,13 @@ import android.view.View;
 import android.view.ViewGroup;
 
 /**
- * Created by Dr.h3cker on 14/03/2015.
+ * Created by Dr.h3cker on 16/03/2015.
  */
-public class tab2 extends Fragment {
-
+public class SettingsTab extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-
-View view =inflater.inflate(R.layout.tab2,container,false);
-
+        View view = inflater.inflate(R.layout.settings_tab, container, false);
         return view;
     }
 }

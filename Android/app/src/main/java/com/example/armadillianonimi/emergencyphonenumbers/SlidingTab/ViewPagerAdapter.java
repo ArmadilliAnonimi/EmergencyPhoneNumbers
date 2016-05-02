@@ -3,7 +3,9 @@ package com.example.armadillianonimi.emergencyphonenumbers;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
-
+import com.example.armadillianonimi.emergencyphonenumbers.EmergencyTab;
+import com.example.armadillianonimi.emergencyphonenumbers.LocationTab;
+import com.example.armadillianonimi.emergencyphonenumbers.SettingsTab;
 
 /**
  * Created by patrickbalestra on 5/2/16.
@@ -27,33 +29,22 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
     @Override
     public Fragment getItem(int position) {
 
-        if(position == 0) // if the position is 0 we are returning the First tab
-        {
-            tab1 tab1 = new tab1();
+        if(position == 0) {
+            EmergencyTab tab1 = new EmergencyTab();
             return tab1;
-        }
-        else if(position == 1)
-        {
-            tab2 tab2 = new tab2();
+        } else if(position == 1) {
+            LocationTab tab2 = new LocationTab();
             return tab2;
-        }
-        else             // As we are having 2 tabs if the position is now 0 it must be 1 so we are returning second tab
-        {
-            tab3 tab3 = new tab3();
+        } else {
+            SettingsTab tab3 = new SettingsTab();
             return tab3;
         }
-
-
     }
-
-    // This method return the titles for the Tabs in the Tab Strip
 
     @Override
     public CharSequence getPageTitle(int position) {
         return Titles[position];
     }
-
-    // This method return the Number of tabs for the tabs Strip
 
     @Override
     public int getCount() {

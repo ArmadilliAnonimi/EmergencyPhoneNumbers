@@ -15,20 +15,22 @@ package com.example.armadillianonimi.emergencyphonenumbers;
  * limitations under the License.
  */
 
-        import android.content.Context;
-        import android.graphics.Typeface;
-        import android.support.v4.view.PagerAdapter;
-        import android.support.v4.view.ViewPager;
-        import android.util.AttributeSet;
-        import android.util.SparseArray;
-        import android.util.TypedValue;
-        import android.view.Gravity;
-        import android.view.LayoutInflater;
-        import android.view.View;
-        import android.view.ViewGroup;
-        import android.widget.HorizontalScrollView;
-        import android.widget.LinearLayout;
-        import android.widget.TextView;
+import android.content.Context;
+import android.graphics.Typeface;
+import android.support.v4.view.PagerAdapter;
+import android.support.v4.view.ViewPager;
+import android.util.AttributeSet;
+import android.util.SparseArray;
+import android.util.TypedValue;
+import android.view.Gravity;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.HorizontalScrollView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+
+import com.example.armadillianonimi.emergencyphonenumbers.SlidingTabStrip;
 
 /**
  * To be used with ViewPager to provide a tab indicator component which give constant feedback as to
