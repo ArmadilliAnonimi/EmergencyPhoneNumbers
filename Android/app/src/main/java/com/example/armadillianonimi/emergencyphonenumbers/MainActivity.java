@@ -8,6 +8,12 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
 import android.widget.TextView;
 
+import android.view.View;
+import android.content.Intent;
+import android.widget.ImageButton;
+import android.content.Context;
+
+import com.example.armadillianonimi.emergencyphonenumbers.ScrollingFlags;
 import com.example.armadillianonimi.emergencyphonenumbers.ViewPagerAdapter;
 import com.example.armadillianonimi.emergencyphonenumbers.SlidingTabLayout;
 
@@ -19,6 +25,8 @@ public class MainActivity extends AppCompatActivity {
     SlidingTabLayout tabs;
     CharSequence Titles[] = {"EMERGENCY", "LOCATION", "SETTINGS"};
     int numberOfTabs = 3;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,7 +64,24 @@ public class MainActivity extends AppCompatActivity {
         tabs.setViewPager(pager);
 
         // EmergencyPhoneNumbersAPI api = new EmergencyPhoneNumbersAPI();
-
+    openFlags();
     }
+    public void openFlags() {
+        ImageButton button = (ImageButton) findViewById(R.id.flagButton);
+        final Context context = this;
+
+        button.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+
+                Intent flags = new Intent(context, ScrollingFlags.class);
+                startActivity(flags);
+
+            }
+
+        });
+    }
+
 
 }
