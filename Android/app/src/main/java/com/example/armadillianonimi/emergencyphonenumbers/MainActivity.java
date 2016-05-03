@@ -10,15 +10,6 @@ import android.widget.TextView;
 
 import com.example.armadillianonimi.emergencyphonenumbers.ViewPagerAdapter;
 import com.example.armadillianonimi.emergencyphonenumbers.SlidingTabLayout;
-import com.example.armadillianonimi.emergencyphonenumbers.ScrollFlags;
-
-import android.app.Activity;
-import android.os.Bundle;
-import android.widget.ImageButton;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.content.Intent;
-
 
 public class MainActivity extends AppCompatActivity {
 
@@ -28,9 +19,6 @@ public class MainActivity extends AppCompatActivity {
     SlidingTabLayout tabs;
     CharSequence Titles[] = {"EMERGENCY", "LOCATION", "SETTINGS"};
     int numberOfTabs = 3;
-    ImageButton imgButton;
-    OnClickListener clickListener;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,11 +36,11 @@ public class MainActivity extends AppCompatActivity {
         adapter = new ViewPagerAdapter(getSupportFragmentManager(), Titles, numberOfTabs);
 
         // Assigning ViewPager View and setting the adapter
-        pager = (ViewPager) findViewById(R.id.pager);
+        pager = (ViewPager)findViewById(R.id.pager);
         pager.setAdapter(adapter);
 
-        // Assigning the Sliding Tab Layout View
-        tabs = (SlidingTabLayout) findViewById(R.id.tabs);
+        // Assiging the Sliding Tab Layout View
+        tabs = (SlidingTabLayout)findViewById(R.id.tabs);
         // To make the Tabs Fixed set this true, This makes the tabs Space Evenly in Available width
         tabs.setDistributeEvenly(true);
 
@@ -68,19 +56,7 @@ public class MainActivity extends AppCompatActivity {
         tabs.setViewPager(pager);
 
         // EmergencyPhoneNumbersAPI api = new EmergencyPhoneNumbersAPI();
-        ImageButton button = (ImageButton)findViewById(R.id.flagButton);
-        button.setOnClickListener(new OnClickListener() {
-        });
-        addButtonListener();
 
     }
-
-    public void addButtonListener() {
-        imgButton = (ImageButton) findViewById(R.id.flagButton);
-        imgButton.setOnClickListener(clickListener);
-        startActivity(ScrollFlags.onCreate());
-    }
-
 
 }
-
