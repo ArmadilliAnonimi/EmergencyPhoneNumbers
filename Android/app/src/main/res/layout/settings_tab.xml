@@ -2,14 +2,4 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent" android:layout_height="match_parent">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Tab 3"
-        android:id="@+id/textView2"
-        android:textAlignment="center"
-        android:layout_gravity="center_vertical"
-        android:textIsSelectable="false"
-        android:textSize="30dp"/>
-
 </LinearLayout>
