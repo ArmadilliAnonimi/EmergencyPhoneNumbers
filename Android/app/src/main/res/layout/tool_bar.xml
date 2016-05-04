@@ -18,7 +18,7 @@
         android:layout_width="25sp"
         android:layout_height="25sp"
         android:id="@+id/flag"
-        android:src="@drawable/location"
+        android:src="@drawable/ch"
         android:scaleType="fitCenter"
         android:background="@null"
         android:layout_marginLeft="30sp"/>
@@ -33,8 +33,8 @@
 
     <ImageButton
         android:id="@+id/location"
-        android:layout_width="25sp"
-        android:layout_height="25sp"
+        android:layout_width="30sp"
+        android:layout_height="30sp"
         android:src="@drawable/location"
         android:scaleType="fitCenter"
         android:background="@null"

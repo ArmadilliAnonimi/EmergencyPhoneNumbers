@@ -102,7 +102,7 @@ public class LocationTab extends Fragment {
         googleMap.addMarker(marker);
         CameraPosition cameraPosition = new CameraPosition.Builder()
                 // TODO: Implement when get location is done.
-                .target(new LatLng(76.011198, 8.957746)).zoom(12).build();
+                .target(new LatLng(46.011198, 8.957746)).zoom(12).build();
         googleMap.animateCamera(CameraUpdateFactory
                 .newCameraPosition(cameraPosition));
 
