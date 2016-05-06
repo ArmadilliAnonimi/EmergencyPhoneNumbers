@@ -1,14 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.preference.PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent" android:layout_height="match_parent">
-    <android.support.v7.preference.SwitchPreferenceCompat
-        android:key="pref_auto_location"
-        android:title="@string/pref_auto_location"
-        android:summary="@string/pref_auto_location_summary"
-        android:defaultValue="false" />
-    <android.support.v7.preference.SwitchPreferenceCompat
-        android:key="pref_auto_calling"
-        android:title="@string/pref_auto_calling"
-        android:summary="@string/pref_auto_calling_summary"
-        android:defaultValue="false"/>
+
+    <android.support.v7.preference.PreferenceCategory
+        android:title="@string/preferences_title_preferences">
+
+        <android.support.v7.preference.SwitchPreferenceCompat
+            android:key="pref_auto_location"
+            android:title="@string/pref_auto_location"
+            android:summary="@string/pref_auto_location_summary"
+            android:defaultValue="false" />
+        <android.support.v7.preference.SwitchPreferenceCompat
+            android:key="pref_auto_calling"
+            android:title="@string/pref_auto_calling"
+            android:summary="@string/pref_auto_calling_summary"
+            android:defaultValue="false"/>
+
+    </android.support.v7.preference.PreferenceCategory>
+
+    <android.support.v7.preference.PreferenceCategory
+        android:title="@string/preferences_title_about">
+
+        <Preference android:title="@string/prefs_web_page" >
+            <intent android:action="android.intent.action.VIEW"
+                android:data="https://github.com/BalestraPatrick/EmergencyPhoneNumbers" />
+        </Preference>
+
+    </android.support.v7.preference.PreferenceCategory>
+
 </android.support.v7.preference.PreferenceScreen>
