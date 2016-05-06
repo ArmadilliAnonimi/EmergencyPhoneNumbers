@@ -1,5 +1,9 @@
 package com.example.armadillianonimi.emergencyphonenumbers;
 
+import android.Manifest;
+import android.content.pm.PackageManager;
+import android.provider.Settings;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
@@ -64,7 +68,8 @@ public class MainActivity extends AppCompatActivity {
         tabs.setViewPager(pager);
 
         // EmergencyPhoneNumbersAPI api = new EmergencyPhoneNumbersAPI();
-    openFlags();
+        openFlags();
+
     }
     public void openFlags() {
         ImageButton button = (ImageButton) findViewById(R.id.flagButton);
@@ -83,5 +88,24 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    // Callback method called when the user allows or denies the access to the location. We reload the map if we have the permission to do so.
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+        System.out.println("GOT CALLBACK");
+        switch (requestCode) {
+            case 1: {
+                // If request is cancelled, the result arrays are empty.
+                System.out.println("Results: " + grantResults.toString());
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    System.out.println("Perission granted!");
+                } else {
+                    // permission denied, boo! Disable the
+                    // functionality that depends on this permission.
+                }
+                return;
+            }
+            // other 'case' lines to check for other
+            // permissions this app might request
+        }
+    }
 
 }
