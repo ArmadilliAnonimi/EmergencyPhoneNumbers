@@ -15,14 +15,18 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
     CharSequence Titles[]; // This will Store the Titles of the Tabs which are Going to be passed when ViewPagerAdapter is created
     int NumbOfTabs; // Store the number of tabs, this will also be passed when the ViewPagerAdapter is created
 
+    EmergencyTab emergencyTab;
+    LocationTab locationTab;
+    SettingsTab settingsTab;
 
     // Build a Constructor and assign the passed Values to appropriate values in the class
     public ViewPagerAdapter(FragmentManager fm,CharSequence mTitles[], int mNumbOfTabsumb) {
         super(fm);
-
         this.Titles = mTitles;
         this.NumbOfTabs = mNumbOfTabsumb;
-
+        this.emergencyTab = new EmergencyTab();
+        this.locationTab = new LocationTab();
+        this.settingsTab = new SettingsTab();
     }
 
     //This method return the fragment for the every position in the View Pager
@@ -30,14 +34,11 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
     public Fragment getItem(int position) {
 
         if(position == 0) {
-            EmergencyTab tab1 = new EmergencyTab();
-            return tab1;
+            return  emergencyTab;
         } else if(position == 1) {
-            LocationTab tab2 = new LocationTab();
-            return tab2;
+            return locationTab;
         } else {
-            SettingsTab tab3 = new SettingsTab();
-            return tab3;
+            return settingsTab;
         }
     }
 

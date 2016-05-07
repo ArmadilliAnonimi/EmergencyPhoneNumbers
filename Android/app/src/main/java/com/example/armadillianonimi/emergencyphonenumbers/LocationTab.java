@@ -33,23 +33,22 @@ public class LocationTab extends Fragment {
     private LocationListener locationListener = new LocationListener() {
         @Override
         public void onLocationChanged(Location location) {
-            System.out.println("Latitude:" + location.getLatitude() + ", Longitude:" + location.getLongitude());
-
+            System.out.println("MEOW Latitude:" + location.getLatitude() + ", Longitude:" + location.getLongitude());
         }
 
         @Override
         public void onStatusChanged(String s, int i, Bundle bundle) {
-            System.out.println("Latitude" + "disable");
+            System.out.println("Provider status changed");
         }
 
         @Override
         public void onProviderEnabled(String s) {
-            System.out.println("Latitude" + "enable");
+            System.out.println("Provider enabled");
         }
 
         @Override
         public void onProviderDisabled(String s) {
-            System.out.println("Latitude" + "status");
+            System.out.println("Provider disabled");
         }
     };
 
@@ -61,12 +60,8 @@ public class LocationTab extends Fragment {
         mapView.onCreate(savedInstanceState);
         mapView.onResume();
 
+        // Initialize the location manager
         locationManager = (LocationManager) getContext().getSystemService(Context.LOCATION_SERVICE);
-
-        // Request permission to access location and subsequently load map
-        requestPermissionToAccessLocation();
-
-        // Perform any camera updates here.
         return view;
     }
 
@@ -77,14 +72,11 @@ public class LocationTab extends Fragment {
     }
 
     public void loadMap() {
-        System.out.println("LOCATIONMANAGER: " + locationManager);
         if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            System.out.println("FUCKME");
             return;
         }
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
         locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationListener);
-        System.out.println("We have permissions.");
 
         try {
             MapsInitializer.initialize(getActivity().getApplicationContext());
@@ -144,7 +136,7 @@ public class LocationTab extends Fragment {
         if (!checkLocationPermission()) {
             ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION}, 1);
         } else {
-            System.out.println("SHOUDL LOAD MAP");
+            System.out.println("SHOULD LOAD MAP");
             loadMap();
         }
     }
@@ -153,12 +145,10 @@ public class LocationTab extends Fragment {
         switch (requestCode) {
             case 1: {
                 // If request is cancelled, the result arrays are empty.
-                System.out.println("Results: " + grantResults);
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    System.out.println("Permission granted!");
                     loadMap();
+                    System.out.println("FUCKED");
                 }
-                return;
             }
             // Check other permissions in the future
         }
@@ -171,8 +161,4 @@ public class LocationTab extends Fragment {
         int resCoarse = getActivity().checkCallingOrSelfPermission(permissionCoarse);
         return res == PackageManager.PERMISSION_GRANTED && resCoarse == PackageManager.PERMISSION_GRANTED;
     }
-
 }
-
-
-
