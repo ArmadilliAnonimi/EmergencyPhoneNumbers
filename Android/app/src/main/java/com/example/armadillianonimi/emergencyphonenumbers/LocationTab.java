@@ -33,7 +33,7 @@ public class LocationTab extends Fragment {
     private LocationListener locationListener = new LocationListener() {
         @Override
         public void onLocationChanged(Location location) {
-            System.out.println("MEOW Latitude:" + location.getLatitude() + ", Longitude:" + location.getLongitude());
+            System.out.println("Latitude:" + location.getLatitude() + ", Longitude:" + location.getLongitude());
         }
 
         @Override
@@ -136,7 +136,6 @@ public class LocationTab extends Fragment {
         if (!checkLocationPermission()) {
             ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION}, 1);
         } else {
-            System.out.println("SHOULD LOAD MAP");
             loadMap();
         }
     }
@@ -147,7 +146,6 @@ public class LocationTab extends Fragment {
                 // If request is cancelled, the result arrays are empty.
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     loadMap();
-                    System.out.println("FUCKED");
                 }
             }
             // Check other permissions in the future
