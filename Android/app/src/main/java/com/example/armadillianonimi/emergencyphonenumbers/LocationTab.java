@@ -7,6 +7,7 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
@@ -23,6 +24,7 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 public class LocationTab extends Fragment {
@@ -30,10 +32,28 @@ public class LocationTab extends Fragment {
     private MapView mapView;
     private GoogleMap googleMap;
     private LocationManager locationManager;
+    private Marker marker;
     private LocationListener locationListener = new LocationListener() {
         @Override
         public void onLocationChanged(Location location) {
-            System.out.println("Latitude:" + location.getLatitude() + ", Longitude:" + location.getLongitude());
+
+            double latitude = location.getLatitude();
+            double longitude = location.getLongitude();
+            LatLng coordinates = new LatLng(latitude, longitude);
+
+            googleMap = mapView.getMap();
+            System.out.println("Latitude:" + latitude + ", Longitude:" + longitude);
+
+            if (marker != null) {
+                marker.remove();
+            }
+            marker = googleMap.addMarker(new MarkerOptions().position(coordinates).title("You are here").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)));
+
+            // Adding marker on the map.
+            CameraPosition cameraPosition = new CameraPosition.Builder()
+                    .target(coordinates).zoom(16).build();
+            googleMap.animateCamera(CameraUpdateFactory
+                    .newCameraPosition(cameraPosition));
         }
 
         @Override
@@ -83,26 +103,6 @@ public class LocationTab extends Fragment {
             e.printStackTrace();
         }
 
-        googleMap = mapView.getMap();
-        // TODO: Get location. Used a predefined location for now.
-        double latitude = 46.011198;
-        double longitude = 8.957746;
-
-        // Marker on the map.
-        MarkerOptions marker = new MarkerOptions().position(
-                new LatLng(latitude, longitude)).title("You are here");
-
-        // Marker icon options.
-        marker.icon(BitmapDescriptorFactory
-                .defaultMarker(BitmapDescriptorFactory.HUE_RED));
-
-        // Adding marker on the map.
-        googleMap.addMarker(marker);
-        CameraPosition cameraPosition = new CameraPosition.Builder()
-                // TODO: Implement when get location is done.
-                .target(new LatLng(46.011198, 8.957746)).zoom(12).build();
-        googleMap.animateCamera(CameraUpdateFactory
-                .newCameraPosition(cameraPosition));
     }
 
     // Map callbacks.
@@ -134,8 +134,10 @@ public class LocationTab extends Fragment {
     private void requestPermissionToAccessLocation() {
         // If the access to the location was not yet granted, ask for it.
         if (!checkLocationPermission()) {
+            System.out.println("Requesting permission");
             ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION}, 1);
         } else {
+            System.out.println("load map");
             loadMap();
         }
     }
