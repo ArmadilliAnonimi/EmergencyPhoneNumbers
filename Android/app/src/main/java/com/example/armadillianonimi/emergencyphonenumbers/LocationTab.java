@@ -3,33 +3,38 @@ package com.example.armadillianonimi.emergencyphonenumbers;
 import android.Manifest;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
-import android.provider.Settings;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
+import com.google.android.gms.identity.intents.Address;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.MapsInitializer;
-import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import java.io.IOException;
+import java.util.List;
+import java.util.Locale;
+
 public class LocationTab extends Fragment {
 
     private MapView mapView;
+    private TextView addressTextView;
     private GoogleMap googleMap;
     private LocationManager locationManager;
     private Marker marker;
@@ -54,6 +59,23 @@ public class LocationTab extends Fragment {
                     .target(coordinates).zoom(16).build();
             googleMap.animateCamera(CameraUpdateFactory
                     .newCameraPosition(cameraPosition));
+
+            Geocoder geocoder = new Geocoder(getContext(), Locale.getDefault());
+            try {
+                List<android.location.Address> listAddresses = geocoder.getFromLocation(latitude, longitude, 1);
+                if(listAddresses != null && listAddresses.size() > 0){
+                    // Street & Number, CAP City, Country,
+                    android.location.Address myAddress = listAddresses.get(0);
+                    String locationString = myAddress.getThoroughfare() + " " + myAddress.getFeatureName() + ", " + myAddress.getPostalCode() + " " + myAddress.getLocality() + ", " + myAddress.getCountryName();
+                    addressTextView.setText(locationString + "\n" + latitude + ", " + longitude);
+
+                    System.out.println(locationString);
+                    System.out.println("Found location: " + listAddresses.toString());
+                }
+            } catch (IOException e) {
+                System.out.println("ERROR");
+                e.printStackTrace();
+            }
         }
 
         @Override
@@ -77,6 +99,8 @@ public class LocationTab extends Fragment {
         // Inflat and return the layout.
         View view = inflater.inflate(R.layout.location_tab, container, false);
         mapView = (MapView) view.findViewById(R.id.mapView);
+        addressTextView = (TextView) view.findViewById(R.id.addresstextview);
+        addressTextView.setText("Finding your location...");
         mapView.onCreate(savedInstanceState);
         mapView.onResume();
 
