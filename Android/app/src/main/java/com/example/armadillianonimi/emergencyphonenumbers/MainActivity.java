@@ -70,8 +70,29 @@ public class MainActivity extends AppCompatActivity {
 
         // EmergencyPhoneNumbersAPI api = new EmergencyPhoneNumbersAPI();
         openFlags();
-
     }
+
+    public void selectAppBarColour(int position) {
+        switch (position) {
+            case 0:
+                int emergencyColour = getResources().getColor(R.color.colorPrimary);
+                toolbar.setBackgroundColor(emergencyColour);
+                tabs.setBackgroundColor(emergencyColour);
+                break;
+            case 1:
+                int locationColour = getResources().getColor(R.color.colorPrimaryLocation);
+                toolbar.setBackgroundColor(locationColour);
+                tabs.setBackgroundColor(locationColour);
+                break;
+            case 2:
+                int settingsColour = getResources().getColor(R.color.colorPrimarySettings);
+                toolbar.setBackgroundColor(settingsColour);
+                tabs.setBackgroundColor(settingsColour);
+                break;
+        }
+    }
+
+
     public void openFlags() {
         ImageButton button = (ImageButton) findViewById(R.id.flagButton);
         final Context context = this;

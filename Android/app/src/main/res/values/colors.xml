@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <color name="colorAccent">#FF4081</color>
-    <color name="colorPrimary">#EE2B29</color>
-    <color name="colorPrimaryDark">#c31c13</color>
+    <color name="colorPrimaryDark">#D32F2F</color>
+    <color name="colorPrimary">#F44336</color>
+    <color name="colorSecondaryEmergency">#FFEBEE</color>
+    <color name="colorPrimaryLocation">#2196F3</color>
+    <color name="colorPrimarySettings">#607D8B</color>
     <color name="tabsScrollColor">#ffffff</color>
 
 </resources>
