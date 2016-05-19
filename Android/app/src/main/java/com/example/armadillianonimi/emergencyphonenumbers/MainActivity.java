@@ -5,13 +5,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.support.v4.app.FragmentManager;
 import android.view.View;
 import android.content.Intent;
 import android.content.Context;
-
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -57,10 +58,10 @@ public class MainActivity extends AppCompatActivity {
         // Setting the ViewPager For the SlidingTabsLayout
         tabs.setViewPager(pager);
 
-        // EmergencyPhoneNumbersAPI api = new EmergencyPhoneNumbersAPI();
-        openFlags();
+        setupFlagButton();
+        setupLocationButton();
 
-
+        EmergencyPhoneNumbersAPI api = new EmergencyPhoneNumbersAPI(this);
     }
 
     public void selectAppBarColour(int position) {
@@ -83,12 +84,25 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    public void setupLocationButton() {
+        ImageButton locationButton = (ImageButton) findViewById(R.id.location_button);
+        final Context context = this;
+        locationButton.setOnClickListener(new View.OnClickListener() {
 
-    public void openFlags() {
-        LinearLayout button = (LinearLayout) findViewById(R.id.set_country);
+            @Override
+            public void onClick(View v) {
+//                TODO: Get current country and set it as the current country.
+
+            }
+
+        });
+    }
+
+    public void setupFlagButton() {
+        LinearLayout flagButton = (LinearLayout) findViewById(R.id.set_country);
         final Context context = this;
 
-        button.setOnClickListener(new View.OnClickListener() {
+        flagButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
@@ -120,4 +134,25 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    public void setNumber(ArrayList<Country> arraycountry)
+    {
+        Country selectedCountry = arraycountry.get(29);
+        final EmergencyTab emergencyTab = (EmergencyTab) adapter.getItem(0);
+        final String fire =  selectedCountry.getFire();
+        final String police =  selectedCountry.getPolice();
+        final String medical =  selectedCountry.getMedical();
+        MainActivity.this.runOnUiThread(new Runnable(){
+            @Override
+            public void run() {
+                if ((fire != null) || (police != null) || (medical != null)) {
+                    emergencyTab.setFire(fire);
+                    emergencyTab.setPolice(police);
+                    emergencyTab.setMedical(medical);
+                    System.out.println("Ci siamo");
+                } else {
+                    System.out.println("NOOOOOOOOOOOOO");
+                }
+            }
+        });
+    }
 }

@@ -25,11 +25,12 @@ public class Country {
 
     /**
      * Constructor of this class.
-     * @param name of the country
-     * @param code (2-digit format) of the country
-     * @param police phone number of the country
+     *
+     * @param name    of the country
+     * @param code    (2-digit format) of the country
+     * @param police  phone number of the country
      * @param medical phone number of the country
-     * @param fire phone number of the country
+     * @param fire    phone number of the country
      */
     private void construct(String name, String code, String police, String medical, String fire) {
         this.name = name;
@@ -41,6 +42,7 @@ public class Country {
 
     /**
      * Convenience constructor to build a a Country object directly from the JSONObject.
+     *
      * @param object JSONObject returned found in the JSON file
      */
     public Country(JSONObject object) {
@@ -50,5 +52,16 @@ public class Country {
             System.out.println("Failed to deserialize Country JSONObject");
             e.printStackTrace();
         }
+    }
+
+    public String getFire() {
+        return fire;
+    }
+
+    public String getPolice() {
+        return police;
+    }
+    public String getMedical() {
+        return medical;
     }
 }
