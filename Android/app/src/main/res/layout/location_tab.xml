@@ -17,6 +17,7 @@
         android:background="#ffffff"
         android:layout_height="50dp"
         android:layout_margin="12dp"
+        android:textSize="20sp"
         android:gravity="center"
         android:layout_gravity="center_horizontal"
         android:elevation="2dp" />

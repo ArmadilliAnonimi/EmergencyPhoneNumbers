@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 
 import android.support.v7.widget.Toolbar;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import android.view.View;
@@ -94,7 +95,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void openFlags() {
-        ImageButton button = (ImageButton) findViewById(R.id.flagButton);
+        LinearLayout button = (LinearLayout) findViewById(R.id.set_country);
         final Context context = this;
 
         button.setOnClickListener(new View.OnClickListener() {

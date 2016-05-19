@@ -43,14 +43,16 @@
                         android:src="@drawable/phone_icon"
                         android:layout_centerInParent="true"
                         android:layout_alignParentRight="true"
+                        android:layout_marginRight="10dp"
                         />
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="112"
-                        android:textSize="30sp"
+                        android:textSize="35sp"
                         android:textColor="#424242"
                         android:layout_centerInParent="true"
+                        android:padding="10dp"
                         android:layout_marginLeft="0sp"
                         android:layout_alignParentRight="true"
                         android:layout_marginRight="50dp"
@@ -61,8 +63,9 @@
                         android:layout_centerVertical="true"
                         android:text="Fire"
                         android:textSize="35sp"
+                        android:padding="10dp"
                         android:textColor="#424242"
-                        android:layout_marginLeft="0sp"/>
+                        />
 
                 </RelativeLayout>
 
@@ -87,14 +90,16 @@
                         android:src="@drawable/phone_icon"
                         android:layout_centerInParent="true"
                         android:layout_alignParentRight="true"
+                        android:layout_marginRight="10dp"
                         />
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="118"
-                        android:textSize="30sp"
+                        android:textSize="35sp"
                         android:textColor="#424242"
                         android:layout_centerInParent="true"
+                        android:padding="10dp"
                         android:layout_marginLeft="0sp"
                         android:layout_alignParentRight="true"
                         android:layout_marginRight="50dp"
@@ -105,6 +110,7 @@
                         android:layout_centerVertical="true"
                         android:text="Police"
                         android:textSize="35sp"
+                        android:padding="10dp"
                         android:textColor="#424242"
                         android:layout_marginLeft="0sp"/>
 
@@ -131,14 +137,16 @@
                         android:src="@drawable/phone_icon"
                         android:layout_centerInParent="true"
                         android:layout_alignParentRight="true"
+                        android:layout_marginRight="10dp"
                         />
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="116"
-                        android:textSize="30sp"
+                        android:textSize="35sp"
                         android:textColor="#424242"
                         android:layout_centerInParent="true"
+                        android:padding="10dp"
                         android:layout_marginLeft="0sp"
                         android:layout_alignParentRight="true"
                         android:layout_marginRight="50dp"
@@ -149,6 +157,7 @@
                         android:layout_centerVertical="true"
                         android:text="Medical"
                         android:textSize="35sp"
+                        android:padding="10dp"
                         android:textColor="#424242"
                         android:layout_marginLeft="0sp"/>
 
