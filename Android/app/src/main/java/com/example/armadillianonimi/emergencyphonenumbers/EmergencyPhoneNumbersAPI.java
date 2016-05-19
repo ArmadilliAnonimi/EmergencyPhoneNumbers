@@ -30,6 +30,7 @@ public class EmergencyPhoneNumbersAPI {
 
     // Contains all the Country objects to be displayed in a list to the user
     private ArrayList<Country> countries;
+    private MainActivity activity;
 
     /**
      * Callback for the URL connection to the server
@@ -68,6 +69,7 @@ public class EmergencyPhoneNumbersAPI {
                         Country country = new Country(countriesArray.getJSONObject(i));
                         countries.add(country);
                     }
+                    activity.setNumber(countries);
 
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -75,6 +77,7 @@ public class EmergencyPhoneNumbersAPI {
 
             } else {
                 System.out.println("Received response but with code " + response.code());
+                throw new IOException();
             }
         }
     };
@@ -82,7 +85,8 @@ public class EmergencyPhoneNumbersAPI {
     /**
      * Constructor of this class that enqueues the URL request to the Server.
      */
-    public EmergencyPhoneNumbersAPI() {
+    public EmergencyPhoneNumbersAPI(MainActivity activity) {
+        this.activity = activity;
         OkHttpClient client = new OkHttpClient();
         Request request = new Request.Builder().url(url).build();
         client.newCall(request).enqueue(callback);
