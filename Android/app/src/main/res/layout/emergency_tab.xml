@@ -49,6 +49,7 @@
                         android:layout_height="wrap_content"
                         android:text="112"
                         android:textSize="30sp"
+                        android:textColor="#424242"
                         android:layout_centerInParent="true"
                         android:layout_marginLeft="0sp"
                         android:layout_alignParentRight="true"
@@ -60,6 +61,7 @@
                         android:layout_centerVertical="true"
                         android:text="Fire"
                         android:textSize="35sp"
+                        android:textColor="#424242"
                         android:layout_marginLeft="0sp"/>
 
                 </RelativeLayout>
@@ -91,6 +93,7 @@
                         android:layout_height="wrap_content"
                         android:text="118"
                         android:textSize="30sp"
+                        android:textColor="#424242"
                         android:layout_centerInParent="true"
                         android:layout_marginLeft="0sp"
                         android:layout_alignParentRight="true"
@@ -102,6 +105,7 @@
                         android:layout_centerVertical="true"
                         android:text="Police"
                         android:textSize="35sp"
+                        android:textColor="#424242"
                         android:layout_marginLeft="0sp"/>
 
                 </RelativeLayout>
@@ -133,6 +137,7 @@
                         android:layout_height="wrap_content"
                         android:text="116"
                         android:textSize="30sp"
+                        android:textColor="#424242"
                         android:layout_centerInParent="true"
                         android:layout_marginLeft="0sp"
                         android:layout_alignParentRight="true"
@@ -144,6 +149,7 @@
                         android:layout_centerVertical="true"
                         android:text="Medical"
                         android:textSize="35sp"
+                        android:textColor="#424242"
                         android:layout_marginLeft="0sp"/>
 
                 </RelativeLayout>
