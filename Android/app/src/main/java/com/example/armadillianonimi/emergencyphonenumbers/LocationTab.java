@@ -90,7 +90,7 @@ public class LocationTab extends Fragment {
 
         @Override
         public void onProviderDisabled(String s) {
-            System.out.println("Provider disabled");
+            addressTextView.setText("Location disabled.\nPlease check your settings.");
         }
     };
 

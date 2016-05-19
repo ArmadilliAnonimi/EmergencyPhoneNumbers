@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimaryLocation">
+    >
 
     <com.google.android.gms.maps.MapView
         xmlns:android="http://schemas.android.com/apk/res/android"
@@ -14,12 +14,15 @@
     <TextView
         android:id="@+id/addresstextview"
         android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
         android:background="#ffffff"
-        android:layout_height="50dp"
         android:layout_margin="12dp"
         android:textSize="20sp"
         android:gravity="center"
         android:layout_gravity="center_horizontal"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
         android:elevation="2dp" />
 
 </FrameLayout>

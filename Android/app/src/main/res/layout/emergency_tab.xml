@@ -178,7 +178,8 @@
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
         android:clickable="true"
-        android:src="@drawable/plus"
+        android:src="@drawable/plus_icon"
         android:layout_gravity="bottom|end"
-        app:elevation="6dp" />
+        app:elevation="6dp"
+        android:scaleType="center"/>
 </android.support.design.widget.CoordinatorLayout>
