@@ -25,6 +25,8 @@ import com.example.armadillianonimi.emergencyphonenumbers.ScrollingFlags;
 import com.example.armadillianonimi.emergencyphonenumbers.ViewPagerAdapter;
 import com.example.armadillianonimi.emergencyphonenumbers.SlidingTabLayout;
 
+import java.util.ArrayList;
+
 public class MainActivity extends AppCompatActivity {
 
     Toolbar toolbar;
@@ -68,9 +70,8 @@ public class MainActivity extends AppCompatActivity {
 
         // Setting the ViewPager For the SlidingTabsLayout
         tabs.setViewPager(pager);
-
-        // EmergencyPhoneNumbersAPI api = new EmergencyPhoneNumbersAPI();
         openFlags();
+        EmergencyPhoneNumbersAPI api = new EmergencyPhoneNumbersAPI(this);
     }
 
     public void selectAppBarColour(int position) {
@@ -130,4 +131,25 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    public void setNumber(ArrayList<Country> arraycountry)
+    {
+        Country selectedCountry = arraycountry.get(29);
+        final EmergencyTab emergencyTab = (EmergencyTab) adapter.getItem(0);
+        final String fire =  selectedCountry.getFire();
+        final String police =  selectedCountry.getPolice();
+        final String medical =  selectedCountry.getMedical();
+        MainActivity.this.runOnUiThread(new Runnable(){
+            @Override
+            public void run() {
+                if ((fire != null) || (police != null) || (medical != null)) {
+                    emergencyTab.setFire(fire);
+                    emergencyTab.setPolice(police);
+                    emergencyTab.setMedical(medical);
+                    System.out.println("Ci siamo");
+                } else {
+                    System.out.println("NOOOOOOOOOOOOO");
+                }
+            }
+        });
+    }
 }
