@@ -63,7 +63,7 @@ public class LocationTab extends Fragment {
             Geocoder geocoder = new Geocoder(getContext(), Locale.getDefault());
             try {
                 List<android.location.Address> listAddresses = geocoder.getFromLocation(latitude, longitude, 1);
-                if(listAddresses != null && listAddresses.size() > 0){
+                if (listAddresses != null && listAddresses.size() > 0) {
                     // Street & Number, CAP City, Country,
                     android.location.Address myAddress = listAddresses.get(0);
                     String locationString = myAddress.getThoroughfare() + " " + myAddress.getFeatureName() + ", " + myAddress.getPostalCode() + " " + myAddress.getLocality() + ", " + myAddress.getCountryName();
@@ -140,7 +140,9 @@ public class LocationTab extends Fragment {
     public void onPause() {
         super.onPause();
         mapView.onPause();
-        //locationManager.removeUpdates(locationListener);
+        if (locationManager != null && checkLocationPermission()) {
+            locationManager.removeUpdates(locationListener);
+        }
     }
 
     @Override
