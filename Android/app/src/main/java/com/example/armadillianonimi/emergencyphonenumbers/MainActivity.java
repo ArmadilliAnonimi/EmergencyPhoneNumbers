@@ -1,29 +1,19 @@
 package com.example.armadillianonimi.emergencyphonenumbers;
 
-import android.Manifest;
 import android.content.pm.PackageManager;
-import android.location.Location;
-import android.location.LocationManager;
-import android.provider.Settings;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import android.support.v4.view.ViewPager;
 
 import android.support.v7.widget.Toolbar;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import android.view.View;
 import android.content.Intent;
-import android.widget.ImageButton;
 import android.content.Context;
-
-import com.example.armadillianonimi.emergencyphonenumbers.ScrollingFlags;
-import com.example.armadillianonimi.emergencyphonenumbers.ViewPagerAdapter;
-import com.example.armadillianonimi.emergencyphonenumbers.SlidingTabLayout;
 
 import java.util.ArrayList;
 
@@ -70,7 +60,10 @@ public class MainActivity extends AppCompatActivity {
 
         // Setting the ViewPager For the SlidingTabsLayout
         tabs.setViewPager(pager);
-        openFlags();
+
+        setupFlagButton();
+        setupLocationButton();
+
         EmergencyPhoneNumbersAPI api = new EmergencyPhoneNumbersAPI(this);
     }
 
@@ -94,12 +87,25 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    public void setupLocationButton() {
+        ImageButton locationButton = (ImageButton) findViewById(R.id.location_button);
+        final Context context = this;
+        locationButton.setOnClickListener(new View.OnClickListener() {
 
-    public void openFlags() {
-        LinearLayout button = (LinearLayout) findViewById(R.id.set_country);
+            @Override
+            public void onClick(View v) {
+//                TODO: Get current country and set it as the current country.
+
+            }
+
+        });
+    }
+
+    public void setupFlagButton() {
+        LinearLayout flagButton = (LinearLayout) findViewById(R.id.set_country);
         final Context context = this;
 
-        button.setOnClickListener(new View.OnClickListener() {
+        flagButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
