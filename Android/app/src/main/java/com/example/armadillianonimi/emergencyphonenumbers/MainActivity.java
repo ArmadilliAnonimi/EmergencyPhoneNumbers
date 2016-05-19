@@ -1,29 +1,17 @@
 package com.example.armadillianonimi.emergencyphonenumbers;
 
-import android.Manifest;
 import android.content.pm.PackageManager;
-import android.location.Location;
-import android.location.LocationManager;
-import android.provider.Settings;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-
 import android.support.v4.view.ViewPager;
-
 import android.support.v7.widget.Toolbar;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
+import android.support.v4.app.FragmentManager;
 import android.view.View;
 import android.content.Intent;
-import android.widget.ImageButton;
 import android.content.Context;
 
-import com.example.armadillianonimi.emergencyphonenumbers.ScrollingFlags;
-import com.example.armadillianonimi.emergencyphonenumbers.ViewPagerAdapter;
-import com.example.armadillianonimi.emergencyphonenumbers.SlidingTabLayout;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -71,6 +59,8 @@ public class MainActivity extends AppCompatActivity {
 
         // EmergencyPhoneNumbersAPI api = new EmergencyPhoneNumbersAPI();
         openFlags();
+
+
     }
 
     public void selectAppBarColour(int position) {
@@ -103,7 +93,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Intent flags = new Intent(context, ScrollingFlags.class);
+                Intent flags = new Intent(context, CountrySelection.class);
                 startActivity(flags);
 
             }
