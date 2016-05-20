@@ -8,7 +8,6 @@ import android.support.v7.widget.Toolbar;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.support.v4.app.FragmentManager;
 import android.view.View;
 import android.content.Intent;
 import android.content.Context;
@@ -17,24 +16,39 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
 
     Toolbar toolbar;
+    TextView country;
     ViewPager pager;
     ViewPagerAdapter adapter;
     SlidingTabLayout tabs;
     CharSequence Titles[] = {"EMERGENCY", "LOCATION", "SETTINGS"};
     int numberOfTabs = 3;
+    LocationFinder locationFinder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // Creating The Toolbar and setting it as the Toolbar for the activity
+        locationFinder = new LocationFinder(this);
+        locationFinder.setLocationManagerListener(new LocationManagerListener() {
+            @Override
+            public void locationReceived(UserLocation location) {
+                updateCountry(location.country);
+            }
+        });
+
+        // TODO: request location only if the user preference is set to true, otherwise just load the last location set from the preferences.
+        if (true) {
+            locationFinder.requestLocation();
+        }
+
+        // Creating The Toolbar and setting it as the Toolbar for the activity.
         toolbar = (Toolbar) findViewById(R.id.tool_bar);
         toolbar.setTitle("");
         setSupportActionBar(toolbar);
 
-        TextView country = (TextView) findViewById(R.id.country);
-        country.setText("Brasil");
+        country = (TextView) findViewById(R.id.country);
+
         // Creating The ViewPagerAdapter and Passing Fragment Manager, Titles fot the Tabs and Number Of Tabs.
         adapter = new ViewPagerAdapter(getSupportFragmentManager(), Titles, numberOfTabs);
 
@@ -89,14 +103,15 @@ public class MainActivity extends AppCompatActivity {
         ImageButton locationButton = (ImageButton) findViewById(R.id.location_button);
         final Context context = this;
         locationButton.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View v) {
-//                TODO: Get current country and set it as the current country.
-
+                locationFinder.requestLocation();
             }
-
         });
+    }
+
+    public void updateCountry(String country) {
+        this.country.setText(country);
     }
 
     public void setupFlagButton() {
@@ -107,10 +122,9 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-        showDialog();
-             //   Intent flags = new Intent(context, CountrySelection.class);
-               // startActivity(flags);
-
+                showDialog();
+                //   Intent flags = new Intent(context, CountrySelection.class);
+                // startActivity(flags);
             }
 
         });
@@ -130,6 +144,7 @@ public class MainActivity extends AppCompatActivity {
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     LocationTab locationTab = (LocationTab)adapter.getItem(1);
                     locationTab.loadMap();
+                    System.out.println("got location access");
                 } else {
                     // permission denied, boo! Disable the
                     // functionality that depends on this permission.
