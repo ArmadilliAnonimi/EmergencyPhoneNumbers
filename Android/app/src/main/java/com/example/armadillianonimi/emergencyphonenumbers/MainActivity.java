@@ -8,6 +8,7 @@ import android.support.v7.widget.Toolbar;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.support.v4.app.FragmentManager;
 import android.view.View;
 import android.content.Intent;
 import android.content.Context;
