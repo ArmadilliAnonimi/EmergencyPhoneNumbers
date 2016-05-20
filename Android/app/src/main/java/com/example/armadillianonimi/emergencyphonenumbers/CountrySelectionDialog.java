@@ -21,6 +21,8 @@ public class CountrySelectionDialog extends DialogFragment {
     private boolean mValueSet;
     SharedPreferences prefs;
     private int mClickedDialogEntryIndex;
+    public int currentElement;
+    public String currentValue;
 
     @Override public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,8 +34,22 @@ public class CountrySelectionDialog extends DialogFragment {
 
     @Override public Dialog onCreateDialog(Bundle savedInstanceState) {
         AlertDialog.Builder dialog = new AlertDialog.Builder(getActivity());
+
+
         dialog.setTitle("Select your Country:");
-        dialog.setPositiveButton(null, null);
+        // Add the buttons
+        dialog.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                mClickedDialogEntryIndex = currentElement;
+                prefs.edit().putString("select_country", currentValue).commit();
+            }
+        });
+        dialog.setPositiveButton("DONE", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                // User clicked Done button and therefore it just closes and I don't have to do
+                // anything here.
+            }
+        });
         mClickedDialogEntryIndex = getValueIndex();
         dialog.setSingleChoiceItems(mEntries, mClickedDialogEntryIndex, selectItemListener);
         return dialog.create();
@@ -56,14 +72,16 @@ public class CountrySelectionDialog extends DialogFragment {
 
     DialogInterface.OnClickListener selectItemListener = new DialogInterface.OnClickListener() {
 
+
+
         @Override public void onClick(DialogInterface dialog, int which) {
+            currentElement = which;
+            currentValue = prefs.getString("select_country", mValue);
             if (mClickedDialogEntryIndex != which) {
                 mClickedDialogEntryIndex = which;
                 mValue = mEntryValues[mClickedDialogEntryIndex].toString();
                 prefs.edit().putString("select_country", mValue).commit();
             }
-            dialog.dismiss();
-
         }
     };
 
