@@ -10,7 +10,7 @@
         android:allowBackup="true"
         android:debuggable="true"
         android:icon="@mipmap/ic_launcher"
-        android:label="Emergency Phone Numbers"
+        android:label="Emergency\nNumbers"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <meta-data
