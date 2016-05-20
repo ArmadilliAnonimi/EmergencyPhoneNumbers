@@ -25,10 +25,6 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ScrollingFlags"
-            android:label="@string/title_activity_scrolling_flags"
-            android:theme="@style/AppTheme" />
-        <activity
             android:name=".CountrySelection"
             android:label="@string/title_activity_country_selection"></activity>
     </application>
