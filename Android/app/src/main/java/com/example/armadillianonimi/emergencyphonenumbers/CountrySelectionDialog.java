@@ -32,7 +32,7 @@ public class CountrySelectionDialog extends DialogFragment {
 
     @Override public Dialog onCreateDialog(Bundle savedInstanceState) {
         AlertDialog.Builder dialog = new AlertDialog.Builder(getActivity());
-        dialog.setTitle("Select your Country");
+        dialog.setTitle("Select your Country:");
         dialog.setPositiveButton(null, null);
         mClickedDialogEntryIndex = getValueIndex();
         dialog.setSingleChoiceItems(mEntries, mClickedDialogEntryIndex, selectItemListener);
