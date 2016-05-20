@@ -141,7 +141,7 @@ public class LocationTab extends Fragment {
 
     // If the provider is disabled, set the addressTextView as:
     public void setProviderDisabled() {
-        addressTextView.setText("Location disabled.\nPlease check your settings.");
+        //addressTextView.setText("Location disabled.\nPlease check your settings.");
     }
 
     // Map callbacks.

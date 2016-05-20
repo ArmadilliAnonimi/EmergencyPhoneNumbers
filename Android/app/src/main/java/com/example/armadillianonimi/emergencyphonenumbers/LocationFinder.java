@@ -92,7 +92,7 @@ public class LocationFinder {
         public void onProviderDisabled(String s) {
             if (activity instanceof MainActivity) {
                 MainActivity main = (MainActivity)activity;
-                LocationTab locationTab = (LocationTab)main.adapter.getItem(1);
+                LocationTab locationTab = (LocationTab)main.mSectionsPagerAdapter.getItem(1);
                 locationTab.setProviderDisabled();
             }
         }
@@ -116,7 +116,7 @@ public class LocationFinder {
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     if (activity instanceof MainActivity) {
                         MainActivity main = (MainActivity)activity;
-                        LocationTab locationTab = (LocationTab)main.adapter.getItem(1);
+                        LocationTab locationTab = (LocationTab)main.mSectionsPagerAdapter.getItem(1);
                         locationTab.loadMap();
                     }
                 }
