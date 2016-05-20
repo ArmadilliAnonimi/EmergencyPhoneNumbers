@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string-array name="countrynames" />
-    <string-array name="countrycodes" />
+    <string-array name="countrynames">
+        <item>"Germany"</item>
+        <item>"Switzerland"</item>
+        <item>"Austria"</item>
+    </string-array>
+    <string-array name="countrycodes">
+        <item>"DE"</item>
+        <item>"CH"</item>
+        <item>"AU"</item>
+    </string-array>
 </resources>

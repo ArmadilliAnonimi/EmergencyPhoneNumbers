@@ -22,6 +22,10 @@ import okhttp3.Response;
 
 public class EmergencyPhoneNumbersAPI {
 
+    private static EmergencyPhoneNumbersAPI sharedInstance = null;
+
+    private EmergencyAPIListener listener;
+
     // URL of the backend hsoted on Heroku
     private static String url = "https://emergency-phone-numbers.herokuapp.com";
 
@@ -69,8 +73,8 @@ public class EmergencyPhoneNumbersAPI {
                         Country country = new Country(countriesArray.getJSONObject(i));
                         countries.add(country);
                     }
-                    activity.setNumber(countries);
-
+                    // Tell interface that we loaded all the countries
+                    listener.countriesAvailable(countries);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -85,11 +89,21 @@ public class EmergencyPhoneNumbersAPI {
     /**
      * Constructor of this class that enqueues the URL request to the Server.
      */
-    public EmergencyPhoneNumbersAPI(MainActivity activity) {
-        this.activity = activity;
+    private EmergencyPhoneNumbersAPI() {
         OkHttpClient client = new OkHttpClient();
         Request request = new Request.Builder().url(url).build();
         client.newCall(request).enqueue(callback);
         countries = new ArrayList<>();
+    }
+
+    public static EmergencyPhoneNumbersAPI getSharedInstance() {
+        if (sharedInstance == null) {
+            sharedInstance = new EmergencyPhoneNumbersAPI();
+        }
+        return sharedInstance;
+    }
+
+    public void setEmergencyAPIListener(EmergencyAPIListener listener) {
+        this.listener = listener;
     }
 }
