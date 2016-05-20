@@ -103,7 +103,12 @@ public class EmergencyPhoneNumbersAPI {
         return sharedInstance;
     }
 
+    public ArrayList<Country> getCountries() {
+        return countries;
+    }
+
     public void setEmergencyAPIListener(EmergencyAPIListener listener) {
         this.listener = listener;
     }
+
 }

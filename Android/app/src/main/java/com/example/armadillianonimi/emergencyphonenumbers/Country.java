@@ -54,6 +54,12 @@ public class Country {
         }
     }
 
+    public String getName() {
+        return name;
+    }
+    public String getCode() {
+        return code;
+    }
     public String getFire() {
         return fire;
     }
@@ -64,4 +70,5 @@ public class Country {
     public String getMedical() {
         return medical;
     }
+
 }

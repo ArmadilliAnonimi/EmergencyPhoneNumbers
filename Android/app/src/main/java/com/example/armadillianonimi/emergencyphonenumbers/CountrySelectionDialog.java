@@ -23,13 +23,15 @@ public class CountrySelectionDialog extends DialogFragment {
     private int mClickedDialogEntryIndex;
     public int currentElement;
     public String currentValue;
+    private EmergencyPhoneNumbersAPI api = EmergencyPhoneNumbersAPI.getSharedInstance();
 
     @Override public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
-        mEntries = getResources().getStringArray(R.array.countrynames);
-        mEntryValues = getResources().getStringArray(R.array.countrycodes);
+        mEntries = new CharSequence[api.getCountries().size()];
+        mEntryValues = new CharSequence[api.getCountries().size()];
         mValue = prefs.getString("select_country", "en");
+        createCountryArray();
     }
 
     @Override public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -38,16 +40,15 @@ public class CountrySelectionDialog extends DialogFragment {
 
         dialog.setTitle("Select your Country:");
         // Add the buttons
-        dialog.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+        dialog.setNeutralButton("CANCEL", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
-                mClickedDialogEntryIndex = currentElement;
-                prefs.edit().putString("select_country", currentValue).commit();
+        //       Doesn't do anything except closing the dialogue.
             }
         });
         dialog.setPositiveButton("DONE", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
-                // User clicked Done button and therefore it just closes and I don't have to do
-                // anything here.
+                mValue = mEntryValues[mClickedDialogEntryIndex].toString();
+                prefs.edit().putString("select_country", mValue).commit();
             }
         });
         mClickedDialogEntryIndex = getValueIndex();
@@ -67,7 +68,7 @@ public class CountrySelectionDialog extends DialogFragment {
                 }
             }
         }
-        return -1;
+        return 0;
     }
 
     DialogInterface.OnClickListener selectItemListener = new DialogInterface.OnClickListener() {
@@ -79,11 +80,19 @@ public class CountrySelectionDialog extends DialogFragment {
             currentValue = prefs.getString("select_country", mValue);
             if (mClickedDialogEntryIndex != which) {
                 mClickedDialogEntryIndex = which;
-                mValue = mEntryValues[mClickedDialogEntryIndex].toString();
-                prefs.edit().putString("select_country", mValue).commit();
             }
         }
     };
 
-
+    public void createCountryArray() {
+        int i = 0;
+        for (Country country : api.getCountries()) {
+            mEntries[i] = country.getName();
+            mEntryValues[i] = country.getCode();
+            i++;
+        }
+    }
 }
+
+
+
