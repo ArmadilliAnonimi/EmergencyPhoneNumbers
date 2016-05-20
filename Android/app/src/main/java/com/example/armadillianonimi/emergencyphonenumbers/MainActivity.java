@@ -106,13 +106,19 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-
-                Intent flags = new Intent(context, CountrySelection.class);
-                startActivity(flags);
+        showDialog();
+             //   Intent flags = new Intent(context, CountrySelection.class);
+               // startActivity(flags);
 
             }
 
         });
+    }
+
+    private void showDialog() {
+        android.app.FragmentManager fm = getFragmentManager();
+        CountrySelectionDialog Country_Selector = new CountrySelectionDialog();
+        Country_Selector.show(fm, "Country_Selector");
     }
 
     // Callback method called when the user allows or denies the access to the location. We reload the map if we have the permission to do so.

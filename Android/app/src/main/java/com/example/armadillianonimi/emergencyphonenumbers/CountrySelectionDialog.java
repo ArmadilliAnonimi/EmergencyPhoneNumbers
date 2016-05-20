@@ -27,7 +27,7 @@ public class CountrySelectionDialog extends DialogFragment {
         prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
         mEntries = getResources().getStringArray(R.array.countrynames);
         mEntryValues = getResources().getStringArray(R.array.countrycodes);
-        mValue = prefs.getString("lang", "en");
+        mValue = prefs.getString("select_country", "en");
     }
 
     @Override public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -60,7 +60,7 @@ public class CountrySelectionDialog extends DialogFragment {
             if (mClickedDialogEntryIndex != which) {
                 mClickedDialogEntryIndex = which;
                 mValue = mEntryValues[mClickedDialogEntryIndex].toString();
-                prefs.edit().putString("lang", mValue).commit();
+                prefs.edit().putString("select_country", mValue).commit();
             }
             dialog.dismiss();
         }

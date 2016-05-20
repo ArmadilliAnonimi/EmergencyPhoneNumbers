@@ -31,7 +31,6 @@
         <activity
             android:name=".CountrySelection"
             android:label="@string/title_activity_country_selection"></activity>
-        <activity android:name=".CountrySelector"></activity>
     </application>
 
 </manifest>
