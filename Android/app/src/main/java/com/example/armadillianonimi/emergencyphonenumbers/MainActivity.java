@@ -1,6 +1,10 @@
 package com.example.armadillianonimi.emergencyphonenumbers;
 
 import android.content.pm.PackageManager;
+import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
@@ -18,14 +22,13 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
-    Toolbar toolbar;
     TextView country;
-    ViewPager pager;
-    ViewPagerAdapter adapter;
-    SlidingTabLayout tabs;
     CharSequence Titles[] = {"EMERGENCY", "LOCATION", "SETTINGS"};
-    int numberOfTabs = 3;
     LocationFinder locationFinder;
+    SectionsPagerAdapter mSectionsPagerAdapter;
+    EmergencyTab emergencyTab = new EmergencyTab();
+    LocationTab locationTab = new LocationTab();
+    SettingsTab settingsTab = new SettingsTab();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,34 +50,32 @@ public class MainActivity extends AppCompatActivity {
         }
 
         // Creating The Toolbar and setting it as the Toolbar for the activity.
+        Toolbar toolbar;
         toolbar = (Toolbar) findViewById(R.id.tool_bar);
         toolbar.setTitle("");
         setSupportActionBar(toolbar);
 
         country = (TextView) findViewById(R.id.country);
 
-        // Creating The ViewPagerAdapter and Passing Fragment Manager, Titles fot the Tabs and Number Of Tabs.
-        adapter = new ViewPagerAdapter(getSupportFragmentManager(), Titles, numberOfTabs);
+        // Creating The SectionsPagerAdapter and Passing Fragment Manager, Titles fot the Tabs and Number Of Tabs.
+        mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 
         // Assigning ViewPager View and setting the adapter
+        ViewPager pager;
         pager = (ViewPager)findViewById(R.id.pager);
-        pager.setAdapter(adapter);
+        pager.setAdapter(mSectionsPagerAdapter);
 
         // Assiging the Sliding Tab Layout View
-        tabs = (SlidingTabLayout)findViewById(R.id.tabs);
         // To make the Tabs Fixed set this true, This makes the tabs Space Evenly in Available width
-        tabs.setDistributeEvenly(true);
+        TabLayout tabs;
+        tabs = (TabLayout) findViewById(R.id.tabs);
 
         // Setting Custom Color for the Scroll bar indicator of the Tab View
-        tabs.setCustomTabColorizer(new SlidingTabLayout.TabColorizer() {
-            @Override
-            public int getIndicatorColor(int position) {
-                return getResources().getColor(R.color.tabsScrollColor);
-            }
-        });
+        tabs.setSelectedTabIndicatorColor(getResources().getColor(R.color.tabsScrollColor));
+
 
         // Setting the ViewPager For the SlidingTabsLayout
-        tabs.setViewPager(pager);
+        tabs.setupWithViewPager(pager);
 
         manageEmergencyAPI();
 
@@ -83,25 +84,25 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void selectAppBarColour(int position) {
-        switch (position) {
-            case 0:
-                int emergencyColour = getResources().getColor(R.color.colorPrimary);
-                toolbar.setBackgroundColor(emergencyColour);
-                tabs.setBackgroundColor(emergencyColour);
-                break;
-            case 1:
-                int locationColour = getResources().getColor(R.color.colorPrimaryLocation);
-                toolbar.setBackgroundColor(locationColour);
-                tabs.setBackgroundColor(locationColour);
-                break;
-            case 2:
-                int settingsColour = getResources().getColor(R.color.colorPrimarySettings);
-                toolbar.setBackgroundColor(settingsColour);
-                tabs.setBackgroundColor(settingsColour);
-                break;
-        }
-    }
+//    public void selectAppBarColour(int position) {
+//        switch (position) {
+//            case 0:
+//                int emergencyColour = getResources().getColor(R.color.colorPrimary);
+//                toolbar.setBackgroundColor(emergencyColour);
+//                tabs.setBackgroundColor(emergencyColour);
+//                break;
+//            case 1:
+//                int locationColour = getResources().getColor(R.color.colorPrimaryLocation);
+//                toolbar.setBackgroundColor(locationColour);
+//                tabs.setBackgroundColor(locationColour);
+//                break;
+//            case 2:
+//                int settingsColour = getResources().getColor(R.color.colorPrimarySettings);
+//                toolbar.setBackgroundColor(settingsColour);
+//                tabs.setBackgroundColor(settingsColour);
+//                break;
+//        }
+//    }
 
     public void setupLocationButton() {
         ImageButton locationButton = (ImageButton) findViewById(R.id.location_button);
@@ -146,7 +147,7 @@ public class MainActivity extends AppCompatActivity {
             case 1: {
                 // If request is cancelled, the result arrays are empty.
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    LocationTab locationTab = (LocationTab)adapter.getItem(1);
+                    LocationTab locationTab = (LocationTab) mSectionsPagerAdapter.getItem(1);
                     locationTab.loadMap();
                     System.out.println("got location access");
                 } else {
@@ -168,7 +169,7 @@ public class MainActivity extends AppCompatActivity {
                 System.out.println("We just reiceved the countries: " + countries);
 
                 Country selectedCountry = countries.get(24);
-                final EmergencyTab emergencyTab = (EmergencyTab) adapter.getItem(0);
+                final EmergencyTab emergencyTab = (EmergencyTab) mSectionsPagerAdapter.getItem(0);
                 final String fire =  selectedCountry.getFire();
                 final String police =  selectedCountry.getPolice();
                 final String medical =  selectedCountry.getMedical();
@@ -187,5 +188,43 @@ public class MainActivity extends AppCompatActivity {
                 });
             }
         });
+    }
+
+    public class SectionsPagerAdapter extends FragmentPagerAdapter {
+
+        public SectionsPagerAdapter(FragmentManager fm) {
+            super(fm);
+        }
+
+        @Override
+        public Fragment getItem(int position) {
+            // getItem is called to instantiate the fragment for the given page.
+            // Return a PlaceholderFragment (defined as a static inner class below).
+            switch (position) {
+                case 0: return emergencyTab;
+                case 1: return locationTab;
+                case 2: return settingsTab;
+            }
+            return null;
+        }
+
+        @Override
+        public int getCount() {
+            // Show 3 total pages.
+            return 3;
+        }
+
+        @Override
+        public CharSequence getPageTitle(int position) {
+            switch (position) {
+                case 0:
+                    return Titles[0];
+                case 1:
+                    return Titles[1];
+                case 2:
+                    return Titles[2];
+            }
+            return null;
+        }
     }
 }
