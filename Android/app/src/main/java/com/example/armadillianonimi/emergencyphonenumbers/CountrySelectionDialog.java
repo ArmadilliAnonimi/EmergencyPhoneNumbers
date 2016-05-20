@@ -63,6 +63,7 @@ public class CountrySelectionDialog extends DialogFragment {
                 prefs.edit().putString("select_country", mValue).commit();
             }
             dialog.dismiss();
+
         }
     };
 
