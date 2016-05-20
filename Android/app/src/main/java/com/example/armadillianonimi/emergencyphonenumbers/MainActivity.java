@@ -1,30 +1,17 @@
 package com.example.armadillianonimi.emergencyphonenumbers;
 
-import android.Manifest;
 import android.content.pm.PackageManager;
-import android.location.Location;
-import android.location.LocationManager;
-import android.provider.Settings;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-
 import android.support.v4.view.ViewPager;
-
 import android.support.v7.widget.Toolbar;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
+import android.support.v4.app.FragmentManager;
 import android.view.View;
 import android.content.Intent;
-import android.widget.ImageButton;
 import android.content.Context;
-
-import com.example.armadillianonimi.emergencyphonenumbers.ScrollingFlags;
-import com.example.armadillianonimi.emergencyphonenumbers.ViewPagerAdapter;
-import com.example.armadillianonimi.emergencyphonenumbers.SlidingTabLayout;
-
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
@@ -70,9 +57,12 @@ public class MainActivity extends AppCompatActivity {
 
         // Setting the ViewPager For the SlidingTabsLayout
         tabs.setViewPager(pager);
-        openFlags();
 
         manageEmergencyAPI();
+
+        setupFlagButton();
+        setupLocationButton();
+
     }
 
     public void selectAppBarColour(int position) {
@@ -95,22 +85,41 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-
-    public void openFlags() {
-        LinearLayout button = (LinearLayout) findViewById(R.id.set_country);
+    public void setupLocationButton() {
+        ImageButton locationButton = (ImageButton) findViewById(R.id.location_button);
         final Context context = this;
-
-        button.setOnClickListener(new View.OnClickListener() {
+        locationButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
-
-                Intent flags = new Intent(context, ScrollingFlags.class);
-                startActivity(flags);
+//                TODO: Get current country and set it as the current country.
 
             }
 
         });
+    }
+
+    public void setupFlagButton() {
+        LinearLayout flagButton = (LinearLayout) findViewById(R.id.set_country);
+        final Context context = this;
+
+        flagButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+        showDialog();
+             //   Intent flags = new Intent(context, CountrySelection.class);
+               // startActivity(flags);
+
+            }
+
+        });
+    }
+
+    private void showDialog() {
+        android.app.FragmentManager fm = getFragmentManager();
+        CountrySelectionDialog Country_Selector = new CountrySelectionDialog();
+        Country_Selector.show(fm, "Country_Selector");
     }
 
     // Callback method called when the user allows or denies the access to the location. We reload the map if we have the permission to do so.
