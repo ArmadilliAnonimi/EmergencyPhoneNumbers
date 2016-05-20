@@ -24,6 +24,8 @@ public class MainActivity extends AppCompatActivity {
     CharSequence Titles[] = {"EMERGENCY", "LOCATION", "SETTINGS"};
     LocationFinder locationFinder;
     SectionsPagerAdapter mSectionsPagerAdapter;
+    Toolbar toolbar;
+    TabLayout tabs;
     EmergencyTab emergencyTab = new EmergencyTab();
     LocationTab locationTab = new LocationTab();
     SettingsTab settingsTab = new SettingsTab();
@@ -48,7 +50,6 @@ public class MainActivity extends AppCompatActivity {
         }
 
         // Creating The Toolbar and setting it as the Toolbar for the activity.
-        Toolbar toolbar;
         toolbar = (Toolbar) findViewById(R.id.tool_bar);
         toolbar.setTitle("");
         setSupportActionBar(toolbar);
@@ -63,17 +64,28 @@ public class MainActivity extends AppCompatActivity {
         pager = (ViewPager)findViewById(R.id.pager);
         pager.setAdapter(mSectionsPagerAdapter);
 
-        // Assiging the Sliding Tab Layout View
-        // To make the Tabs Fixed set this true, This makes the tabs Space Evenly in Available width
-        TabLayout tabs;
+        // Assigning the TabLayout View
         tabs = (TabLayout) findViewById(R.id.tabs);
-
-        // Setting Custom Color for the Scroll bar indicator of the Tab View
+        // Setting Custom Color for the Scroll bar indicator of the TabLayout View
         tabs.setSelectedTabIndicatorColor(getResources().getColor(R.color.tabsScrollColor));
 
-
-        // Setting the ViewPager For the SlidingTabsLayout
+        // Setting the ViewPager For the TabLayout
         tabs.setupWithViewPager(pager);
+
+        // Tabs Listener
+        tabs.setOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(pager) {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                super.onTabSelected(tab);
+                selectAppBarColour(tabs.getSelectedTabPosition());
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {}
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {}
+        });
 
         manageEmergencyAPI();
 
@@ -82,25 +94,25 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-//    public void selectAppBarColour(int position) {
-//        switch (position) {
-//            case 0:
-//                int emergencyColour = getResources().getColor(R.color.colorPrimary);
-//                toolbar.setBackgroundColor(emergencyColour);
-//                tabs.setBackgroundColor(emergencyColour);
-//                break;
-//            case 1:
-//                int locationColour = getResources().getColor(R.color.colorPrimaryLocation);
-//                toolbar.setBackgroundColor(locationColour);
-//                tabs.setBackgroundColor(locationColour);
-//                break;
-//            case 2:
-//                int settingsColour = getResources().getColor(R.color.colorPrimarySettings);
-//                toolbar.setBackgroundColor(settingsColour);
-//                tabs.setBackgroundColor(settingsColour);
-//                break;
-//        }
-//    }
+    public void selectAppBarColour(int position) {
+        switch (position) {
+            case 0:
+                int emergencyColour = getResources().getColor(R.color.colorPrimary);
+                toolbar.setBackgroundColor(emergencyColour);
+                tabs.setBackgroundColor(emergencyColour);
+                break;
+            case 1:
+                int locationColour = getResources().getColor(R.color.colorPrimaryLocation);
+                toolbar.setBackgroundColor(locationColour);
+                tabs.setBackgroundColor(locationColour);
+                break;
+            case 2:
+                int settingsColour = getResources().getColor(R.color.colorPrimarySettings);
+                toolbar.setBackgroundColor(settingsColour);
+                tabs.setBackgroundColor(settingsColour);
+                break;
+        }
+    }
 
     public void setupLocationButton() {
         ImageButton locationButton = (ImageButton) findViewById(R.id.location_button);

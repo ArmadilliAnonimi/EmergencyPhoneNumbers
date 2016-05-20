@@ -55,4 +55,9 @@ public class EmergencyTab extends Fragment {
         textview_medic.setText(medictext);
         medicnum = medictext;
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+    }
 }
