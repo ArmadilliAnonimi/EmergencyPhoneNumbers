@@ -71,7 +71,8 @@ public class MainActivity extends AppCompatActivity {
         // Setting the ViewPager For the SlidingTabsLayout
         tabs.setViewPager(pager);
         openFlags();
-        EmergencyPhoneNumbersAPI api = new EmergencyPhoneNumbersAPI(this);
+
+        manageEmergencyAPI();
     }
 
     public void selectAppBarColour(int position) {
@@ -131,24 +132,31 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void setNumber(ArrayList<Country> arraycountry)
-    {
-        Country selectedCountry = arraycountry.get(29);
-        final EmergencyTab emergencyTab = (EmergencyTab) adapter.getItem(0);
-        final String fire =  selectedCountry.getFire();
-        final String police =  selectedCountry.getPolice();
-        final String medical =  selectedCountry.getMedical();
-        MainActivity.this.runOnUiThread(new Runnable(){
+    private void manageEmergencyAPI() {
+        EmergencyPhoneNumbersAPI api = EmergencyPhoneNumbersAPI.getSharedInstance();
+        api.setEmergencyAPIListener(new EmergencyAPIListener() {
             @Override
-            public void run() {
-                if ((fire != null) || (police != null) || (medical != null)) {
-                    emergencyTab.setFire(fire);
-                    emergencyTab.setPolice(police);
-                    emergencyTab.setMedical(medical);
-                    System.out.println("Ci siamo");
-                } else {
-                    System.out.println("NOOOOOOOOOOOOO");
-                }
+            public void countriesAvailable(ArrayList<Country> countries) {
+                System.out.println("We just reiceved the countries: " + countries);
+
+                Country selectedCountry = countries.get(24);
+                final EmergencyTab emergencyTab = (EmergencyTab) adapter.getItem(0);
+                final String fire =  selectedCountry.getFire();
+                final String police =  selectedCountry.getPolice();
+                final String medical =  selectedCountry.getMedical();
+                MainActivity.this.runOnUiThread(new Runnable(){
+                    @Override
+                    public void run() {
+                        if ((fire != null) || (police != null) || (medical != null)) {
+                            emergencyTab.setFire(fire);
+                            emergencyTab.setPolice(police);
+                            emergencyTab.setMedical(medical);
+                            System.out.println("Ci siamo");
+                        } else {
+                            System.out.println("NOOOOOOOOOOOOO");
+                        }
+                    }
+                });
             }
         });
     }
