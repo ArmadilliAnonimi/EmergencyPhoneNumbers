@@ -5,6 +5,11 @@
     <android.support.v7.preference.PreferenceCategory
         android:title="@string/preferences_title_preferences">
 
+        <android.support.v7.preference.Preference
+            android:key="dialog"
+            android:title="@string/pref_change_country"
+            android:summary="@string/pref_change_country_summary"
+            android:onClick="showDialog" />
         <android.support.v7.preference.SwitchPreferenceCompat
             android:key="pref_auto_location"
             android:title="@string/pref_auto_location"

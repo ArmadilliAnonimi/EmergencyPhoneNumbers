@@ -6,4 +6,7 @@
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="text_margin">16dp</dimen>
     <dimen name="appbar_padding_top">8dp</dimen>
+    <dimen name="disclaimer_title">40sp</dimen>
+    <dimen name="disclaimer_message">20sp</dimen>
+    <dimen name="disclaimer_message_padding_top">20dp</dimen>
 </resources>
