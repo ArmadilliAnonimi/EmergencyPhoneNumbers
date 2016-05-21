@@ -12,6 +12,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceManager;
 import android.support.v7.widget.Toolbar;
+import android.view.Window;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -72,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
         // Assigning the TabLayout View
         tabs = (TabLayout) findViewById(R.id.tabs);
         // Setting Custom Color for the Scroll bar indicator of the TabLayout View
-        tabs.setSelectedTabIndicatorColor(getResources().getColor(R.color.tabsScrollColor));
+        tabs.setSelectedTabIndicatorColor(getResources().getColor(R.color.colorAccent));
 
         // Setting the ViewPager For the TabLayout
         tabs.setupWithViewPager(pager);
@@ -135,18 +136,30 @@ public class MainActivity extends AppCompatActivity {
         switch (position) {
             case 0:
                 int emergencyColour = getResources().getColor(R.color.colorPrimary);
+                int emergencyColourDark = getResources().getColor(R.color.colorPrimaryDark);
                 toolbar.setBackgroundColor(emergencyColour);
                 tabs.setBackgroundColor(emergencyColour);
+                findViewById(R.id.appbar).setBackgroundColor(emergencyColour);
+                Window emergencyWindow = getWindow();
+                emergencyWindow.setStatusBarColor(emergencyColourDark);
                 break;
             case 1:
                 int locationColour = getResources().getColor(R.color.colorPrimaryLocation);
+                int locationColourDark = getResources().getColor(R.color.colorPrimaryLocationDark);
                 toolbar.setBackgroundColor(locationColour);
                 tabs.setBackgroundColor(locationColour);
+                findViewById(R.id.appbar).setBackgroundColor(locationColour);
+                Window locationWindow = getWindow();
+                locationWindow.setStatusBarColor(locationColourDark);
                 break;
             case 2:
                 int settingsColour = getResources().getColor(R.color.colorPrimarySettings);
+                int settingsColourDark = getResources().getColor(R.color.colorPrimarySettingsDark);
                 toolbar.setBackgroundColor(settingsColour);
                 tabs.setBackgroundColor(settingsColour);
+                findViewById(R.id.appbar).setBackgroundColor(settingsColour);
+                Window settingsWindow = getWindow();
+                settingsWindow.setStatusBarColor(settingsColourDark);
                 break;
         }
     }

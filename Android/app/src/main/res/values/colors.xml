@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <color name="colorPrimaryDark">#D32F2F</color>
     <color name="colorPrimary">#F44336</color>
+    <color name="colorPrimaryDark">#D32F2F</color>
     <color name="colorSecondaryEmergency">#E0E0E0</color>
-    <color name="colorAccent">#ffffff</color>
     <color name="colorPrimaryLocation">#2196F3</color>
+    <color name="colorPrimaryLocationDark">#1976D2</color>
     <color name="colorPrimarySettings">#607D8B</color>
-    <color name="tabsScrollColor">#ffffff</color>
+    <color name="colorPrimarySettingsDark">#455A64</color>
+    <color name="colorAccent">#ffffff</color>
 
 </resources>
