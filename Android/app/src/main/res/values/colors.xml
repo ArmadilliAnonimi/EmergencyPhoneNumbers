@@ -9,5 +9,6 @@
     <color name="colorPrimarySettings">#607D8B</color>
     <color name="colorPrimarySettingsDark">#455A64</color>
     <color name="colorAccent">#ffffff</color>
+    <color name="colorEmergencyCardsText">#616161</color>
 
 </resources>
