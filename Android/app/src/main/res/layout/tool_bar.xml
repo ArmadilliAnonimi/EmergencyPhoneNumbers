@@ -38,7 +38,7 @@
         android:id="@+id/location_button"
         android:layout_width="30sp"
         android:layout_height="30sp"
-        android:src="@drawable/location"
+        android:src="@drawable/selector"
         android:scaleType="fitCenter"
         android:background="@null"
         android:layout_gravity="right"
