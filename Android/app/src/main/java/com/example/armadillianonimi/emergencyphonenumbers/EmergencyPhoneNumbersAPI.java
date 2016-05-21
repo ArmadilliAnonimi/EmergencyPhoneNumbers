@@ -6,6 +6,7 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -34,6 +35,7 @@ public class EmergencyPhoneNumbersAPI {
 
     // Contains all the Country objects to be displayed in a list to the user
     private ArrayList<Country> countries;
+    private HashMap<String, Country>  countryHashMap;
     private MainActivity activity;
 
     /**
@@ -71,10 +73,12 @@ public class EmergencyPhoneNumbersAPI {
                     JSONArray countriesArray = object.getJSONArray("content");
                     for (int i = 0; i < countriesArray.length(); i++) {
                         Country country = new Country(countriesArray.getJSONObject(i));
+                        String code = country.getCode();
                         countries.add(country);
+                        countryHashMap.put(code, country);
                     }
                     // Tell interface that we loaded all the countries
-                    listener.countriesAvailable(countries);
+                    listener.countriesAvailable(countryHashMap);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -94,6 +98,7 @@ public class EmergencyPhoneNumbersAPI {
         Request request = new Request.Builder().url(url).build();
         client.newCall(request).enqueue(callback);
         countries = new ArrayList<>();
+        countryHashMap = new HashMap<>();
     }
 
     public static EmergencyPhoneNumbersAPI getSharedInstance() {
@@ -105,6 +110,10 @@ public class EmergencyPhoneNumbersAPI {
 
     public ArrayList<Country> getCountries() {
         return countries;
+    }
+
+    public HashMap<String, Country> getCountryHashMap() {
+        return countryHashMap;
     }
 
     public void setEmergencyAPIListener(EmergencyAPIListener listener) {

@@ -9,25 +9,10 @@
     <string name="preferences_title_about">About</string>
     <string name="pref_languages_screen">Language</string>
     <string name="prefs_web_page">App page on GitHub</string>
-    <string name="title_activity_country_selection">Settings</string>
+    <string name="fire_string">Fire</string>
+    <string name="police_string">Police</string>
+    <string name="medical_string">Medical</string>
 
-    <!-- Strings related to Settings -->
-    <string name="pref_title_select_country">Select your Country:</string>
-    <string-array name="pref_country_selection_titles">
-        <item>Switzerland</item>
-        <item>Austria</item>
-        <item>Germany</item>
-        <item>Italy</item>
-        <item>Belgium</item>
-        <item>Netherlands</item>
-    </string-array>
-    <string-array name="pref_country_selection_values">
-        <item>"CH"</item>
-        <item>"AU"</item>
-        <item>"DE"</item>
-        <item>"IT"</item>
-        <item>"BE"</item>
-        <item>-"NE"</item>
-    </string-array>
+
 
 </resources>

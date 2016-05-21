@@ -1,10 +1,10 @@
 package com.example.armadillianonimi.emergencyphonenumbers;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Created by Emanuele on 20/05/16.
  */
 public interface EmergencyAPIListener {
-    void countriesAvailable(ArrayList<Country> countries);
+    void countriesAvailable(HashMap<String, Country> countryHashMap);
 }

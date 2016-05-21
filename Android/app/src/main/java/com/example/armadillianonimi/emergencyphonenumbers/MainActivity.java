@@ -1,5 +1,6 @@
 package com.example.armadillianonimi.emergencyphonenumbers;
 
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -8,6 +9,8 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
+import android.support.v7.preference.Preference;
+import android.support.v7.preference.PreferenceManager;
 import android.support.v7.widget.Toolbar;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
@@ -17,6 +20,7 @@ import android.content.Context;
 import com.crashlytics.android.Crashlytics;
 import io.fabric.sdk.android.Fabric;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -29,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
     EmergencyTab emergencyTab = new EmergencyTab();
     LocationTab locationTab = new LocationTab();
     SettingsTab settingsTab = new SettingsTab();
+    SharedPreferences.OnSharedPreferenceChangeListener prefsListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,6 +97,38 @@ public class MainActivity extends AppCompatActivity {
         setupFlagButton();
         setupLocationButton();
 
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        prefsListener = new SharedPreferences.OnSharedPreferenceChangeListener() {
+            @Override
+            public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+                System.out.println("SELECT_COUNTRY CHANGED, SNEAKY LISTENER HEARD EVERYTHING");
+                if (key.equals("select_country")) {
+                    String currentCountryCode = sharedPreferences.getString(key, "DE");
+                    HashMap<String, Country> countryHashMap = EmergencyPhoneNumbersAPI.getSharedInstance().getCountryHashMap();
+                    Country selectedCountry = countryHashMap.get(currentCountryCode);
+                    final EmergencyTab emergencyTab = (EmergencyTab) mSectionsPagerAdapter.getItem(0);
+                    final String fire =  selectedCountry.getFire();
+                    final String police =  selectedCountry.getPolice();
+                    final String medical =  selectedCountry.getMedical();
+                    final String name = selectedCountry.getName();
+                    MainActivity.this.runOnUiThread(new Runnable(){
+                        @Override
+                        public void run() {
+                            if ((fire != null) || (police != null) || (medical != null)) {
+                                emergencyTab.setFire(fire);
+                                emergencyTab.setPolice(police);
+                                emergencyTab.setMedical(medical);
+                                country.setText(name);
+                                System.out.println("Ci siamo");
+                            } else {
+                                System.out.println("NOOOOOOOOOOOOO");
+                            }
+                        }
+                    });
+                }
+            }
+        };
+        prefs.registerOnSharedPreferenceChangeListener(prefsListener);
     }
 
     public void selectAppBarColour(int position) {
@@ -175,14 +212,16 @@ public class MainActivity extends AppCompatActivity {
         EmergencyPhoneNumbersAPI api = EmergencyPhoneNumbersAPI.getSharedInstance();
         api.setEmergencyAPIListener(new EmergencyAPIListener() {
             @Override
-            public void countriesAvailable(ArrayList<Country> countries) {
-                System.out.println("We just reiceved the countries: " + countries);
+            public void countriesAvailable(HashMap<String, Country> countryHashMap) {
+                System.out.println("We just reiceved the countries: " + countryHashMap);
 
-                Country selectedCountry = countries.get(24);
+                String currentCode = PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("select_country", "CH");
+                Country selectedCountry = countryHashMap.get(currentCode);
                 final EmergencyTab emergencyTab = (EmergencyTab) mSectionsPagerAdapter.getItem(0);
                 final String fire =  selectedCountry.getFire();
                 final String police =  selectedCountry.getPolice();
                 final String medical =  selectedCountry.getMedical();
+                final String name = selectedCountry.getName();
                 MainActivity.this.runOnUiThread(new Runnable(){
                     @Override
                     public void run() {
@@ -190,6 +229,7 @@ public class MainActivity extends AppCompatActivity {
                             emergencyTab.setFire(fire);
                             emergencyTab.setPolice(police);
                             emergencyTab.setMedical(medical);
+                            country.setText(name);
                             System.out.println("Ci siamo");
                         } else {
                             System.out.println("NOOOOOOOOOOOOO");

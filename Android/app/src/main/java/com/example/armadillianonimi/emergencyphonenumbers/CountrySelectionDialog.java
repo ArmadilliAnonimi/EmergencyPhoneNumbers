@@ -4,10 +4,13 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.annotation.Nullable;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.preference.PreferenceManager;
+
 
 /**
  * Created by val on 19/05/16.
@@ -30,7 +33,7 @@ public class CountrySelectionDialog extends DialogFragment {
         prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
         mEntries = new CharSequence[api.getCountries().size()];
         mEntryValues = new CharSequence[api.getCountries().size()];
-        mValue = prefs.getString("select_country", "en");
+        mValue = prefs.getString("select_country", "CH");
         createCountryArray();
     }
 
