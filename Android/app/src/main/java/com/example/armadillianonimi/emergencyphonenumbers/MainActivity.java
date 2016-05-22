@@ -1,16 +1,24 @@
 package com.example.armadillianonimi.emergencyphonenumbers;
 
+import android.Manifest;
+import android.app.Activity;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.net.Uri;
+import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceManager;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
 import android.view.Window;
 import android.widget.ImageButton;
@@ -18,6 +26,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.view.View;
 import android.content.Context;
+import android.widget.Toast;
+
 import com.crashlytics.android.Crashlytics;
 import io.fabric.sdk.android.Fabric;
 import java.util.ArrayList;
@@ -31,16 +41,20 @@ public class MainActivity extends AppCompatActivity {
     SectionsPagerAdapter mSectionsPagerAdapter;
     Toolbar toolbar;
     TabLayout tabs;
-    EmergencyTab emergencyTab = new EmergencyTab();
+    final EmergencyTab emergencyTab = new EmergencyTab();
     LocationTab locationTab = new LocationTab();
     SettingsTab settingsTab = new SettingsTab();
     SharedPreferences.OnSharedPreferenceChangeListener prefsListener;
+    private static final int PERMISSION_REQUEST_CODE = 1;
+    boolean flag = false;
+    Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Fabric.with(this, new Crashlytics());
         setContentView(R.layout.activity_main);
+
 
         locationFinder = new LocationFinder(this);
         locationFinder.setLocationManagerListener(new LocationManagerListener() {
@@ -84,6 +98,7 @@ public class MainActivity extends AppCompatActivity {
             public void onTabSelected(TabLayout.Tab tab) {
                 super.onTabSelected(tab);
                 selectAppBarColour(tabs.getSelectedTabPosition());
+
             }
 
             @Override
@@ -102,7 +117,6 @@ public class MainActivity extends AppCompatActivity {
         prefsListener = new SharedPreferences.OnSharedPreferenceChangeListener() {
             @Override
             public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-                System.out.println("SELECT_COUNTRY CHANGED, SNEAKY LISTENER HEARD EVERYTHING");
                 if (key.equals("select_country")) {
                     String currentCountryCode = sharedPreferences.getString(key, "DE");
                     HashMap<String, Country> countryHashMap = EmergencyPhoneNumbersAPI.getSharedInstance().getCountryHashMap();
@@ -130,8 +144,40 @@ public class MainActivity extends AppCompatActivity {
             }
         };
         prefs.registerOnSharedPreferenceChangeListener(prefsListener);
+
+        if (!(checkPermission())) {
+               request();
+        }
     }
 
+
+    public void call(View view) {
+
+                Intent callIntent = new Intent(Intent.ACTION_CALL);
+                callIntent.setData(Uri.parse("tel:123456789"));
+            if (checkPermission()) {
+                startActivity(callIntent);
+            }
+        else{
+                Toast.makeText(getApplicationContext(), "Please, allow call permission. Go to ...", Toast.LENGTH_SHORT).show();
+                System.out.println("NO PERMISSION? AFFARI TUOI");
+        }
+    }
+
+    public boolean checkPermission(){
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE)
+                != PackageManager.PERMISSION_GRANTED) {
+        return false;
+        }
+        return true;
+    }
+
+    public void request(){
+        ActivityCompat.requestPermissions(this,
+                new String[]{Manifest.permission.CALL_PHONE},
+                PERMISSION_REQUEST_CODE);
+        System.out.println("CALL GOT");
+    }
     public void selectAppBarColour(int position) {
         switch (position) {
             case 0:
