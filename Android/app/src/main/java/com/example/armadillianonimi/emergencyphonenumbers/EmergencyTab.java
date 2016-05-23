@@ -3,58 +3,95 @@ package com.example.armadillianonimi.emergencyphonenumbers;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.example.armadillianonimi.emergencyphonenumbers.R;
+import java.util.ArrayList;
 
 /**
  * Created by patrickbalestra on 14/03/2015.
  */
 public class EmergencyTab extends Fragment {
-    String firenum;
-    private TextView textview_fire;
-    String policenum;
-    private TextView textview_police;
-    String medicnum;
-    private TextView textview_medic;
+
+    private String fireNumber;
+    private TextView fireTextView;
+    private String policeNumber;
+    private TextView policeTextView;
+    private String medicalNumber;
+    private TextView medicalTextView;
+    private FloatingActionButton addContactButton;
+
+    final int CONTACT_PICK_REQUEST = 1000;
+    final int RESULT_CODE_OK = -1;
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.emergency_tab, container, false);
-        textview_fire = (TextView) view.findViewById(R.id.firenum);
-        if (firenum != null) {
-            textview_fire.setText(firenum);
-        }
-        textview_police = (TextView) view.findViewById(R.id.policenum);
-        if (policenum != null) {
-            textview_police.setText(policenum);
-        }
-        textview_medic = (TextView) view.findViewById(R.id.medicalnum);
-        if (medicnum != null) {
-            textview_medic.setText(medicnum);
-        }
-        return  view;
-    }
-    public void setFire(String firetext){
 
-        textview_fire.setText(firetext);
-        firenum = firetext;
+        fireTextView = (TextView) view.findViewById(R.id.firenum);
+        if (fireNumber != null) {
+            fireTextView.setText(fireNumber);
+        }
+        policeTextView = (TextView) view.findViewById(R.id.policenum);
+        if (policeNumber != null) {
+            policeTextView.setText(policeNumber);
+        }
+        medicalTextView = (TextView) view.findViewById(R.id.medicalnum);
+        if (medicalNumber != null) {
+            medicalTextView.setText(medicalNumber);
+        }
+
+        addContactButton = (FloatingActionButton)view.findViewById(R.id.btn);
+        setupAddContactButton();
+        return view;
+    }
+
+    @Override
+    public void onActivityResult(int requestCode,int resultCode,Intent data){
+        super.onActivityResult(requestCode, resultCode, data);
+        System.out.println("RESULT");
+
+        if (requestCode == CONTACT_PICK_REQUEST && resultCode == RESULT_CODE_OK) {
+
+            ArrayList<Contact> selectedContacts = data.getParcelableArrayListExtra("SelectedContacts");
+
+            String display = "";
+            for (int i = 0; i < selectedContacts.size(); i++){
+
+                display += (i+1) + ". " + selectedContacts.get(i).toString() + "\n";
+
+            }
+//            contactsDisplay.setText("Selected Contacts : \n\n"+display);
+        }
+    }
+
+    private void setupAddContactButton() {
+        addContactButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intentContactPick = new Intent(getContext(),ContactsPickerActivity.class);
+                startActivityForResult(intentContactPick, CONTACT_PICK_REQUEST);
+            }
+        });
+    }
+
+    public void setFire(String firetext){
+        fireTextView.setText(firetext);
+        fireNumber = firetext;
     }
 
     public void setPolice(String policetext){
-
-        textview_police.setText(policetext);
-        policenum = policetext;
+        policeTextView.setText(policetext);
+        policeNumber = policetext;
     }
 
     public void setMedical(String medictext){
-
-        textview_medic.setText(medictext);
-        medicnum = medictext;
+        medicalTextView.setText(medictext);
+        medicalNumber = medictext;
     }
 
     @Override

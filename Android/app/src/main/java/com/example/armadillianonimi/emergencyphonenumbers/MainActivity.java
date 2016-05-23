@@ -8,6 +8,7 @@ import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
 import android.provider.ContactsContract;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
@@ -39,38 +40,25 @@ import java.util.HashMap;
 public class MainActivity extends AppCompatActivity {
 
     TextView country;
-    CharSequence Titles[] = {"EMERGENCY", "LOCATION", "SETTINGS"};
+    final CharSequence Titles[] = {"EMERGENCY", "LOCATION", "SETTINGS"};
     LocationFinder locationFinder;
     SectionsPagerAdapter mSectionsPagerAdapter;
     Toolbar toolbar;
     TabLayout tabs;
     final EmergencyTab emergencyTab = new EmergencyTab();
-    LocationTab locationTab = new LocationTab();
-    SettingsTab settingsTab = new SettingsTab();
+    final LocationTab locationTab = new LocationTab();
+    final SettingsTab settingsTab = new SettingsTab();
     SharedPreferences.OnSharedPreferenceChangeListener prefsListener;
     private static final int PERMISSION_REQUEST_CODE = 1;
     HashMap<Integer,String> elements = new HashMap<>();
     Country selectedCountry;
     TextView contactsDisplay;
-    final int CONTACT_PICK_REQUEST = 1000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Fabric.with(this, new Crashlytics());
         setContentView(R.layout.activity_main);
-
-        //contactsDisplay = (TextView) findViewById(R.id.txt_selected_contacts);
-//        pickContacts = (Button) findViewById(R.id.btn);
-//
-//        pickContacts.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//                Intent intentContactPick = new Intent(MainActivity.this,ContactsPickerActivity.class);
-//                MainActivity.this.startActivityForResult(intentContactPick,CONTACT_PICK_REQUEST);
-//            }
-//        });
 
         locationFinder = new LocationFinder(this);
         locationFinder.setLocationManagerListener(new LocationManagerListener() {
@@ -166,32 +154,6 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    @Override
-    public void onActivityResult(int requestCode,int resultCode,Intent data){
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if(requestCode == CONTACT_PICK_REQUEST && resultCode == RESULT_OK){
-
-            ArrayList<Contact> selectedContacts = data.getParcelableArrayListExtra("SelectedContacts");
-
-            String display="";
-            for(int i=0;i<selectedContacts.size();i++){
-
-                display += (i+1)+". "+selectedContacts.get(i).toString()+"\n";
-
-            }
-            contactsDisplay.setText("Selected Contacts : \n\n"+display);
-
-        }
-
-    }
-
-    public void contact(View view){
-
-        Intent intentContactPick = new Intent(this, ContactsPickerActivity.class);
-        startActivityForResult(intentContactPick,CONTACT_PICK_REQUEST);
-
-    }
     public void call(View view) {
         if (checkPermission(Manifest.permission.CALL_PHONE)) {
             int id = view.getId();
@@ -293,7 +255,6 @@ public class MainActivity extends AppCompatActivity {
 
         });
     }
-
 
     private void showDialog() {
         android.app.FragmentManager fm = getFragmentManager();
