@@ -28,6 +28,17 @@ public class SettingsTab extends PreferenceFragmentCompat {
             }
         });
 
+        // Listener for click on "FAQ" preference
+        Preference faqDialog = findPreference("faq");
+        faqDialog.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+            public boolean onPreferenceClick(Preference preference) {
+                android.app.FragmentManager fm = getActivity().getFragmentManager();
+                AboutDialog dialog = new AboutDialog();
+                dialog.show(fm, "FAQ");
+                return true;
+            }
+        });
+
         // Listener for click on "About" preference
         Preference aboutDialog = findPreference("about_dialog");
         aboutDialog.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {

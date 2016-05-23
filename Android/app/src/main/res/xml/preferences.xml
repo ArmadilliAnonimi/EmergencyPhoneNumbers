@@ -20,6 +20,9 @@
             android:title="@string/pref_auto_calling"
             android:summary="@string/pref_auto_calling_summary"
             android:defaultValue="false"/>
+        <android.support.v7.preference.Preference
+            android:key="faq"
+            android:title="@string/faq"/>
 
     </android.support.v7.preference.PreferenceCategory>
 
