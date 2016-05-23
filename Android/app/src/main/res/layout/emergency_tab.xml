@@ -63,6 +63,7 @@
             </android.support.v7.widget.CardView>
             <android.support.v7.widget.CardView
                 android:id="@+id/police"
+
                 android:layout_gravity="center"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
@@ -111,6 +112,7 @@
             </android.support.v7.widget.CardView>
             <android.support.v7.widget.CardView
                 android:id="@+id/medical"
+
                 android:layout_gravity="center"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"

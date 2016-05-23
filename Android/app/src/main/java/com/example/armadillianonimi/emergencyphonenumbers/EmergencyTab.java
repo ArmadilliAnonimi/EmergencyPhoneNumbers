@@ -50,6 +50,11 @@ public class EmergencyTab extends Fragment {
         policenum = policetext;
     }
 
+    public void call() {
+
+        System.out.println("Should start a call");
+    }
+
     public void setMedical(String medictext){
         System.out.println("medical woks, Mr Patrick");
         textview_medic.setText(medictext);

@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.net.Uri;
-import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
@@ -46,14 +45,17 @@ public class MainActivity extends AppCompatActivity {
     SettingsTab settingsTab = new SettingsTab();
     SharedPreferences.OnSharedPreferenceChangeListener prefsListener;
     private static final int PERMISSION_REQUEST_CODE = 1;
-    boolean flag = false;
-    Context context;
+    HashMap<Integer,String> elements = new HashMap<>();
+    Country selectedCountry;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Fabric.with(this, new Crashlytics());
         setContentView(R.layout.activity_main);
+
+        //Here (I hope) you add the new contact tab in the elements array
+       //elements.put()
 
 
         locationFinder = new LocationFinder(this);
@@ -120,7 +122,7 @@ public class MainActivity extends AppCompatActivity {
                 if (key.equals("select_country")) {
                     String currentCountryCode = sharedPreferences.getString(key, "DE");
                     HashMap<String, Country> countryHashMap = EmergencyPhoneNumbersAPI.getSharedInstance().getCountryHashMap();
-                    Country selectedCountry = countryHashMap.get(currentCountryCode);
+                    selectedCountry = countryHashMap.get(currentCountryCode);
                     final EmergencyTab emergencyTab = (EmergencyTab) mSectionsPagerAdapter.getItem(0);
                     final String fire =  selectedCountry.getFire();
                     final String police =  selectedCountry.getPolice();
@@ -134,9 +136,6 @@ public class MainActivity extends AppCompatActivity {
                                 emergencyTab.setPolice(police);
                                 emergencyTab.setMedical(medical);
                                 country.setText(name);
-                                System.out.println("Ci siamo");
-                            } else {
-                                System.out.println("NOOOOOOOOOOOOO");
                             }
                         }
                     });
@@ -152,14 +151,29 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void call(View view) {
+        if (checkPermission()) {
+                int id = view.getId();
+            Intent callIntent = new Intent(Intent.ACTION_CALL);
+                switch(id){
+                    case(R.id.fire):
+                        System.out.println(selectedCountry.getFire());
+                        callIntent.setData(Uri.parse("tel: "+ selectedCountry.getFire()));
+                        break;
+                    case(R.id.police):
+                        callIntent.setData(Uri.parse("tel:"+ selectedCountry.getPolice()));
+                        break;
+                    case(R.id.medical):
+                        callIntent.setData(Uri.parse("tel:" + selectedCountry.getMedical()));
+                        break;
+//                    default:
+//                        callIntent.setData(Uri.parse("tel:" +elements.get(id)));
+//                        startActivity(callIntent);
+               }
+            startActivity(callIntent);
 
-                Intent callIntent = new Intent(Intent.ACTION_CALL);
-                callIntent.setData(Uri.parse("tel:123456789"));
-            if (checkPermission()) {
-                startActivity(callIntent);
             }
         else{
-                Toast.makeText(getApplicationContext(), "Please, allow call permission. Go to ...", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Please, allow call permission. \n Go to Settings -> App -> Permission -> Enable Phone and Location services", Toast.LENGTH_SHORT).show();
                 System.out.println("NO PERMISSION? AFFARI TUOI");
         }
     }
@@ -275,7 +289,7 @@ public class MainActivity extends AppCompatActivity {
                 System.out.println("We just reiceved the countries: " + countryHashMap);
 
                 String currentCode = PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("select_country", "CH");
-                Country selectedCountry = countryHashMap.get(currentCode);
+                selectedCountry = countryHashMap.get(currentCode);
                 final EmergencyTab emergencyTab = (EmergencyTab) mSectionsPagerAdapter.getItem(0);
                 final String fire =  selectedCountry.getFire();
                 final String police =  selectedCountry.getPolice();
