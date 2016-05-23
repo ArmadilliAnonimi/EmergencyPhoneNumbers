@@ -5,6 +5,7 @@ import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -20,28 +21,16 @@ public class AboutDialog extends DialogFragment {
 
     @Override public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        names = new CharSequence[5];
-        websites = new CharSequence[5];
-
-        // Our names
-        names[0] = "Patrick Balestra";
-        names[1] = "Valerie Burgener";
-        names[2] = "Emanuele Esposito";
-        names[3] = "Aron Fiechter";
-        names[4] = "Susanna Riccardi";
-        // Our websites
-        websites[0] = "http://atelier.inf.unisi.ch/~balesp/";
-        websites[1] = "http://atelier.inf.unisi.ch/~burgev";
-        websites[2] = "http://atelier.inf.unisi.ch/~esposem/";
-        websites[3] = "http://atelier.inf.unisi.ch/~fiecha/";
-        websites[4] = "http://atelier.inf.unisi.ch/~riccas/";
+        Resources res = getResources();
+        names = res.getStringArray(R.array.names_array);
+        websites = res.getStringArray(R.array.websites_url_array);
     }
 
     @Override public Dialog onCreateDialog(Bundle savedInstanceState) {
         AlertDialog.Builder dialog = new AlertDialog.Builder(getActivity());
-        dialog.setTitle("This app was developed @ USI by the following students:");
+        dialog.setTitle(R.string.about_dialog_title);
 
-        dialog.setNeutralButton("CLOSE", new DialogInterface.OnClickListener() {
+        dialog.setNeutralButton(R.string.about_dialog_close, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) { }
         });
 

@@ -98,4 +98,19 @@ public class EmergencyTab extends Fragment {
     public void onResume() {
         super.onResume();
     }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+    }
+
+    @Override
+    public void onLowMemory() {
+        super.onLowMemory();
+    }
 }

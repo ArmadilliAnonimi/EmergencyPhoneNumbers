@@ -152,6 +152,7 @@ public class MainActivity extends AppCompatActivity {
             request(Manifest.permission.READ_CONTACTS);
         }
 
+        System.out.println("### - MainActivity created");
     }
 
     public void call(View view) {
@@ -348,5 +349,45 @@ public class MainActivity extends AppCompatActivity {
             }
             return null;
         }
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        System.out.println("### - MainActivity started");
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        System.out.println("### - MainActivity resumed");
+        System.out.println("APP IS RESUMED");
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        System.out.println("### - MainActivity paused");
+        System.out.println("APP IS PAUSED");
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        System.out.println("### - MainActivity stopped");
+        System.out.println("APP IS STOPPED");
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        System.out.println("### - MainActivity restarted");
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        System.out.println("### - MainActivity destroyed");
+        System.out.println("APP IS QUIT");
     }
 }
