@@ -152,29 +152,27 @@ public class MainActivity extends AppCompatActivity {
 
     public void call(View view) {
         if (checkPermission()) {
-                int id = view.getId();
+            int id = view.getId();
             Intent callIntent = new Intent(Intent.ACTION_CALL);
-                switch(id){
-                    case(R.id.fire):
-                        System.out.println(selectedCountry.getFire());
-                        callIntent.setData(Uri.parse("tel: "+ selectedCountry.getFire()));
-                        break;
-                    case(R.id.police):
-                        callIntent.setData(Uri.parse("tel:"+ selectedCountry.getPolice()));
-                        break;
-                    case(R.id.medical):
-                        callIntent.setData(Uri.parse("tel:" + selectedCountry.getMedical()));
-                        break;
+            switch(id){
+                case(R.id.fire):
+                    System.out.println(selectedCountry.getFire());
+                    callIntent.setData(Uri.parse("tel: "+ selectedCountry.getFire()));
+                    break;
+                case(R.id.police):
+                    callIntent.setData(Uri.parse("tel:"+ selectedCountry.getPolice()));
+                    break;
+                case(R.id.medical):
+                    callIntent.setData(Uri.parse("tel:" + selectedCountry.getMedical()));
+                    break;
 //                    default:
 //                        callIntent.setData(Uri.parse("tel:" +elements.get(id)));
 //                        startActivity(callIntent);
                }
             startActivity(callIntent);
-
-            }
-        else{
-                Toast.makeText(getApplicationContext(), "Please, allow call permission. \n Go to Settings -> App -> Permission -> Enable Phone and Location services", Toast.LENGTH_SHORT).show();
-                System.out.println("NO PERMISSION? AFFARI TUOI");
+        } else {
+            request();
+            Toast.makeText(getApplicationContext(), "Please, allow call permission.\nIt's good for you!", Toast.LENGTH_SHORT).show();
         }
     }
 
