@@ -9,8 +9,11 @@
     <string name="pref_change_country_summary">Select your country from a list</string>
     <string name="preferences_title_preferences">Preferences</string>
     <string name="preferences_title_about">About</string>
+    <string name="pref_about_summary">Meet who is behind this app</string>
     <string name="pref_languages_screen">Language</string>
-    <string name="prefs_web_page">App page on GitHub</string>
+    <string name="prefs_web_page">Fork on GitHub</string>
+    <string name="prefs_web_page_summary">The app is completely open-source so you can contribute and take a look at the code.</string>
+    <string name="prefs_about">About</string>
     <string name="prefs_disclaimer">Disclaimer</string>
     <string name="prefs_disclaimer_message">
         Legal thingy text and also some very legal stuff about how if everything goes shit we are not
@@ -20,11 +23,12 @@
         Damn, that\'s even smaller than the default text size; let\'s try 20dp. Or better, 20sp, since the
         auto corrector said that for text sizes it would be better to use sp and not dp. Yep, 20 is indeed
         better. But let\'s add some padding.
+        But seriously, this app should never be used when not related to emergencies. The cost of the calls is borne by the caller and the rates may vary. Not all numbers are free. This application only facilitates the search of the emergency numbers with your location. Its proper functioning depends on the network coverage and your phone carrier.
     </string>
     <string name="prefs_disclaimer_message_close">CLOSE</string>
+
     <string name="fire_string">Fire</string>
     <string name="police_string">Police</string>
     <string name="medical_string">Medical</string>
-
 
 </resources>

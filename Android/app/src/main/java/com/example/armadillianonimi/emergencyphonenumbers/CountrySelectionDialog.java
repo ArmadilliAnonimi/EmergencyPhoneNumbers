@@ -40,7 +40,6 @@ public class CountrySelectionDialog extends DialogFragment {
     @Override public Dialog onCreateDialog(Bundle savedInstanceState) {
         AlertDialog.Builder dialog = new AlertDialog.Builder(getActivity());
 
-
         dialog.setTitle("Select your Country:");
         // Add the buttons
         dialog.setNeutralButton("CANCEL", new DialogInterface.OnClickListener() {
