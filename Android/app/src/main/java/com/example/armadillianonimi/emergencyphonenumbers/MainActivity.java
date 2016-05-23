@@ -27,6 +27,7 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.view.View;
 import android.content.Context;
@@ -50,9 +51,8 @@ public class MainActivity extends AppCompatActivity {
     final SettingsTab settingsTab = new SettingsTab();
     SharedPreferences.OnSharedPreferenceChangeListener prefsListener;
     private static final int PERMISSION_REQUEST_CODE = 1;
-    HashMap<Integer,String> elements = new HashMap<>();
+
     Country selectedCountry;
-    TextView contactsDisplay;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -151,6 +151,22 @@ public class MainActivity extends AppCompatActivity {
         if (!(checkPermission(Manifest.permission.READ_CONTACTS))) {
             request(Manifest.permission.READ_CONTACTS);
         }
+//        HashMap<String,String> elements = emergencyTab.getElements();
+//        for(String el : elements.keySet()){
+//            LinearLayout l = (LinearLayout) findViewById(R.id.main);
+//            CardView c = new CardView(this);
+//            RelativeLayout r = new RelativeLayout(this);
+//            TextView t = new TextView(this);
+//            if (l != null) {
+//                l.addView(c);
+//                c.addView(r);
+//                r.addView(t);
+//                t.setText(el);
+//                System.out.println("SIIIIIIII");
+//            }
+//            else { System.out.println("NOOOOOOOOOOOOOOO");
+//            }
+//        }
 
         System.out.println("### - MainActivity created");
     }
@@ -170,9 +186,9 @@ public class MainActivity extends AppCompatActivity {
                 case(R.id.medical):
                     callIntent.setData(Uri.parse("tel:" + selectedCountry.getMedical()));
                     break;
+                //emergencyTab.getElements()
 //                    default:
 //                        callIntent.setData(Uri.parse("tel:" +elements.get(id)));
-//                        startActivity(callIntent);
                }
             startActivity(callIntent);
         } else {

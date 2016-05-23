@@ -5,12 +5,17 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.CardView;
+import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Created by patrickbalestra on 14/03/2015.
@@ -24,7 +29,7 @@ public class EmergencyTab extends Fragment {
     private String medicalNumber;
     private TextView medicalTextView;
     private FloatingActionButton addContactButton;
-
+    HashMap<String,String> elements = new HashMap<>();
     final int CONTACT_PICK_REQUEST = 1000;
     final int RESULT_CODE_OK = -1;
 
@@ -47,28 +52,42 @@ public class EmergencyTab extends Fragment {
 
         addContactButton = (FloatingActionButton)view.findViewById(R.id.btn);
         setupAddContactButton();
+
+        for(String el : elements.keySet()){
+            LinearLayout l = (LinearLayout) view.findViewById(R.id.main);
+            CardView c = new CardView(getContext());
+            RelativeLayout r = new RelativeLayout(getContext());
+            TextView t = new TextView(getContext());
+            l.addView(c);
+            c.addView(r);
+            r.addView(t);
+            t.setText(el);
+        }
         return view;
     }
 
     @Override
     public void onActivityResult(int requestCode,int resultCode,Intent data){
         super.onActivityResult(requestCode, resultCode, data);
-        System.out.println("RESULT");
+
 
         if (requestCode == CONTACT_PICK_REQUEST && resultCode == RESULT_CODE_OK) {
 
             ArrayList<Contact> selectedContacts = data.getParcelableArrayListExtra("SelectedContacts");
 
-            String display = "";
+
             for (int i = 0; i < selectedContacts.size(); i++){
-
-                display += (i+1) + ". " + selectedContacts.get(i).toString() + "\n";
-
+                if (!(elements.containsKey(selectedContacts.get(i).name))) {
+                    elements.put(selectedContacts.get(i).name, selectedContacts.get(i).phone);
+                }
             }
-//            contactsDisplay.setText("Selected Contacts : \n\n"+display);
+
         }
     }
 
+    public HashMap<String,String> getElements(){
+        return elements;
+    }
     private void setupAddContactButton() {
         addContactButton.setOnClickListener(new View.OnClickListener() {
             @Override
