@@ -35,7 +35,11 @@
             <intent android:action="android.intent.action.VIEW"
                 android:data="https://github.com/BalestraPatrick/EmergencyPhoneNumbers" />
         </Preference>
-        <android.support.v7.preference.Preference
+        <Preference
+            android:title="@string/prefs_tutorial"
+            android:summary="@string/prefs_tutorial_summary">
+        </Preference>
+        <Preference
             android:key="about_dialog"
             android:title="@string/prefs_about"
             android:summary="@string/pref_about_summary"

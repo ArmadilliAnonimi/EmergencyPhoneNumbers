@@ -26,6 +26,8 @@
         But seriously, this app should never be used when not related to emergencies. The cost of the calls is borne by the caller and the rates may vary. Not all numbers are free. This application only facilitates the search of the emergency numbers with your location. Its proper functioning depends on the network coverage and your phone carrier.
     </string>
     <string name="faq">FAQ</string>
+    <string name="prefs_tutorial">Tutorial</string>
+    <string name="prefs_tutorial_summary">Quickly learn how to best use this app\'s features.</string>
     <string name="prefs_disclaimer_message_close">CLOSE</string>
 
     <string name="fire_string">Fire</string>

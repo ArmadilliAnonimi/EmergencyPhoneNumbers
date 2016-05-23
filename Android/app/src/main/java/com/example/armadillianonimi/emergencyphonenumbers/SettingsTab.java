@@ -32,9 +32,16 @@ public class SettingsTab extends PreferenceFragmentCompat {
         Preference faqDialog = findPreference("faq");
         faqDialog.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
             public boolean onPreferenceClick(Preference preference) {
-                android.app.FragmentManager fm = getActivity().getFragmentManager();
-                AboutDialog dialog = new AboutDialog();
-                dialog.show(fm, "FAQ");
+                // TODO: show Activity with FAQ and Disclaimer
+                return true;
+            }
+        });
+
+        // Listener for click on "Tutorial" preference
+        Preference tutorialDialog = findPreference("tutorial");
+        faqDialog.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+            public boolean onPreferenceClick(Preference preference) {
+                // TODO: show tutorial that is also TODO
                 return true;
             }
         });
