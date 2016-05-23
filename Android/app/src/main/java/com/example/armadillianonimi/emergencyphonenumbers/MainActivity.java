@@ -5,7 +5,9 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.net.Uri;
+import android.provider.ContactsContract;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
@@ -19,7 +21,9 @@ import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceManager;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Window;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -47,6 +51,9 @@ public class MainActivity extends AppCompatActivity {
     private static final int PERMISSION_REQUEST_CODE = 1;
     HashMap<Integer,String> elements = new HashMap<>();
     Country selectedCountry;
+    TextView contactsDisplay;
+    Button pickContacts;
+    final int CONTACT_PICK_REQUEST = 1000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,7 +63,17 @@ public class MainActivity extends AppCompatActivity {
 
         //Here (I hope) you add the new contact tab in the elements array
        //elements.put()
-
+        //contactsDisplay = (TextView) findViewById(R.id.txt_selected_contacts);
+//        pickContacts = (Button) findViewById(R.id.btn);
+//
+//        pickContacts.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//                Intent intentContactPick = new Intent(MainActivity.this,ContactsPickerActivity.class);
+//                MainActivity.this.startActivityForResult(intentContactPick,CONTACT_PICK_REQUEST);
+//            }
+//        });
 
         locationFinder = new LocationFinder(this);
         locationFinder.setLocationManagerListener(new LocationManagerListener() {
@@ -73,7 +90,6 @@ public class MainActivity extends AppCompatActivity {
 
         // Creating The Toolbar and setting it as the Toolbar for the activity.
         toolbar = (Toolbar) findViewById(R.id.tool_bar);
-        toolbar.setTitle("");
         setSupportActionBar(toolbar);
 
         country = (TextView) findViewById(R.id.country);
@@ -144,14 +160,43 @@ public class MainActivity extends AppCompatActivity {
         };
         prefs.registerOnSharedPreferenceChangeListener(prefsListener);
 
-        if (!(checkPermission())) {
-               request();
+        if (!(checkPermission(Manifest.permission.CALL_PHONE))) {
+               request(Manifest.permission.CALL_PHONE);
         }
+        if (!(checkPermission(Manifest.permission.READ_CONTACTS))) {
+            request(Manifest.permission.READ_CONTACTS);
+        }
+
     }
 
+    @Override
+    public void onActivityResult(int requestCode,int resultCode,Intent data){
+        super.onActivityResult(requestCode, resultCode, data);
 
+        if(requestCode == CONTACT_PICK_REQUEST && resultCode == RESULT_OK){
+
+            ArrayList<Contact> selectedContacts = data.getParcelableArrayListExtra("SelectedContacts");
+
+            String display="";
+            for(int i=0;i<selectedContacts.size();i++){
+
+                display += (i+1)+". "+selectedContacts.get(i).toString()+"\n";
+
+            }
+            contactsDisplay.setText("Selected Contacts : \n\n"+display);
+
+        }
+
+    }
+
+    public void contact(View view){
+
+        Intent intentContactPick = new Intent(this, ContactsPickerActivity.class);
+        startActivityForResult(intentContactPick,CONTACT_PICK_REQUEST);
+
+    }
     public void call(View view) {
-        if (checkPermission()) {
+        if (checkPermission(Manifest.permission.CALL_PHONE)) {
             int id = view.getId();
             Intent callIntent = new Intent(Intent.ACTION_CALL);
             switch(id){
@@ -171,24 +216,23 @@ public class MainActivity extends AppCompatActivity {
                }
             startActivity(callIntent);
         } else {
-            request();
+            request(Manifest.permission.CALL_PHONE);
             Toast.makeText(getApplicationContext(), "Please, allow call permission.\nIt's good for you!", Toast.LENGTH_SHORT).show();
         }
     }
 
-    public boolean checkPermission(){
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE)
+    public boolean checkPermission(String permission){
+        if (ContextCompat.checkSelfPermission(this, permission)
                 != PackageManager.PERMISSION_GRANTED) {
         return false;
         }
         return true;
     }
 
-    public void request(){
+    public void request(String permission){
         ActivityCompat.requestPermissions(this,
-                new String[]{Manifest.permission.CALL_PHONE},
+                new String[]{permission},
                 PERMISSION_REQUEST_CODE);
-        System.out.println("CALL GOT");
     }
     public void selectAppBarColour(int position) {
         switch (position) {
@@ -239,7 +283,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void setupFlagButton() {
         LinearLayout flagButton = (LinearLayout) findViewById(R.id.set_country);
-        final Context context = this;
+
 
         flagButton.setOnClickListener(new View.OnClickListener() {
 
@@ -252,6 +296,7 @@ public class MainActivity extends AppCompatActivity {
 
         });
     }
+
 
     private void showDialog() {
         android.app.FragmentManager fm = getFragmentManager();
@@ -284,7 +329,7 @@ public class MainActivity extends AppCompatActivity {
         api.setEmergencyAPIListener(new EmergencyAPIListener() {
             @Override
             public void countriesAvailable(HashMap<String, Country> countryHashMap) {
-                System.out.println("We just reiceved the countries: " + countryHashMap);
+
 
                 String currentCode = PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("select_country", "CH");
                 selectedCountry = countryHashMap.get(currentCode);
@@ -301,9 +346,7 @@ public class MainActivity extends AppCompatActivity {
                             emergencyTab.setPolice(police);
                             emergencyTab.setMedical(medical);
                             country.setText(name);
-                            System.out.println("Ci siamo");
-                        } else {
-                            System.out.println("NOOOOOOOOOOOOO");
+
                         }
                     }
                 });

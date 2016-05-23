@@ -170,6 +170,8 @@
 
     <android.support.design.widget.FloatingActionButton
         app:backgroundTint="@color/colorPrimary"
+        android:onClick="contact"
+        android:id="@+id/btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"

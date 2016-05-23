@@ -1,5 +1,6 @@
 package com.example.armadillianonimi.emergencyphonenumbers;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -39,24 +40,19 @@ public class EmergencyTab extends Fragment {
         return  view;
     }
     public void setFire(String firetext){
-    System.out.println("fire woks, Mr Patrick");
+
         textview_fire.setText(firetext);
         firenum = firetext;
     }
 
     public void setPolice(String policetext){
-        System.out.println("police woks, Mr Patrick");
+
         textview_police.setText(policetext);
         policenum = policetext;
     }
 
-    public void call() {
-
-        System.out.println("Should start a call");
-    }
-
     public void setMedical(String medictext){
-        System.out.println("medical woks, Mr Patrick");
+
         textview_medic.setText(medictext);
         medicnum = medictext;
     }
