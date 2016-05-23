@@ -11,9 +11,11 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-
             <android.support.v7.widget.CardView
                 android:id="@+id/fire"
+                android:focusable="true"
+                android:clickable="true"
+                android:foreground="?android:attr/selectableItemBackground"
                 android:onClick="call"
                 android:layout_gravity="center"
                 android:layout_width="fill_parent"
@@ -62,57 +64,10 @@
 
             </android.support.v7.widget.CardView>
             <android.support.v7.widget.CardView
-                android:id="@+id/police"
-
-                android:layout_gravity="center"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="12dp"
-                card_view:cardCornerRadius="2dp"
-                card_view:contentPadding="10dp">
-
-                <RelativeLayout
-
-                    android:layout_width="fill_parent"
-                    android:layout_height="fill_parent">
-
-                    <ImageView
-                        android:layout_width="40sp"
-                        android:layout_height="40dp"
-                        android:src="@drawable/phone_icon"
-                        android:tint="@color/colorEmergencyCardsText"
-                        android:layout_centerInParent="true"
-                        android:layout_alignParentRight="true"
-                        android:layout_marginRight="10dp"
-                        />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="35sp"
-                        android:id="@+id/policenum"
-                        android:textColor="@color/colorEmergencyCardsText"
-                        android:layout_centerInParent="true"
-                        android:padding="10dp"
-                        android:layout_marginLeft="0sp"
-                        android:layout_alignParentRight="true"
-                        android:layout_marginRight="50dp"
-                        />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:text="@string/police_string"
-                        android:textSize="35sp"
-                        android:padding="10dp"
-                        android:textColor="@color/colorEmergencyCardsText"
-                        android:layout_marginLeft="0sp"/>
-
-                </RelativeLayout>
-
-            </android.support.v7.widget.CardView>
-            <android.support.v7.widget.CardView
                 android:id="@+id/medical"
-
+                android:focusable="true"
+                android:clickable="true"
+                android:foreground="?android:attr/selectableItemBackground"
                 android:layout_gravity="center"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
@@ -159,8 +114,57 @@
                 </RelativeLayout>
 
             </android.support.v7.widget.CardView>
+            <android.support.v7.widget.CardView
+                android:id="@+id/police"
+                android:focusable="true"
+                android:clickable="true"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:layout_gravity="center"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="12dp"
+                card_view:cardCornerRadius="2dp"
+                card_view:contentPadding="10dp">
 
+                <RelativeLayout
 
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent">
+
+                    <ImageView
+                        android:layout_width="40sp"
+                        android:layout_height="40dp"
+                        android:src="@drawable/phone_icon"
+                        android:tint="@color/colorEmergencyCardsText"
+                        android:layout_centerInParent="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="10dp"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="35sp"
+                        android:id="@+id/policenum"
+                        android:textColor="@color/colorEmergencyCardsText"
+                        android:layout_centerInParent="true"
+                        android:padding="10dp"
+                        android:layout_marginLeft="0sp"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="50dp"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:text="@string/police_string"
+                        android:textSize="35sp"
+                        android:padding="10dp"
+                        android:textColor="@color/colorEmergencyCardsText"
+                        android:layout_marginLeft="0sp"/>
+
+                </RelativeLayout>
+
+            </android.support.v7.widget.CardView>
 
         </LinearLayout>
 
