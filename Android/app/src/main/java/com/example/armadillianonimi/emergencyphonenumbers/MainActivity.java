@@ -52,7 +52,6 @@ public class MainActivity extends AppCompatActivity {
     HashMap<Integer,String> elements = new HashMap<>();
     Country selectedCountry;
     TextView contactsDisplay;
-    Button pickContacts;
     final int CONTACT_PICK_REQUEST = 1000;
 
     @Override
@@ -61,8 +60,6 @@ public class MainActivity extends AppCompatActivity {
         Fabric.with(this, new Crashlytics());
         setContentView(R.layout.activity_main);
 
-        //Here (I hope) you add the new contact tab in the elements array
-       //elements.put()
         //contactsDisplay = (TextView) findViewById(R.id.txt_selected_contacts);
 //        pickContacts = (Button) findViewById(R.id.btn);
 //
