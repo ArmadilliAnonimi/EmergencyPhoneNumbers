@@ -95,20 +95,18 @@ public class EmergencyTab extends Fragment {
         });
     }
 
-    public void setFire(String firetext){
-        System.out.println("Calling set fire");
-        fireTextView.setText(firetext);
-        fireNumber = firetext;
-    }
+    public void updateUI() {
+        if (fireTextView != null) {
+            fireTextView.setText(fireNumber);
+        }
 
-    public void setPolice(String policetext){
-        policeTextView.setText(policetext);
-        policeNumber = policetext;
-    }
+        if (policeTextView != null) {
+            policeTextView.setText(policeNumber);
+        }
 
-    public void setMedical(String medictext){
-        medicalTextView.setText(medictext);
-        medicalNumber = medictext;
+        if (medicalTextView != null) {
+            medicalTextView.setText(medicalNumber);
+        }
     }
 
     @Override

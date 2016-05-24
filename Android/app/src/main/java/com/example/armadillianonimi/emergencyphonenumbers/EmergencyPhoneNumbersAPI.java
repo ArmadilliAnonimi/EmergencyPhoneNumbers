@@ -33,19 +33,20 @@ import okhttp3.Response;
 
 public class EmergencyPhoneNumbersAPI {
 
+    // Singleton instance for this class
     private static EmergencyPhoneNumbersAPI sharedInstance = null;
 
+    // Listener used to communicate changes through a callback with other objects
     private EmergencyAPIListener listener;
 
-    // URL of the backend hsoted on Heroku
+    // URL of the backend
     private static String emergencyPhoneNumbersURL = "https://emergency-phone-numbers.herokuapp.com";
 
+    // Name of the file stored in the internal storage
     private static String fileName = "countries.json";
 
+    // Stores the context used to write and read from the internal storage
     private Context context;
-
-    // TODO: to be stored on disk and compared with the JSON version
-    private double APIVersion = 0.1;
 
     // Object that takes care of doing HTTP requests
     private OkHttpClient client;
@@ -53,7 +54,6 @@ public class EmergencyPhoneNumbersAPI {
     // Contains all the Country objects to be displayed in a list to the user
     private ArrayList<Country> countries;
     private HashMap<String, Country> countryHashMap;
-    private MainActivity activity;
 
     /**
      * Callback for the URL connection to the server
@@ -128,19 +128,8 @@ public class EmergencyPhoneNumbersAPI {
     }
 
     private boolean areCountriesCached(Context context) {
-        try {
-            FileInputStream fileInput = context.openFileInput(fileName);
-            if (fileInput != null) {
-                return true;
-            } else {
-                return false;
-            }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return false;
+        File file = context.getFileStreamPath(fileName);
+        return file.exists();
     }
 
     private void readCountries(Context context) {
@@ -173,12 +162,9 @@ public class EmergencyPhoneNumbersAPI {
     }
 
     private void generateCountriesFromString(String JSONString) {
-        JSONObject object = null;
+        JSONObject object;
         try {
             object = new JSONObject(JSONString);
-            double contentVersion = object.getDouble("version");
-            APIVersion = contentVersion;
-
             JSONArray countriesArray = object.getJSONArray("content");
             for (int i = 0; i < countriesArray.length(); i++) {
                 Country country = new Country(countriesArray.getJSONObject(i));

@@ -132,9 +132,10 @@ public class MainActivity extends AppCompatActivity {
                         @Override
                         public void run() {
                             if ((fire != null) || (police != null) || (medical != null)) {
-                                emergencyTab.setFire(fire);
-                                emergencyTab.setPolice(police);
-                                emergencyTab.setMedical(medical);
+                                emergencyTab.fireNumber = fire;
+                                emergencyTab.policeNumber = police;
+                                emergencyTab.medicalNumber = medical;
+                                emergencyTab.updateUI();
                                 country.setText(name);
                             }
                         }
@@ -315,9 +316,10 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                         if ((fire != null) || (police != null) || (medical != null)) {
-                            emergencyTab.setFire(fire);
-                            emergencyTab.setPolice(police);
-                            emergencyTab.setMedical(medical);
+                            emergencyTab.fireNumber = fire;
+                            emergencyTab.policeNumber = police;
+                            emergencyTab.medicalNumber = medical;
+                            emergencyTab.updateUI();
                             country.setText(name);
                         }
                     }
