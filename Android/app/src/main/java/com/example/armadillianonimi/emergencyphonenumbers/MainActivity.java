@@ -150,22 +150,6 @@ public class MainActivity extends AppCompatActivity {
         if (!(checkPermission(Manifest.permission.READ_CONTACTS))) {
             request(Manifest.permission.READ_CONTACTS);
         }
-//        HashMap<String,String> elements = emergencyTab.getElements();
-//        for(String el : elements.keySet()){
-//            LinearLayout l = (LinearLayout) findViewById(R.id.main);
-//            CardView c = new CardView(this);
-//            RelativeLayout r = new RelativeLayout(this);
-//            TextView t = new TextView(this);
-//            if (l != null) {
-//                l.addView(c);
-//                c.addView(r);
-//                r.addView(t);
-//                t.setText(el);
-//                System.out.println("SIIIIIIII");
-//            }
-//            else { System.out.println("NOOOOOOOOOOOOOOO");
-//            }
-//        }
 
         System.out.println("### - MainActivity created");
     }
