@@ -30,7 +30,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.HashMap;
-import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -310,6 +309,9 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+
+
+
     public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
         public SectionsPagerAdapter(FragmentManager fm) {
@@ -351,15 +353,7 @@ public class MainActivity extends AppCompatActivity {
     public Country getDefaultCountry() {
         // Not finished yet, here it looks up first the Geolocation, then by
         // the phone's serial number.
-        String countryCode = Locale.getDefault().getCountry();
-
-        if (countryCode == "") {
-            // GEOLOCATION THINGY, for now CH
-            return api.getCountryHashMap().get("CH");
-        }
-        else {
-            return api.getCountryHashMap().get(countryCode);
-        }
+        return api.getCountryHashMap().get("CH");
     }
 
     @Override
