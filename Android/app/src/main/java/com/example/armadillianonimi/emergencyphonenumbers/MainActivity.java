@@ -169,9 +169,6 @@ public class MainActivity extends AppCompatActivity {
                 case(R.id.medical):
                     callIntent.setData(Uri.parse("tel:" + selectedCountry.getMedical()));
                     break;
-                //emergencyTab.getElements()
-//                    default:
-//                        callIntent.setData(Uri.parse("tel:" +elements.get(id)));
                }
             startActivity(callIntent);
         } else {

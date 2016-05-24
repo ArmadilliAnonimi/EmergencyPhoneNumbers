@@ -2,11 +2,14 @@ package com.example.armadillianonimi.emergencyphonenumbers;
 
 import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.CardView;
 import android.text.Layout;
 import android.view.LayoutInflater;
@@ -37,6 +40,7 @@ public class EmergencyTab extends Fragment {
     private CardView c;
     private final int CONTACT_PICK_REQUEST = 1000;
     private final int RESULT_CODE_OK = -1;
+    private static final int PERMISSION_REQUEST_CODE = 1;
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -98,22 +102,28 @@ public class EmergencyTab extends Fragment {
             });
         }
     }
+    public boolean checkPermission(String permission){
+        if (ContextCompat.checkSelfPermission(getContext(), permission)
+                != PackageManager.PERMISSION_GRANTED) {
+            return false;
+        }
+        return true;
+    }
+    public void request(String permission){
+        ActivityCompat.requestPermissions(getActivity(),
+                new String[]{permission},
+                PERMISSION_REQUEST_CODE);
+    }
     public void call2(View view) {
-        //if (checkPermission(Manifest.permission.CALL_PHONE)) {
-            int id = view.getId();
+        if (checkPermission(Manifest.permission.CALL_PHONE)) {
             Intent callIntent = new Intent(Intent.ACTION_CALL);
                     callIntent.setData(Uri.parse("tel:" + elements.get(view.getId())[0]));
-
-                //emergencyTab.getElements()
-//                    default:
-//                        callIntent.setData(Uri.parse("tel:" +elements.get(id)));
-
             startActivity(callIntent);
-        //} else {
-            //request(Manifest.permission.CALL_PHONE);
-            //Toast.makeText(getApplicationContext(), "Please, allow call permission.\nIt's good for you!", Toast.LENGTH_SHORT).show();
+        } else {
+            request(Manifest.permission.CALL_PHONE);
+            Toast.makeText(getContext(), "Please, allow call permission.\nIt's good for you!", Toast.LENGTH_SHORT).show();
         }
-    //}
+    }
 
 
     public ArrayList<String[]> getElements(){
@@ -123,8 +133,14 @@ public class EmergencyTab extends Fragment {
         addContactButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intentContactPick = new Intent(getContext(),ContactsPickerActivity.class);
-                startActivityForResult(intentContactPick, CONTACT_PICK_REQUEST);
+                if (checkPermission(Manifest.permission.READ_CONTACTS)) {
+                    Intent intentContactPick = new Intent(getContext(), ContactsPickerActivity.class);
+                    startActivityForResult(intentContactPick, CONTACT_PICK_REQUEST);
+                }else {
+                    request(Manifest.permission.READ_CONTACTS);
+                    Toast.makeText(getContext(), "Please, allow call permission.\nIt's good for you!", Toast.LENGTH_SHORT).show();
+                }
+
             }
         });
     }
