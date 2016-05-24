@@ -3,7 +3,6 @@ package com.example.armadillianonimi.emergencyphonenumbers;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.provider.Settings;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -14,8 +13,6 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -35,9 +32,6 @@ public class EmergencyPhoneNumbersAPI {
 
     // Singleton instance for this class
     private static EmergencyPhoneNumbersAPI sharedInstance = null;
-
-    // Listener used to communicate changes through a callback with other objects
-    private EmergencyAPIListener listener;
 
     // URL of the backend
     private static String emergencyPhoneNumbersURL = "https://emergency-phone-numbers.herokuapp.com";
@@ -175,7 +169,7 @@ public class EmergencyPhoneNumbersAPI {
             }
             writeCountries(context, JSONString);
             // Tell interface that we loaded all the countries
-            listener.countriesAvailable(countryHashMap);
+          //  listener.countriesAvailable(countryHashMap);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -204,10 +198,6 @@ public class EmergencyPhoneNumbersAPI {
 
     public HashMap<String, Country> getCountryHashMap() {
         return countryHashMap;
-    }
-
-    public void setEmergencyAPIListener(EmergencyAPIListener listener) {
-        this.listener = listener;
     }
 
 }
