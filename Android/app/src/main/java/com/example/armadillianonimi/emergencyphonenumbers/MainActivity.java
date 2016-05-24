@@ -1,58 +1,57 @@
 package com.example.armadillianonimi.emergencyphonenumbers;
 
 import android.Manifest;
-import android.app.Activity;
+
+import android.net.Uri;
+import com.crashlytics.android.Crashlytics;
+import io.fabric.sdk.android.Fabric;
+
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.database.Cursor;
-import android.net.Uri;
-import android.provider.ContactsContract;
-import android.support.design.widget.FloatingActionButton;
+import android.content.Context;
+
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.view.ViewPager;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.support.v4.view.ViewPager;
-import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceManager;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
+import android.os.Bundle;
 import android.view.Window;
-import android.widget.Button;
+import android.view.View;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.view.View;
-import android.content.Context;
 import android.widget.Toast;
 
-import com.crashlytics.android.Crashlytics;
-import io.fabric.sdk.android.Fabric;
-import java.util.ArrayList;
 import java.util.HashMap;
 
 public class MainActivity extends AppCompatActivity {
 
-    private TextView country;
-    final CharSequence Titles[] = {"EMERGENCY", "LOCATION", "SETTINGS"};
-    LocationFinder locationFinder;
-    SectionsPagerAdapter mSectionsPagerAdapter;
+    // Tabs and toolbar
     Toolbar toolbar;
+    final CharSequence Titles[] = {"EMERGENCY", "LOCATION", "SETTINGS"};
+    SectionsPagerAdapter mSectionsPagerAdapter;
     TabLayout tabs;
     final EmergencyTab emergencyTab = new EmergencyTab();
     final LocationTab locationTab = new LocationTab();
     final SettingsTab settingsTab = new SettingsTab();
+
+    // Preferences
+    SharedPreferences prefs;
     SharedPreferences.OnSharedPreferenceChangeListener prefsListener;
+    LocationFinder locationFinder;
     private static final int PERMISSION_REQUEST_CODE = 1;
 
-    Country selectedCountry;
+    // Countries
+    private EmergencyPhoneNumbersAPI api = EmergencyPhoneNumbersAPI.getSharedInstance();
+    private TextView country;
+    private Country selectedCountry;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
