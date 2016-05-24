@@ -117,7 +117,7 @@ public class EmergencyTab extends Fragment {
     public void call2(View view) {
         if (checkPermission(Manifest.permission.CALL_PHONE)) {
             Intent callIntent = new Intent(Intent.ACTION_CALL);
-                    callIntent.setData(Uri.parse("tel:" + elements.get(view.getId())[0]));
+                    callIntent.setData(Uri.parse("tel:" + elements.get(view.getId())[1]));
             startActivity(callIntent);
         } else {
             request(Manifest.permission.CALL_PHONE);
