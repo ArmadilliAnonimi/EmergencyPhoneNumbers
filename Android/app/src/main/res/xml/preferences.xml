@@ -22,7 +22,7 @@
             android:defaultValue="false"/>
         <android.support.v7.preference.Preference
             android:key="faq"
-            android:title="@string/faq"/>
+            android:title="@string/pref_faq"/>
 
     </android.support.v7.preference.PreferenceCategory>
 
@@ -30,18 +30,18 @@
         android:title="@string/preferences_title_about">
 
         <Preference
-            android:title="@string/prefs_web_page"
-            android:summary="@string/prefs_web_page_summary">
+            android:title="@string/pref_web_page"
+            android:summary="@string/pref_web_page_summary">
             <intent android:action="android.intent.action.VIEW"
                 android:data="https://github.com/BalestraPatrick/EmergencyPhoneNumbers" />
         </Preference>
         <Preference
-            android:title="@string/prefs_tutorial"
-            android:summary="@string/prefs_tutorial_summary">
+            android:title="@string/pref_tutorial"
+            android:summary="@string/pref_tutorial_summary">
         </Preference>
         <Preference
             android:key="about_dialog"
-            android:title="@string/prefs_about"
+            android:title="@string/pref_about"
             android:summary="@string/pref_about_summary"
             android:onClick="showAboutScreen"/>
 
