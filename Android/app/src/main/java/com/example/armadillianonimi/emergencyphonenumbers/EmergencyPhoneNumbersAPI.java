@@ -1,10 +1,21 @@
 package com.example.armadillianonimi.emergencyphonenumbers;
 
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.provider.Settings;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -15,7 +26,6 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 /**
- * Created by patrickbalestra on 4/30/16.
  * This class takes care of connection to the backend and to download the JSON file.
  * We then parse it to extract the version number and all the countries. A Country object containing all its data
  * is instantiated and stored in an ArrayList for later use.
@@ -28,14 +38,21 @@ public class EmergencyPhoneNumbersAPI {
     private EmergencyAPIListener listener;
 
     // URL of the backend hsoted on Heroku
-    private static String url = "https://emergency-phone-numbers.herokuapp.com";
+    private static String emergencyPhoneNumbersURL = "https://emergency-phone-numbers.herokuapp.com";
+
+    private static String fileName = "countries.json";
+
+    private Context context;
 
     // TODO: to be stored on disk and compared with the JSON version
     private double APIVersion = 0.1;
 
+    // Object that takes care of doing HTTP requests
+    private OkHttpClient client;
+
     // Contains all the Country objects to be displayed in a list to the user
     private ArrayList<Country> countries;
-    private HashMap<String, Country>  countryHashMap;
+    private HashMap<String, Country> countryHashMap;
     private MainActivity activity;
 
     /**
@@ -64,25 +81,8 @@ public class EmergencyPhoneNumbersAPI {
             if (response.code() == 200) {
                 System.out.println("Successfully received response with code: 200");
                 String JSONString = response.body().string();
-                JSONObject object = null;
-                try {
-                    object = new JSONObject(JSONString);
-                    double contentVersion = object.getDouble("version");
-                    APIVersion = contentVersion;
-
-                    JSONArray countriesArray = object.getJSONArray("content");
-                    for (int i = 0; i < countriesArray.length(); i++) {
-                        Country country = new Country(countriesArray.getJSONObject(i));
-                        String code = country.getCode();
-                        countries.add(country);
-                        countryHashMap.put(code, country);
-                    }
-                    // Tell interface that we loaded all the countries
-                    listener.countriesAvailable(countryHashMap);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-
+                generateCountriesFromString(JSONString);
+                System.out.println("Generated countries HashMap: " + countryHashMap.toString());
             } else {
                 System.out.println("Received response but with code " + response.code());
                 throw new IOException();
@@ -94,9 +94,7 @@ public class EmergencyPhoneNumbersAPI {
      * Constructor of this class that enqueues the URL request to the Server.
      */
     private EmergencyPhoneNumbersAPI() {
-        OkHttpClient client = new OkHttpClient();
-        Request request = new Request.Builder().url(url).build();
-        client.newCall(request).enqueue(callback);
+        client = new OkHttpClient();
         countries = new ArrayList<>();
         countryHashMap = new HashMap<>();
     }
@@ -106,6 +104,112 @@ public class EmergencyPhoneNumbersAPI {
             sharedInstance = new EmergencyPhoneNumbersAPI();
         }
         return sharedInstance;
+    }
+
+    public void requestCountries(Context context) {
+        this.context = context;
+        if (areCountriesCached(context)) {
+            System.out.println("File exists.");
+            // Read countries and communicate to listener to reload UI
+            readCountries(context);
+
+            // Check if there is internet connection.
+            if (haveNetworkConnection()) {
+                Request request = new Request.Builder().url(emergencyPhoneNumbersURL).build();
+                client.newCall(request).enqueue(callback);
+            }
+
+            // TODO: check if there is a newer version
+        } else {
+            Request request = new Request.Builder().url(emergencyPhoneNumbersURL).build();
+            client.newCall(request).enqueue(callback);
+            System.out.println("Done");
+        }
+    }
+
+    private boolean areCountriesCached(Context context) {
+        try {
+            FileInputStream fileInput = context.openFileInput(fileName);
+            if (fileInput != null) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    private void readCountries(Context context) {
+        try {
+            FileInputStream fileInput = context.openFileInput(fileName);
+            int c;
+            String countries = "";
+            while ((c = fileInput.read()) != -1) {
+                countries += Character.toString((char)c);
+            }
+            fileInput.close();
+            System.out.println("Je suis countries: " + countries);
+            generateCountriesFromString(countries);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void writeCountries(Context context, String json) {
+        try {
+            FileOutputStream fileOut = context.openFileOutput(fileName, Context.MODE_WORLD_READABLE);
+            System.out.println(json);
+            fileOut.write(json.getBytes());
+            fileOut.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void generateCountriesFromString(String JSONString) {
+        JSONObject object = null;
+        try {
+            object = new JSONObject(JSONString);
+            double contentVersion = object.getDouble("version");
+            APIVersion = contentVersion;
+
+            JSONArray countriesArray = object.getJSONArray("content");
+            for (int i = 0; i < countriesArray.length(); i++) {
+                Country country = new Country(countriesArray.getJSONObject(i));
+                String code = country.getCode();
+                countries.add(country);
+                countryHashMap.put(code, country);
+                System.out.println("country" + countryHashMap);
+            }
+            writeCountries(context, JSONString);
+            // Tell interface that we loaded all the countries
+            listener.countriesAvailable(countryHashMap);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private boolean haveNetworkConnection() {
+        boolean haveConnectedWifi = false;
+        boolean haveConnectedMobile = false;
+
+        ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo[] netInfo = cm.getAllNetworkInfo();
+        for (NetworkInfo ni : netInfo) {
+            if (ni.getTypeName().equalsIgnoreCase("WIFI"))
+                if (ni.isConnected())
+                    haveConnectedWifi = true;
+            if (ni.getTypeName().equalsIgnoreCase("MOBILE"))
+                if (ni.isConnected())
+                    haveConnectedMobile = true;
+        }
+        return haveConnectedWifi || haveConnectedMobile;
     }
 
     public ArrayList<Country> getCountries() {

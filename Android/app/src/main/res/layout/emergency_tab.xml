@@ -13,11 +13,10 @@
             android:layout_height="match_parent">
 
             <android.support.v7.widget.CardView
-                android:id="@+id/fire"
+                android:id="@+id/police"
                 android:focusable="true"
                 android:clickable="true"
                 android:foreground="?android:attr/selectableItemBackground"
-                android:onClick="call"
                 android:layout_gravity="center"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
@@ -43,7 +42,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="35sp"
-                        android:id="@+id/firenum"
+                        android:id="@+id/policenum"
                         android:textColor="@color/colorEmergencyCardsText"
                         android:layout_centerInParent="true"
                         android:padding="10dp"
@@ -55,11 +54,11 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
-                        android:text="@string/fire_string"
+                        android:text="@string/police_string"
                         android:textSize="35sp"
                         android:padding="10dp"
                         android:textColor="@color/colorEmergencyCardsText"
-                        />
+                        android:layout_marginLeft="0sp"/>
 
                 </RelativeLayout>
 
@@ -116,10 +115,11 @@
 
             </android.support.v7.widget.CardView>
             <android.support.v7.widget.CardView
-                android:id="@+id/police"
+                android:id="@+id/fire"
                 android:focusable="true"
                 android:clickable="true"
                 android:foreground="?android:attr/selectableItemBackground"
+                android:onClick="call"
                 android:layout_gravity="center"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
@@ -145,7 +145,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="35sp"
-                        android:id="@+id/policenum"
+                        android:id="@+id/firenum"
                         android:textColor="@color/colorEmergencyCardsText"
                         android:layout_centerInParent="true"
                         android:padding="10dp"
@@ -157,16 +157,15 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
-                        android:text="@string/police_string"
+                        android:text="@string/fire_string"
                         android:textSize="35sp"
                         android:padding="10dp"
                         android:textColor="@color/colorEmergencyCardsText"
-                        android:layout_marginLeft="0sp"/>
+                        />
 
                 </RelativeLayout>
 
             </android.support.v7.widget.CardView>
-
         </LinearLayout>
 
     <android.support.design.widget.FloatingActionButton

@@ -22,21 +22,23 @@ import java.util.HashMap;
  */
 public class EmergencyTab extends Fragment {
 
-    private String fireNumber;
+    public String fireNumber;
+    public String policeNumber;
+    public String medicalNumber;
+
     private TextView fireTextView;
-    private String policeNumber;
     private TextView policeTextView;
-    private String medicalNumber;
     private TextView medicalTextView;
     private FloatingActionButton addContactButton;
-    HashMap<String,String> elements = new HashMap<>();
-    final int CONTACT_PICK_REQUEST = 1000;
-    final int RESULT_CODE_OK = -1;
+    private HashMap<String,String> elements = new HashMap<>();
+
+    private final int CONTACT_PICK_REQUEST = 1000;
+    private final int RESULT_CODE_OK = -1;
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.emergency_tab, container, false);
-
+        System.out.println("Initializing fireTextView");
         fireTextView = (TextView) view.findViewById(R.id.firenum);
         if (fireNumber != null) {
             fireTextView.setText(fireNumber);
@@ -70,18 +72,13 @@ public class EmergencyTab extends Fragment {
     public void onActivityResult(int requestCode,int resultCode,Intent data){
         super.onActivityResult(requestCode, resultCode, data);
 
-
         if (requestCode == CONTACT_PICK_REQUEST && resultCode == RESULT_CODE_OK) {
-
             ArrayList<Contact> selectedContacts = data.getParcelableArrayListExtra("SelectedContacts");
-
-
             for (int i = 0; i < selectedContacts.size(); i++){
                 if (!(elements.containsKey(selectedContacts.get(i).name))) {
                     elements.put(selectedContacts.get(i).name, selectedContacts.get(i).phone);
                 }
             }
-
         }
     }
 
@@ -99,6 +96,7 @@ public class EmergencyTab extends Fragment {
     }
 
     public void setFire(String firetext){
+        System.out.println("Calling set fire");
         fireTextView.setText(firetext);
         fireNumber = firetext;
     }

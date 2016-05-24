@@ -40,7 +40,7 @@ import java.util.HashMap;
 
 public class MainActivity extends AppCompatActivity {
 
-    TextView country;
+    private TextView country;
     final CharSequence Titles[] = {"EMERGENCY", "LOCATION", "SETTINGS"};
     LocationFinder locationFinder;
     SectionsPagerAdapter mSectionsPagerAdapter;
@@ -101,7 +101,6 @@ public class MainActivity extends AppCompatActivity {
             public void onTabSelected(TabLayout.Tab tab) {
                 super.onTabSelected(tab);
                 selectAppBarColour(tabs.getSelectedTabPosition());
-
             }
 
             @Override
@@ -304,10 +303,9 @@ public class MainActivity extends AppCompatActivity {
         api.setEmergencyAPIListener(new EmergencyAPIListener() {
             @Override
             public void countriesAvailable(HashMap<String, Country> countryHashMap) {
-
-
                 String currentCode = PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("select_country", "CH");
                 selectedCountry = countryHashMap.get(currentCode);
+
                 final EmergencyTab emergencyTab = (EmergencyTab) mSectionsPagerAdapter.getItem(0);
                 final String fire =  selectedCountry.getFire();
                 final String police =  selectedCountry.getPolice();
@@ -321,12 +319,12 @@ public class MainActivity extends AppCompatActivity {
                             emergencyTab.setPolice(police);
                             emergencyTab.setMedical(medical);
                             country.setText(name);
-
                         }
                     }
                 });
             }
         });
+        api.requestCountries(getApplicationContext());
     }
 
     public class SectionsPagerAdapter extends FragmentPagerAdapter {
