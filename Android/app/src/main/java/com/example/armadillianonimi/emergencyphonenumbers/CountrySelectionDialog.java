@@ -4,9 +4,11 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.annotation.Nullable;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.preference.PreferenceManager;
 
 
@@ -48,14 +50,11 @@ public class CountrySelectionDialog extends DialogFragment {
         dialog.setPositiveButton("DONE", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
                 mValue = mEntryValues[mClickedDialogEntryIndex].toString();
-                prefs.edit().putString("select_country", mValue).apply();
+                prefs.edit().putString("select_country", mValue).commit();
             }
         });
         mClickedDialogEntryIndex = getValueIndex();
         dialog.setSingleChoiceItems(mEntries, mClickedDialogEntryIndex, selectItemListener);
-
-        System.out.println("CHECK SAVED COUNTRY CODE: "+ PreferenceManager.getDefaultSharedPreferences(getActivity()).getString("select_country", "CH"));
-
         return dialog.create();
     }
 
