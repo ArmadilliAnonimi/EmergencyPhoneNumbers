@@ -27,7 +27,6 @@
     <string name="pref_faq">FAQ</string>
     <string name="pref_tutorial">Tutorial</string>
     <string name="pref_tutorial_summary">Quickly learn how to best use this app\'s features.</string>
-    <string name="pref_disclaimer_message_close">CLOSE</string>
 
     <string name="fire_string">Fire</string>
     <string name="police_string">Police</string>
@@ -52,7 +51,6 @@
         <item>http://atelier.inf.unisi.ch/~fiecha/</item>
         <item>http://atelier.inf.unisi.ch/~riccas/</item>
     </string-array>
-    <string name="about_dialog_close">CLOSE</string>
     <string name="finding_location">Finding your location...</string>
     <string name="you_are_here">You are here</string>
 
@@ -60,4 +58,15 @@
     <string name="country_flag">Country flag</string>
     <string name="location_button">Location button</string>
     <string name="phone_icon">Phone icon</string>
+
+    <string name="country_selection_dialog_title_yes">Select your Country:</string>
+
+    <string name="country_selection_dialog_title_no">Not available</string>
+    <string name="country_selection_dialog_message_no">Disable \"Always use current location\" in settings to be able to change country</string>
+
+    <string name="CANCEL">CANCEL</string>
+    <string name="DONE">DONE</string>
+    <string name="CLOSE">CLOSE</string>
+    <string name="OK">OK</string>
+
 </resources>

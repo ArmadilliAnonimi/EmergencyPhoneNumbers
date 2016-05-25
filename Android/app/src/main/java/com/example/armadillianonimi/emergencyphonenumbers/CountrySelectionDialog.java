@@ -16,6 +16,7 @@ import android.support.v7.preference.PreferenceManager;
  * directly the dialogue.
  */
 public class CountrySelectionDialog extends DialogFragment {
+    private boolean choiceAvailable;
     private CharSequence[] mEntries;
     private CharSequence[] mEntryValues;
     private String mValue;
@@ -38,24 +39,36 @@ public class CountrySelectionDialog extends DialogFragment {
     @Override public Dialog onCreateDialog(Bundle savedInstanceState) {
         AlertDialog.Builder dialog = new AlertDialog.Builder(getActivity());
 
-        dialog.setTitle("Select your Country:");
-        // Add the buttons
-        dialog.setNeutralButton("CANCEL", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int id) {
-        //       Doesn't do anything except closing the dialogue.
-            }
-        });
-        dialog.setPositiveButton("DONE", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int id) {
-                mValue = mEntryValues[mClickedDialogEntryIndex].toString();
-                prefs.edit().putString("select_country", mValue).apply();
-            }
-        });
-        mClickedDialogEntryIndex = getValueIndex();
-        dialog.setSingleChoiceItems(mEntries, mClickedDialogEntryIndex, selectItemListener);
+        if (choiceAvailable) {
+            dialog.setTitle(R.string.country_selection_dialog_title_yes);
+            // Add the buttons
+            dialog.setNeutralButton(R.string.CANCEL, new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int id) {
+                    //       Doesn't do anything except closing the dialogue.
+                }
+            });
+            dialog.setPositiveButton(R.string.DONE, new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int id) {
+                    mValue = mEntryValues[mClickedDialogEntryIndex].toString();
+                    prefs.edit().putString("select_country", mValue).apply();
+                }
+            });
+            mClickedDialogEntryIndex = getValueIndex();
+            dialog.setSingleChoiceItems(mEntries, mClickedDialogEntryIndex, selectItemListener);
 
-        System.out.println("CHECK SAVED COUNTRY CODE: "+ PreferenceManager.getDefaultSharedPreferences(getActivity()).getString("select_country", "CH"));
-
+            System.out.println("CHECK SAVED COUNTRY CODE: "+ PreferenceManager.getDefaultSharedPreferences(getActivity()).getString("select_country", "CH"));
+        } else {
+            dialog.setTitle(R.string.country_selection_dialog_title_no);
+            // add buttons
+            dialog.setPositiveButton(R.string.OK, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    //       Doesn't do anything except closing the dialogue.
+                }
+            });
+            dialog.setMessage(R.string.country_selection_dialog_message_no);
+            System.out.println("DISPLAYED NEGATION TO CHANGE COUNTRY MWAHAHAHAH");
+        }
         return dialog.create();
     }
 
@@ -94,6 +107,10 @@ public class CountrySelectionDialog extends DialogFragment {
             mEntryValues[i] = country.getCode();
             i++;
         }
+    }
+
+    public void setChoiceAvailable(boolean canIChooseCountryPls) {
+        this.choiceAvailable = canIChooseCountryPls;
     }
 }
 

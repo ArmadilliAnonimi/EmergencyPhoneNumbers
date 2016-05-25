@@ -126,9 +126,15 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
                 System.out.println("Should update UI 1");
+
                 if (key.equals("select_country")) {
                     System.out.println("Should update UI with key: " + sharedPreferences.getString(key, ""));
                     changeCountry(api.getCountryHashMap());
+                }
+
+                if (key.equals("pref_auto_location")) {
+                    System.out.println("REQUESTING LOCATION BECAUSE SETTING AUTO PREF CHANGED");
+                    locationFinder.requestLocation();
                 }
             }
         };
@@ -244,8 +250,9 @@ public class MainActivity extends AppCompatActivity {
 
     private void showDialog() {
         android.app.FragmentManager fm = getFragmentManager();
-        CountrySelectionDialog Country_Selector = new CountrySelectionDialog();
-        Country_Selector.show(fm, "Country_Selector");
+        CountrySelectionDialog countrySelector = new CountrySelectionDialog();
+        countrySelector.setChoiceAvailable(!(prefs.getBoolean("pref_auto_location", false)));
+        countrySelector.show(fm, "Country_Selector");
     }
 
     // Callback method called when the user allows or denies the access to the location. We reload the map if we have the permission to do so.
@@ -292,7 +299,7 @@ public class MainActivity extends AppCompatActivity {
 
         COMING_THROUGH_GEOLOCATION = false;
 
-        String currentCode = PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("select_country", defaultCountryCode);
+        String currentCode = prefs.getString("select_country", defaultCountryCode);
         selectedCountry = countryHashMap.get(currentCode);
 
         final EmergencyTab emergencyTab = (EmergencyTab) mSectionsPagerAdapter.getItem(0);
