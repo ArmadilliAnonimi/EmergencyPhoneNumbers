@@ -94,7 +94,7 @@ public class LocationTab extends Fragment {
         View view = inflater.inflate(R.layout.location_tab, container, false);
         mapView = (MapView) view.findViewById(R.id.mapView);
         addressTextView = (TextView) view.findViewById(R.id.addresstextview);
-        addressTextView.setText("Finding your location...");
+        addressTextView.setText(R.string.finding_location);
         mapView.onCreate(savedInstanceState);
         mapView.onResume();
 
@@ -111,7 +111,7 @@ public class LocationTab extends Fragment {
                 }
 
                 // Adding marker on the map.
-                marker = googleMap.addMarker(new MarkerOptions().position(location.position).title("You are here").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)));
+                marker = googleMap.addMarker(new MarkerOptions().position(location.position).title(String.valueOf(R.string.you_are_here)).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)));
 
                 // Moving position of the camera in the map depending on the position of the marker.
                 CameraPosition cameraPosition = new CameraPosition.Builder().target(location.position).zoom(16).build();

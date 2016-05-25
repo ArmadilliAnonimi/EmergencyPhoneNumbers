@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">EmergencyPhoneNumbers</string>
-    <string name="title_activity_scrolling_flags">ScrollingFlags</string>
     <string name="pref_auto_location">Always use current location</string>
     <string name="pref_auto_location_summary">Set the country automatically using your current location</string>
     <string name="pref_auto_calling">Call confirmation</string>
@@ -34,6 +33,10 @@
     <string name="police_string">Police</string>
     <string name="medical_string">Medical</string>
 
+    <string name="emergency_title">EMERGENCY</string>
+    <string name="location_title">LOCATION</string>
+    <string name="settings_title">SETTINGS</string>
+
     <string name="about_dialog_title">"This app was developed @ USI by the following students:"</string>
     <string-array name="names_array">
         <item>Patrick Balestra</item>
@@ -50,5 +53,7 @@
         <item>http://atelier.inf.unisi.ch/~riccas/</item>
     </string-array>
     <string name="about_dialog_close">CLOSE</string>
+    <string name="finding_location">Finding your location...</string>
+    <string name="you_are_here">You are here</string>
 
 </resources>

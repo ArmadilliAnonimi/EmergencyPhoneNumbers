@@ -1,0 +1,53 @@
+<resources>
+    <string name="app_name">EmergencyPhoneNumbers</string>
+      <string name="pref_auto_location">Verwenden Sie immer aktuelle Position</string>
+    <string name="pref_auto_location_summary">Stellen Sie das Land automatisch Ihren aktuellen Standort mit</string>
+    <string name="pref_auto_calling">Anrufbestätigung</string>
+    <string name="pref_auto_calling_summary">Stellen Sie vor dem Aufruf, wenn eine Notrufnummer gedrückt wird</string>
+    <string name="pref_change_country">Land wählen</string>
+    <string name="pref_change_country_summary">Wählen Sie Ihr Land aus einer Liste</string>
+    <string name="preferences_title_preferences">Voreinstellungen</string>
+    <string name="preferences_title_about">About</string>
+    <string name="pref_languages_screen">Sprache</string>
+    <string name="pref_web_page">Fork on GitHub</string>
+    <string name="pref_web_page_summary">Die App ist komplett Open Source, so dass Sie auf den Code einen Blick beitragen.</string>
+    <string name="pref_about">About</string>
+    <string name="pref_about_summary">Treffen Sie, wer hinter dieser App ist</string>
+    <string name="pref_disclaimer">Disclaimer</string>
+    <string name="pref_disclaimer_message">
+        Diese App sollte niemals verwendet werden, wenn sie nicht auf Notfälle. Die Kosten für die Anrufe wird durch den Anrufer getragen und die Preise variieren. Nicht alle Zahlen sind frei. Diese Anwendung erleichtert nur die Suche nach den Notrufnummern mit Ihrem Standort. Die einwandfreie Funktion ist abhängig von der Netzabdeckung und Ihre Telefon Träger.
+    </string>
+    <string name="pref_faq">FAQ</string>
+    <string name="pref_tutorial">Tutorial</string>
+    <string name="pref_tutorial_summary">Schnell lernen, wie man am besten diese App Funktionen nutzen.</string>
+    <string name="pref_disclaimer_message_close">SCHLIESSEN</string>
+
+    <string name="fire_string">Feuerwehr</string>
+    <string name="police_string">Polizei</string>
+    <string name="medical_string">Ambulanz</string>
+
+    <string name="emergency_title">NOTFALL</string>
+    <string name="location_title">STANDORT</string>
+    <string name="settings_title">EINSTELLUNGEN</string>
+
+
+    <string name="about_dialog_title">"Diese App wurde @ USI durch die folgenden Studenten entwickelt:"</string>
+    <string-array name="names_array">
+        <item>Patrick Balestra</item>
+        <item>Valerie Burgener</item>
+        <item>Emanuele Esposito</item>
+        <item>Aron Fiechter</item>
+        <item>Susanna Riccardi</item>
+    </string-array>
+    <string-array name="websites_url_array">
+        <item>http://atelier.inf.unisi.ch/~balesp/</item>
+        <item>http://atelier.inf.unisi.ch/~burgev</item>
+        <item>http://atelier.inf.unisi.ch/~esposem/</item>
+        <item>http://atelier.inf.unisi.ch/~fiecha/</item>
+        <item>http://atelier.inf.unisi.ch/~riccas/</item>
+    </string-array>
+    <string name="about_dialog_close">SCHLIESSEN</string>
+    <string name="finding_location">Ihren Standort finden...</string>
+    <string name="you_are_here">Du bist da</string>
+
+</resources>

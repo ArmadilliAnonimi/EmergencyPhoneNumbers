@@ -1,0 +1,53 @@
+<resources>
+    <string name="app_name">EmergencyPhoneNumbers</string>
+    <string name="pref_auto_location">Utilisez toujours emplacement actuel</string>
+    <string name="pref_auto_location_summary">Configurer le pays automatiquement en utilisant votre emplacement actuel</string>
+    <string name="pref_auto_calling">Confirmation d\'appel</string>
+    <string name="pref_auto_calling_summary">Demandez avant d\'appeler quand un numéro d\'urgence est pressé</string>
+    <string name="pref_change_country">Changer de pays</string>
+    <string name="pref_change_country_summary">Sélectionnez votre pays dans la liste</string>
+    <string name="preferences_title_preferences">Préférences</string>
+    <string name="preferences_title_about">About</string>
+    <string name="pref_languages_screen">Langue</string>
+    <string name="pref_web_page">Fork on GitHub</string>
+    <string name="pref_web_page_summary">L\'application est complètement open-source de sorte que vous pouvez contribuer et jeter un oeil au code.</string>
+    <string name="pref_about">About</string>
+    <string name="pref_about_summary">Rencontre qui est derrière cette application</string>
+    <string name="pref_disclaimer">Avertissement</string>
+    <string name="pref_disclaimer_message">
+      Cette application ne devrait jamais être utilisé lorsque ne sont pas liées aux situations d\'urgence. Le coût des appels est pris en charge par l\'appelant et les tarifs peuvent varier. tous les numéros ne sont pas libres. Cette application ne facilite la recherche des numéros d\'urgence avec votre emplacement. Son bon fonctionnement dépend de la couverture du réseau et de votre opérateur de téléphonie.
+    </string>
+    <string name="pref_faq">FAQ</string>
+    <string name="pref_tutorial">Tutorial</string>
+    <string name="pref_tutorial_summary">Apprenez rapidement comment utiliser au mieux cette application fonctionnalités.</string>
+    <string name="pref_disclaimer_message_close">FERMER</string>
+
+    <string name="fire_string">Pompiers</string>
+    <string name="police_string">Police</string>
+    <string name="medical_string">Médical</string>
+
+    <string name="emergency_title">URGENCE</string>
+    <string name="location_title">LOCALISATION</string>
+    <string name="settings_title">RÉGLAGES</string>
+
+
+    <string name="about_dialog_title">"Cette application a été développée @ USI par les élèves suivants:"</string>
+    <string-array name="names_array">
+        <item>Patrick Balestra</item>
+        <item>Valerie Burgener</item>
+        <item>Emanuele Esposito</item>
+        <item>Aron Fiechter</item>
+        <item>Susanna Riccardi</item>
+    </string-array>
+    <string-array name="websites_url_array">
+        <item>http://atelier.inf.unisi.ch/~balesp/</item>
+        <item>http://atelier.inf.unisi.ch/~burgev</item>
+        <item>http://atelier.inf.unisi.ch/~esposem/</item>
+        <item>http://atelier.inf.unisi.ch/~fiecha/</item>
+        <item>http://atelier.inf.unisi.ch/~riccas/</item>
+    </string-array>
+    <string name="about_dialog_close">FERMER</string>
+    <string name="finding_location">Trouver votre emplacement ...</string>
+    <string name="you_are_here">Tu es là</string>
+
+</resources>

@@ -36,7 +36,6 @@ public class MainActivity extends AppCompatActivity {
 
     // Tabs and toolbar
     private Toolbar toolbar;
-    private final CharSequence Titles[] = {"EMERGENCY", "LOCATION", "SETTINGS"};
     SectionsPagerAdapter mSectionsPagerAdapter;
     private TabLayout tabs;
     final EmergencyTab emergencyTab = new EmergencyTab();
@@ -182,7 +181,7 @@ public class MainActivity extends AppCompatActivity {
                 new String[]{permission},
                 PERMISSION_REQUEST_CODE);
     }
-    
+
     public void selectAppBarColour(int position) {
         switch (position) {
             case 0:
@@ -282,7 +281,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void changeCountry(HashMap<String, Country> countryHashMap) {
-        String currentCode = PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("select_country", getDefaultCountry().getCode());
+        String currentCode = "CH";//PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("select_country", getDefaultCountry().getCode());
         selectedCountry = countryHashMap.get(currentCode);
         System.out.println("currentCode: " + currentCode);
         final EmergencyTab emergencyTab = (EmergencyTab) mSectionsPagerAdapter.getItem(0);
@@ -342,14 +341,14 @@ public class MainActivity extends AppCompatActivity {
         }
 
         @Override
-        public CharSequence getPageTitle(int position) {
+        public String getPageTitle(int position) {
             switch (position) {
                 case 0:
-                    return Titles[0];
+                    return getString(R.string.emergency_title);
                 case 1:
-                    return Titles[1];
+                    return getString(R.string.location_title);
                 case 2:
-                    return Titles[2];
+                    return getString(R.string.settings_title);
             }
             return null;
         }
