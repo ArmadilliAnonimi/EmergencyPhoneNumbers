@@ -28,18 +28,9 @@ public class SettingsTab extends PreferenceFragmentCompat {
             }
         });
 
-        // Listener for click on "FAQ" preference
-        Preference faqDialog = findPreference("faq");
-        faqDialog.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
-            public boolean onPreferenceClick(Preference preference) {
-                // TODO: show Activity with FAQ and Disclaimer
-                return true;
-            }
-        });
-
         // Listener for click on "Tutorial" preference
         Preference tutorialDialog = findPreference("tutorial");
-        faqDialog.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+        tutorialDialog.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
             public boolean onPreferenceClick(Preference preference) {
                 // TODO: show tutorial that is also TODO
                 return true;

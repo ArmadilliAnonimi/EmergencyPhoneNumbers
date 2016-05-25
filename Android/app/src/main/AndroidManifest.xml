@@ -30,6 +30,14 @@
         <meta-data
             android:name="io.fabric.ApiKey"
             android:value="9fce642c2644fef5ab19ee53e1ec472130a2c78e" />
+
+        <activity android:name=".DisclaimerActivity"
+            android:label="@string/pref_disclaimer"
+            android:parentActivityName="com.example.armadillianonimi.emergencyphonenumbers.MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.armadillianonimi.emergencyphonenumbers.MainActivity" />
+        </activity>
     </application>
 
 </manifest>

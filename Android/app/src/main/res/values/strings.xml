@@ -23,7 +23,7 @@
         Damn, that\'s even smaller than the default text size; let\'s try 20dp. Or better, 20sp, since the
         auto corrector said that for text sizes it would be better to use sp and not dp. Yep, 20 is indeed
         better. But let\'s add some padding.
-        But seriously, this app should never be used when not related to emergencies. The cost of the calls is borne by the caller and the rates may vary. Not all numbers are free. This application only facilitates the search of the emergency numbers with your location. Its proper functioning depends on the network coverage and your phone carrier.
+        But seriously, this app should never be used when not related to emergencies. The cost of the calls is borne by the caller and the rates may vary. Not all numbers are free. This application only facilitates the search of the emergency numbers with your location. Its proper functioning depends on the network coverage and your phone carrier. If something goes wrong contact Emanuele Giuseppe Esposito, it\'s most probably his fault.
     </string>
     <string name="pref_faq">FAQ</string>
     <string name="pref_tutorial">Tutorial</string>
