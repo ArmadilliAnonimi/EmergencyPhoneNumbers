@@ -30,6 +30,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.HashMap;
+import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -88,6 +89,7 @@ public class MainActivity extends AppCompatActivity {
 
         // Assigning the TabLayout View
         tabs = (TabLayout) findViewById(R.id.tabs);
+
         // Setting Custom Color for the Scroll bar indicator of the TabLayout View
         tabs.setSelectedTabIndicatorColor(getResources().getColor(R.color.colorAccent));
 
@@ -109,41 +111,28 @@ public class MainActivity extends AppCompatActivity {
             public void onTabReselected(TabLayout.Tab tab) {}
         });
 
+        // Initializes the shared preferences
+        prefs = PreferenceManager.getDefaultSharedPreferences(this);
+
+        // Loads the numbers and country in the emergency tab
         manageEmergencyAPI();
 
         setupFlagButton();
         setupLocationButton();
 
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        // Changes the country when it's changed in the preferences
         prefsListener = new SharedPreferences.OnSharedPreferenceChangeListener() {
             @Override
             public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
                 if (key.equals("select_country")) {
-                    String currentCountryCode = sharedPreferences.getString(key, "DE");
-                    HashMap<String, Country> countryHashMap = EmergencyPhoneNumbersAPI.getSharedInstance().getCountryHashMap();
-                    selectedCountry = countryHashMap.get(currentCountryCode);
-                    final EmergencyTab emergencyTab = (EmergencyTab) mSectionsPagerAdapter.getItem(0);
-                    final String fire =  selectedCountry.getFire();
-                    final String police =  selectedCountry.getPolice();
-                    final String medical =  selectedCountry.getMedical();
-                    final String name = selectedCountry.getName();
-                    MainActivity.this.runOnUiThread(new Runnable(){
-                        @Override
-                        public void run() {
-                            if ((fire != null) || (police != null) || (medical != null)) {
-                                emergencyTab.fireNumber = fire;
-                                emergencyTab.policeNumber = police;
-                                emergencyTab.medicalNumber = medical;
-                                emergencyTab.updateUI();
-                                country.setText(name);
-                            }
-                        }
-                    });
+                    changeCountry(api.getCountryHashMap());
                 }
             }
         };
         prefs.registerOnSharedPreferenceChangeListener(prefsListener);
 
+
+        // Permission requests
         if (!(checkPermission(Manifest.permission.CALL_PHONE))) {
                request(Manifest.permission.CALL_PHONE);
         }
@@ -190,6 +179,7 @@ public class MainActivity extends AppCompatActivity {
                 new String[]{permission},
                 PERMISSION_REQUEST_CODE);
     }
+    
     public void selectAppBarColour(int position) {
         switch (position) {
             case 0:
@@ -284,30 +274,48 @@ public class MainActivity extends AppCompatActivity {
         api.setEmergencyAPIListener(new EmergencyAPIListener() {
             @Override
             public void countriesAvailable(HashMap<String, Country> countryHashMap) {
-                String currentCode = PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("select_country", "CH");
-                selectedCountry = countryHashMap.get(currentCode);
-
-                final EmergencyTab emergencyTab = (EmergencyTab) mSectionsPagerAdapter.getItem(0);
-                final String fire =  selectedCountry.getFire();
-                final String police =  selectedCountry.getPolice();
-                final String medical =  selectedCountry.getMedical();
-                final String name = selectedCountry.getName();
-                MainActivity.this.runOnUiThread(new Runnable(){
-                    @Override
-                    public void run() {
-                        if ((fire != null) || (police != null) || (medical != null)) {
-                            emergencyTab.fireNumber = fire;
-                            emergencyTab.policeNumber = police;
-                            emergencyTab.medicalNumber = medical;
-                            emergencyTab.updateUI();
-                            country.setText(name);
-                        }
-                    }
-                });
+            changeCountry(countryHashMap);
             }
         });
         api.requestCountries(getApplicationContext());
     }
+
+    public void changeCountry(HashMap<String, Country> countryHashMap) {
+        String currentCode = PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("select_country", getDefaultCountry().getCode());
+        selectedCountry = countryHashMap.get(currentCode);
+
+        final EmergencyTab emergencyTab = (EmergencyTab) mSectionsPagerAdapter.getItem(0);
+        final String fire =  selectedCountry.getFire();
+        final String police =  selectedCountry.getPolice();
+        final String medical =  selectedCountry.getMedical();
+        final String name = selectedCountry.getName();
+        MainActivity.this.runOnUiThread(new Runnable(){
+            @Override
+            public void run() {
+                if ((fire != null) || (police != null) || (medical != null)) {
+                    emergencyTab.fireNumber = fire;
+                    emergencyTab.policeNumber = police;
+                    emergencyTab.medicalNumber = medical;
+                    emergencyTab.updateUI();
+                    country.setText(name);
+                }
+            }
+        });
+    }
+
+    public Country getDefaultCountry() {
+        String countryCode = Locale.getDefault().getCountry();
+        if (countryCode == "") {
+            // GEOLOCATION THINGY, for now CH
+            prefs.edit().putString("select_country", "CH").apply();
+            return api.getCountryHashMap().get("CH");
+        }
+        else {
+            prefs.edit().putString("select_country", countryCode).apply();
+            return api.getCountryHashMap().get(countryCode);
+        }
+    }
+
 
     public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
