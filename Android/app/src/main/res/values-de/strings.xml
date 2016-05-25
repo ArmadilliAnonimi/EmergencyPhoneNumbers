@@ -20,7 +20,6 @@
     <string name="pref_faq">FAQ</string>
     <string name="pref_tutorial">Tutorial</string>
     <string name="pref_tutorial_summary">Lass dir erklären, wie die App benutzt wird</string>
-    <string name="pref_disclaimer_message_close">SCHLIESSEN</string>
 
     <string name="fire_string">Feuerwehr</string>
     <string name="police_string">Polizei</string>
@@ -46,13 +45,22 @@
         <item>http://atelier.inf.unisi.ch/~fiecha/</item>
         <item>http://atelier.inf.unisi.ch/~riccas/</item>
     </string-array>
-    <string name="about_dialog_close">SCHLIESSEN</string>
-    <string name="finding_location">Dein Standort wird gesucht...</string>
+    <string name="finding_location">Dein Standort wird gesucht&#8230;</string>
     <string name="you_are_here">Du bist hier</string>
 
     <!--Accessibility-->
     <string name="country_flag">Länderflagge</string>
-    <string name="location_button">Verleih-Taste</string>
+    <string name="location_button">Ortungsbutton</string>
     <string name="phone_icon">Telefonsymbol</string>
+
+    <string name="country_selection_dialog_title_yes">Wähle dein Land:</string>
+
+    <string name="country_selection_dialog_title_no">Nicht verfügbar</string>
+    <string name="country_selection_dialog_message_no">Deaktiviere \"Verwende immer deine aktuelle Position\" in den Einstellungen um das Land zu wechseln</string>
+
+    <string name="CANCEL">ABBRECHEN</string>
+    <string name="DONE">BESTÄTIGEN</string>
+    <string name="CLOSE">SCHLIESSEN</string>
+    <string name="OK">OK</string>
 
 </resources>

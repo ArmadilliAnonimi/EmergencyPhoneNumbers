@@ -51,7 +51,7 @@
         <item>http://atelier.inf.unisi.ch/~fiecha/</item>
         <item>http://atelier.inf.unisi.ch/~riccas/</item>
     </string-array>
-    <string name="finding_location">Finding your location...</string>
+    <string name="finding_location">Finding your location&#8230;</string>
     <string name="you_are_here">You are here</string>
 
     <!--Accessibility-->
@@ -59,7 +59,7 @@
     <string name="location_button">Location button</string>
     <string name="phone_icon">Phone icon</string>
 
-    <string name="country_selection_dialog_title_yes">Select your Country:</string>
+    <string name="country_selection_dialog_title_yes">Select your country:</string>
 
     <string name="country_selection_dialog_title_no">Not available</string>
     <string name="country_selection_dialog_message_no">Disable \"Always use current location\" in settings to be able to change country</string>

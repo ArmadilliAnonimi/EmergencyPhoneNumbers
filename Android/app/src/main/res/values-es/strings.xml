@@ -10,7 +10,7 @@
     <string name="preferences_title_about">About</string>
     <string name="pref_languages_screen">Idioma</string>
     <string name="pref_web_page">Fork on GitHub</string>
-    <string name="pref_web_page_summary">La aplicación es completamente de código abierto para que pueda contribuir y dar un vistazo al código.</string>
+    <string name="pref_web_page_summary">La aplicación es completamente de código abierto para que pueda contribuir y dar un vistazo al código</string>
     <string name="pref_about">About</string>
     <string name="pref_about_summary">Conoce quién está detrás de esta aplicación</string>
     <string name="pref_disclaimer">Renuncia</string>
@@ -19,8 +19,7 @@
     </string>
     <string name="pref_faq">FAQ</string>
     <string name="pref_tutorial">Tutorial</string>
-    <string name="pref_tutorial_summary">Aprender rápidamente cómo utilizar mejor las características de este app.</string>
-    <string name="pref_disclaimer_message_close">CERRAR</string>
+    <string name="pref_tutorial_summary">Aprender rápidamente cómo utilizar mejor las características de este app</string>
 
     <string name="fire_string">Bombero</string>
     <string name="police_string">Policía</string>
@@ -46,13 +45,22 @@
         <item>http://atelier.inf.unisi.ch/~fiecha/</item>
         <item>http://atelier.inf.unisi.ch/~riccas/</item>
     </string-array>
-    <string name="about_dialog_close">DERRAR</string>
-    <string name="finding_location">Encontrar a su ubicación ...</string>
+    <string name="finding_location">Encontrar a su ubicación&#8230;</string>
     <string name="you_are_here">Estás aquí</string>
 
     <!--Accessibility-->
     <string name="country_flag">Bandera de país</string>
     <string name="location_button">Botón de la localización</string>
     <string name="phone_icon">Icono de teléfono</string>
+
+    <string name="country_selection_dialog_title_yes">Selecciona tu país:</string>
+
+    <string name="country_selection_dialog_title_no">No disponible</string>
+    <string name="country_selection_dialog_message_no">Desactivar \"Utilice siempre la ubicación actual\" en la configuración para poder cambiar país</string>
+
+    <string name="CANCEL">ANULAR</string>
+    <string name="DONE">TERMINADO</string>
+    <string name="CLOSE">CERRAR</string>
+    <string name="OK">OK</string>
 
 </resources>

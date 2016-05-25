@@ -22,8 +22,8 @@ public class SettingsTab extends PreferenceFragmentCompat {
         dialogPref.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
             public boolean onPreferenceClick(Preference preference) {
                 android.app.FragmentManager fm = getActivity().getFragmentManager();
-                CountrySelectionDialog Country_Selector = new CountrySelectionDialog();
-                Country_Selector.show(fm, "Country_Selector");
+                CountrySelectionDialog countrySelector = new CountrySelectionDialog();
+                countrySelector.show(fm, "countrySelector");
                 return true;
             }
         });
