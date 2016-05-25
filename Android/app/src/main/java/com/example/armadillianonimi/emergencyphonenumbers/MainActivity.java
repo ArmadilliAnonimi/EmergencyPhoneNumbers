@@ -318,10 +318,8 @@ public class MainActivity extends AppCompatActivity {
         String countryCode = Locale.getDefault().getCountry();
         if (countryCode == "") {
             // GEOLOCATION THINGY, for now CH
-            prefs.edit().putString("select_country", "CH").apply();
             return api.getCountryHashMap().get("CH");
         } else {
-            prefs.edit().putString("select_country", countryCode).apply();
             return api.getCountryHashMap().get(countryCode);
         }
     }
