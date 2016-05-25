@@ -1,20 +1,24 @@
 package com.example.armadillianonimi.emergencyphonenumbers;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.CardView;
 import android.text.Layout;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -67,6 +71,7 @@ public class EmergencyTab extends Fragment {
     }
 
 
+
     @Override
     public void onActivityResult(int requestCode,int resultCode,Intent data){
         super.onActivityResult(requestCode, resultCode, data);
@@ -78,19 +83,35 @@ public class EmergencyTab extends Fragment {
                 String[] person = new String[2];
                 person[0]= selectedContacts.get(i).name;
                 person[1] = selectedContacts.get(i).phone;
-                    elements.add( person);
-                    LinearLayout l = (LinearLayout) getView().findViewById(R.id.main);
-                    c = new CardView(getContext());
-                    c.isFocusable();
-                    c.isClickable();
-                    c.setId(i);
-                    RelativeLayout r = new RelativeLayout(getContext());
-                    TextView t = new TextView(getContext());
-                    l.addView(c);
-                    c.addView(r);
-                    r.addView(t);
-                    t.setText(selectedContacts.get(i).name);
-               // }
+                elements.add( person);
+
+                LinearLayout l = (LinearLayout) getView().findViewById(R.id.main);
+
+                c = new CardView(getContext());
+
+                //c.setMinimumHeight(10);
+                c.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+                l.addView(c);
+                c.isFocusable();
+                c.isClickable();
+                c.setId(i);
+                ViewGroup.MarginLayoutParams m =(ViewGroup.MarginLayoutParams) c.getLayoutParams();
+                m.setMargins(200,200,200,200);
+                c.setLayoutParams(m);
+
+                //c.requestLayout();
+                //System.out.println();
+                //System.out.println(c.getLayoutParams().);
+
+                RelativeLayout r = new RelativeLayout(getContext());
+
+                TextView t = new TextView(getContext());
+
+
+                c.addView(r);
+                r.addView(t);
+                t.setText(selectedContacts.get(i).name);
+           // }
             }
             c.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -117,7 +138,7 @@ public class EmergencyTab extends Fragment {
     public void call2(View view) {
         if (checkPermission(Manifest.permission.CALL_PHONE)) {
             Intent callIntent = new Intent(Intent.ACTION_CALL);
-                    callIntent.setData(Uri.parse("tel:" + elements.get(view.getId())[1]));
+            callIntent.setData(Uri.parse("tel:" + elements.get(view.getId())[1]));
             startActivity(callIntent);
         } else {
             request(Manifest.permission.CALL_PHONE);

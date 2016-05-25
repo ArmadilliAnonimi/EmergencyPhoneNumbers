@@ -145,9 +145,7 @@ public class MainActivity extends AppCompatActivity {
         if (!(checkPermission(Manifest.permission.CALL_PHONE))) {
                request(Manifest.permission.CALL_PHONE);
         }
-        if (!(checkPermission(Manifest.permission.READ_CONTACTS))) {
-            request(Manifest.permission.READ_CONTACTS);
-        }
+
 
         System.out.println("### - MainActivity created");
     }
