@@ -12,7 +12,30 @@
         android:layout_height="match_parent"
         android:orientation="horizontal"
         android:clickable="true"
+<<<<<<< Updated upstream
         android:focusable="true">
+=======
+        android:id="@+id/set_country">
+
+        <ImageView
+            android:layout_width="40sp"
+            android:layout_height="30sp"
+            android:id="@+id/flag"
+            android:src="@drawable/br"
+            android:contentDescription="@string/country_flag"
+            android:scaleType="fitCenter"
+            android:background="@null"
+            android:layout_marginTop="2dp" />
+
+        <TextView
+            android:id="@+id/country"
+            android:contentDescription="@+id/label"
+            android:textSize="25sp"
+            android:textColor="#ffffff"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20sp" />
+>>>>>>> Stashed changes
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -40,6 +63,7 @@
 
         </LinearLayout>
 
+<<<<<<< Updated upstream
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -59,5 +83,18 @@
         </LinearLayout>
 
     </LinearLayout>
+=======
+    <ImageButton
+        android:id="@+id/location_button"
+        android:layout_width="30sp"
+        android:layout_height="30sp"
+        android:src="@drawable/selector"
+        android:contentDescription="@string/location_button"
+        android:scaleType="fitCenter"
+        android:background="@null"
+        android:layout_gravity="right"
+        android:layout_marginRight="10sp"
+        android:clickable="true" />
+>>>>>>> Stashed changes
 
     </android.support.v7.widget.Toolbar>

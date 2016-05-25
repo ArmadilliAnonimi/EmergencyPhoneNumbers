@@ -49,4 +49,10 @@
     <string name="about_dialog_close">CHIUDI</string>
     <string name="finding_location">Trovando la tua posizione...</string>
     <string name="you_are_here">Sei qui</string>
+
+    <!--Accessibility-->
+    <string name="country_flag">Bandiera del paese</string>
+    <string name="location_button">Bottone per localizzazione</string>
+    <string name="phone_icon">Icona del telefono</string>
+
 </resources>

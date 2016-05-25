@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.armadillianonimi.emergencyphonenumbers">
 
+    <!--User permissions: ask permissions to access location, contacts and to make phone calls-->
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
@@ -15,6 +16,8 @@
         android:label="Emergency\nNumbers"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
+        <!--Google maps API key-->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyAHFeYmuLkhc8JVA_FRlWPt7OwmUnFNHw4" />
@@ -26,7 +29,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ContactsPickerActivity"></activity>
+
+        <activity android:name=".ContactsPickerActivity"> </activity>
+
+        <!--Fabric API key: crash report-->
         <meta-data
             android:name="io.fabric.ApiKey"
             android:value="9fce642c2644fef5ab19ee53e1ec472130a2c78e" />
@@ -38,6 +44,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.armadillianonimi.emergencyphonenumbers.MainActivity" />
         </activity>
+
     </application>
 
 </manifest>

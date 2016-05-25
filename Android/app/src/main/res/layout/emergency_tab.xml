@@ -33,11 +33,13 @@
                         android:layout_width="40sp"
                         android:layout_height="40dp"
                         android:src="@drawable/phone_icon"
+                        android:contentDescription="@string/phone_icon"
                         android:tint="@color/colorEmergencyCardsText"
                         android:layout_centerInParent="true"
                         android:layout_alignParentRight="true"
                         android:layout_marginRight="10dp"
                         />
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"

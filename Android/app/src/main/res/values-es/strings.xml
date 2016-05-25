@@ -50,4 +50,9 @@
     <string name="finding_location">Encontrar a su ubicación ...</string>
     <string name="you_are_here">Estás aquí</string>
 
+    <!--Accessibility-->
+    <string name="country_flag">Bandera de país</string>
+    <string name="location_button">Botón de la localización</string>
+    <string name="phone_icon">Icono de teléfono</string>
+
 </resources>

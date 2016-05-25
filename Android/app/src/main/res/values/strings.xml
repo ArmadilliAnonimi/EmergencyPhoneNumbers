@@ -56,4 +56,8 @@
     <string name="finding_location">Finding your location...</string>
     <string name="you_are_here">You are here</string>
 
+    <!--Accessibility-->
+    <string name="country_flag">Country flag</string>
+    <string name="location_button">Location button</string>
+    <string name="phone_icon">Phone icon</string>
 </resources>
