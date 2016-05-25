@@ -61,12 +61,14 @@ public class LocationFinder {
                     android.location.Address myAddress = listAddresses.get(0);
                     String locationString = myAddress.getThoroughfare() + " " + myAddress.getFeatureName() + ", " + myAddress.getPostalCode() + " " + myAddress.getLocality() + ", " + myAddress.getCountryName();
                     userLocation.completeAddress = locationString + "\n" + latitude + ", " + longitude;
-                    userLocation.country = myAddress.getCountryName();
+                    String countryCode = myAddress.getCountryCode();
+                    System.out.println("Country code: "  + countryCode);
+                    userLocation.countryCode = countryCode;
                 }
             } catch (IOException e) {
                 e.printStackTrace();
             }
-
+            System.out.println("updated userLocation " + userLocation.countryCode);
             locationManagerListener.locationReceived(userLocation);
 
             // If we have found the location, we stop updating the map.

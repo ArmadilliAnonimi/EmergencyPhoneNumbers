@@ -82,7 +82,6 @@ public class EmergencyPhoneNumbersAPI {
                 System.out.println("Successfully received response with code: 200");
                 String JSONString = response.body().string();
                 generateCountriesFromString(JSONString);
-                System.out.println("Generated countries HashMap: " + countryHashMap.toString());
             } else {
                 System.out.println("Received response but with code " + response.code());
                 throw new IOException();
@@ -109,21 +108,16 @@ public class EmergencyPhoneNumbersAPI {
     public void requestCountries(Context context) {
         this.context = context;
         if (areCountriesCached(context)) {
-            System.out.println("File exists.");
             // Read countries and communicate to listener to reload UI
             readCountries(context);
-
             // Check if there is internet connection.
             if (haveNetworkConnection()) {
                 Request request = new Request.Builder().url(emergencyPhoneNumbersURL).build();
                 client.newCall(request).enqueue(callback);
             }
-
-            // TODO: check if there is a newer version
         } else {
             Request request = new Request.Builder().url(emergencyPhoneNumbersURL).build();
             client.newCall(request).enqueue(callback);
-            System.out.println("Done");
         }
     }
 
@@ -141,7 +135,6 @@ public class EmergencyPhoneNumbersAPI {
                 countries += Character.toString((char)c);
             }
             fileInput.close();
-            System.out.println("Je suis countries: " + countries);
             generateCountriesFromString(countries);
         } catch (IOException e) {
             e.printStackTrace();
@@ -171,7 +164,6 @@ public class EmergencyPhoneNumbersAPI {
                 String code = country.getCode();
                 countries.add(country);
                 countryHashMap.put(code, country);
-                System.out.println("country" + countryHashMap);
             }
             writeCountries(context, JSONString);
             // Tell interface that we loaded all the countries

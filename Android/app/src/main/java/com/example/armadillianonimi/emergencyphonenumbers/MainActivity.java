@@ -35,18 +35,18 @@ import java.util.Locale;
 public class MainActivity extends AppCompatActivity {
 
     // Tabs and toolbar
-    Toolbar toolbar;
-    final CharSequence Titles[] = {"EMERGENCY", "LOCATION", "SETTINGS"};
+    private Toolbar toolbar;
+    private final CharSequence Titles[] = {"EMERGENCY", "LOCATION", "SETTINGS"};
     SectionsPagerAdapter mSectionsPagerAdapter;
-    TabLayout tabs;
+    private TabLayout tabs;
     final EmergencyTab emergencyTab = new EmergencyTab();
     final LocationTab locationTab = new LocationTab();
     final SettingsTab settingsTab = new SettingsTab();
 
     // Preferences
-    SharedPreferences prefs;
-    SharedPreferences.OnSharedPreferenceChangeListener prefsListener;
-    LocationFinder locationFinder;
+    private SharedPreferences prefs;
+    private SharedPreferences.OnSharedPreferenceChangeListener prefsListener;
+    private LocationFinder locationFinder;
     private static final int PERMISSION_REQUEST_CODE = 1;
 
     // Countries
@@ -60,16 +60,19 @@ public class MainActivity extends AppCompatActivity {
         Fabric.with(this, new Crashlytics());
         setContentView(R.layout.activity_main);
 
+        // Initializes the shared preferences
+        prefs = PreferenceManager.getDefaultSharedPreferences(this);
+
         locationFinder = new LocationFinder(this);
         locationFinder.setLocationManagerListener(new LocationManagerListener() {
             @Override
             public void locationReceived(UserLocation location) {
-                updateCountry(location.country);
+                updateCountry(location);
             }
         });
 
-        // TODO: request location only if the user preference is set to true, otherwise just load the last location set from the preferences.
-        if (true) {
+        if (prefs.getBoolean("pref_auto_location", false)) {
+            System.out.println("REQUESTING LOCATION");
             locationFinder.requestLocation();
         }
 
@@ -111,8 +114,6 @@ public class MainActivity extends AppCompatActivity {
             public void onTabReselected(TabLayout.Tab tab) {}
         });
 
-        // Initializes the shared preferences
-        prefs = PreferenceManager.getDefaultSharedPreferences(this);
 
         // Loads the numbers and country in the emergency tab
         manageEmergencyAPI();
@@ -124,7 +125,9 @@ public class MainActivity extends AppCompatActivity {
         prefsListener = new SharedPreferences.OnSharedPreferenceChangeListener() {
             @Override
             public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+                System.out.println("Should update UI 1");
                 if (key.equals("select_country")) {
+                    System.out.println("Should update UI with key: " + sharedPreferences.getString(key, ""));
                     changeCountry(api.getCountryHashMap());
                 }
             }
@@ -214,23 +217,21 @@ public class MainActivity extends AppCompatActivity {
 
     public void setupLocationButton() {
         ImageButton locationButton = (ImageButton) findViewById(R.id.location_button);
-        final Context context = this;
         locationButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                System.out.println("pressed location button");
                 locationFinder.requestLocation();
             }
         });
     }
 
-    public void updateCountry(String country) {
-        this.country.setText(country);
+    public void updateCountry(UserLocation country) {
+        prefs.edit().putString("select_country", country.countryCode).apply();
     }
 
     public void setupFlagButton() {
         LinearLayout flagButton = (LinearLayout) findViewById(R.id.set_country);
-
-
         flagButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -283,7 +284,7 @@ public class MainActivity extends AppCompatActivity {
     public void changeCountry(HashMap<String, Country> countryHashMap) {
         String currentCode = PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("select_country", getDefaultCountry().getCode());
         selectedCountry = countryHashMap.get(currentCode);
-
+        System.out.println("currentCode: " + currentCode);
         final EmergencyTab emergencyTab = (EmergencyTab) mSectionsPagerAdapter.getItem(0);
         final String fire =  selectedCountry.getFire();
         final String police =  selectedCountry.getPolice();
@@ -309,8 +310,7 @@ public class MainActivity extends AppCompatActivity {
             // GEOLOCATION THINGY, for now CH
             prefs.edit().putString("select_country", "CH").apply();
             return api.getCountryHashMap().get("CH");
-        }
-        else {
+        } else {
             prefs.edit().putString("select_country", countryCode).apply();
             return api.getCountryHashMap().get(countryCode);
         }

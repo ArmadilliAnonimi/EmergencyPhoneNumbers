@@ -63,8 +63,6 @@ public class EmergencyTab extends Fragment {
         setupAddContactButton();
 
         return view;
-
-
     }
 
 
