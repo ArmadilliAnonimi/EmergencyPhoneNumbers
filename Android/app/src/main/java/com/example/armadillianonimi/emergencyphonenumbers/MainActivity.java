@@ -45,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
     // Preferences
     private SharedPreferences prefs;
     private SharedPreferences.OnSharedPreferenceChangeListener prefsListener;
+    private Boolean COMING_THROUGH_GEOLOCATION = false;
     private LocationFinder locationFinder;
     private static final int PERMISSION_REQUEST_CODE = 1;
 
@@ -151,7 +152,6 @@ public class MainActivity extends AppCompatActivity {
             Intent callIntent = new Intent(Intent.ACTION_CALL);
             switch(id){
                 case(R.id.fire):
-                    System.out.println(selectedCountry.getFire());
                     callIntent.setData(Uri.parse("tel: "+ selectedCountry.getFire()));
                     break;
                 case(R.id.police):
@@ -226,6 +226,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void updateCountry(UserLocation country) {
+        COMING_THROUGH_GEOLOCATION = true;
+        selectedCountry = api.getCountryHashMap().get(country.countryCode);
         prefs.edit().putString("select_country", country.countryCode).apply();
     }
 
@@ -236,10 +238,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 showDialog();
-                //   Intent flags = new Intent(context, CountrySelection.class);
-                // startActivity(flags);
             }
-
         });
     }
 
@@ -281,9 +280,21 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void changeCountry(HashMap<String, Country> countryHashMap) {
-        String currentCode = "CH";//PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("select_country", getDefaultCountry().getCode());
+
+        String defaultCountryCode;
+
+        // Check if user comes from location button
+        if (COMING_THROUGH_GEOLOCATION) {
+            defaultCountryCode = selectedCountry.getCode();
+        } else {
+            defaultCountryCode = getDefaultCountry().getCode();
+        }
+
+        COMING_THROUGH_GEOLOCATION = false;
+
+        String currentCode = PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("select_country", defaultCountryCode);
         selectedCountry = countryHashMap.get(currentCode);
-        System.out.println("currentCode: " + currentCode);
+
         final EmergencyTab emergencyTab = (EmergencyTab) mSectionsPagerAdapter.getItem(0);
         final String fire =  selectedCountry.getFire();
         final String police =  selectedCountry.getPolice();

@@ -1,25 +1,25 @@
 <resources>
     <string name="app_name">EmergencyPhoneNumbers</string>
-      <string name="pref_auto_location">Verwenden Sie immer aktuelle Position</string>
-    <string name="pref_auto_location_summary">Stellen Sie das Land automatisch Ihren aktuellen Standort mit</string>
+      <string name="pref_auto_location">Verwende immer deine aktuelle Position</string>
+    <string name="pref_auto_location_summary">Wechsele das Land abhängig von deinem Standort automatisch</string>
     <string name="pref_auto_calling">Anrufbestätigung</string>
-    <string name="pref_auto_calling_summary">Stellen Sie vor dem Aufruf, wenn eine Notrufnummer gedrückt wird</string>
-    <string name="pref_change_country">Land wählen</string>
-    <string name="pref_change_country_summary">Wählen Sie Ihr Land aus einer Liste</string>
-    <string name="preferences_title_preferences">Voreinstellungen</string>
-    <string name="preferences_title_about">About</string>
+    <string name="pref_auto_calling_summary">Nach Bestätigung fragen, wenn eine Notrufnummer gedrückt wurde</string>
+    <string name="pref_change_country">Land auswählen</string>
+    <string name="pref_change_country_summary">Wählen das gewünschte Land aus der Liste</string>
+    <string name="preferences_title_preferences">Einstellungen</string>
+    <string name="preferences_title_about">Weitere Informationen</string>
     <string name="pref_languages_screen">Sprache</string>
-    <string name="pref_web_page">Fork on GitHub</string>
-    <string name="pref_web_page_summary">Die App ist komplett Open Source, so dass Sie auf den Code einen Blick beitragen.</string>
+    <string name="pref_web_page">Von GitHub herunterladbar</string>
+    <string name="pref_web_page_summary">Die App ist Open Source, sodass du einen Blick darauf werfen oder dazu beitragen kannst</string>
     <string name="pref_about">About</string>
-    <string name="pref_about_summary">Treffen Sie, wer hinter dieser App ist</string>
+    <string name="pref_about_summary">Die Studenten hinter dieser App</string>
     <string name="pref_disclaimer">Disclaimer</string>
     <string name="pref_disclaimer_message">
-        Diese App sollte niemals verwendet werden, wenn sie nicht auf Notfälle. Die Kosten für die Anrufe wird durch den Anrufer getragen und die Preise variieren. Nicht alle Zahlen sind frei. Diese Anwendung erleichtert nur die Suche nach den Notrufnummern mit Ihrem Standort. Die einwandfreie Funktion ist abhängig von der Netzabdeckung und Ihre Telefon Träger.
+        Diese App sollte ausschließlich in Notfallsituationen verwendet werden. Die Kosten für die Anrufe werden vom Anrufer getragen; die Preise variieren. Nicht jede Notrufnummer ist kostenlos. Diese Anwendung erleichtert lediglich die Suche nach Notrufnummern basierend auf deinem Standort. Die einwandfreie Funktion dieser App ist abhängig von der Netzabdeckung und deinem Mobilfunkanbieter.
     </string>
     <string name="pref_faq">FAQ</string>
     <string name="pref_tutorial">Tutorial</string>
-    <string name="pref_tutorial_summary">Schnell lernen, wie man am besten diese App Funktionen nutzen.</string>
+    <string name="pref_tutorial_summary">Lass dir erklären, wie die App benutzt wird</string>
     <string name="pref_disclaimer_message_close">SCHLIESSEN</string>
 
     <string name="fire_string">Feuerwehr</string>
@@ -31,7 +31,7 @@
     <string name="settings_title">EINSTELLUNGEN</string>
 
 
-    <string name="about_dialog_title">"Diese App wurde @ USI durch die folgenden Studenten entwickelt:"</string>
+    <string name="about_dialog_title">"Diese App wurde @ USI von den folgenden Studenten entwickelt:"</string>
     <string-array name="names_array">
         <item>Patrick Balestra</item>
         <item>Valerie Burgener</item>
@@ -47,7 +47,7 @@
         <item>http://atelier.inf.unisi.ch/~riccas/</item>
     </string-array>
     <string name="about_dialog_close">SCHLIESSEN</string>
-    <string name="finding_location">Ihren Standort finden...</string>
-    <string name="you_are_here">Du bist da</string>
+    <string name="finding_location">Dein Standort wird gesucht...</string>
+    <string name="you_are_here">Du bist hier</string>
 
 </resources>
