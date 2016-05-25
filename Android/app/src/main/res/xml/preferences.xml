@@ -20,9 +20,6 @@
             android:title="@string/pref_auto_calling"
             android:summary="@string/pref_auto_calling_summary"
             android:defaultValue="false"/>
-        <android.support.v7.preference.Preference
-            android:key="faq"
-            android:title="@string/pref_faq"/>
 
     </android.support.v7.preference.PreferenceCategory>
 
@@ -33,7 +30,15 @@
             android:title="@string/pref_web_page"
             android:summary="@string/pref_web_page_summary">
             <intent android:action="android.intent.action.VIEW"
-                android:data="https://github.com/BalestraPatrick/EmergencyPhoneNumbers" />
+                android:data="https://github.com/BalestraPatrick/EmergencyPhoneNumbers"/>
+        </Preference>
+
+        <Preference
+            android:key="faq"
+            android:title="@string/pref_faq">
+            <intent android:action="android.intent.action.MAIN"
+                android:targetPackage="com.example.armadillianonimi.emergencyphonenumbers"
+                android:targetClass="com.example.armadillianonimi.emergencyphonenumbers.DisclaimerActivity"/>
         </Preference>
         <Preference
             android:title="@string/pref_tutorial"

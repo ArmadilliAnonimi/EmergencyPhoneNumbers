@@ -62,6 +62,7 @@ public class EmergencyTab extends Fragment {
         addContactButton = (FloatingActionButton)view.findViewById(R.id.btn);
         setupAddContactButton();
 
+        System.out.println("EmergencyFragment: onCreateView");
         return view;
 
 
@@ -101,6 +102,7 @@ public class EmergencyTab extends Fragment {
                 }
             });
         }
+        System.out.println("EmergencyFragment: onActivityResult");
     }
     public boolean checkPermission(String permission){
         if (ContextCompat.checkSelfPermission(getContext(), permission)
@@ -162,20 +164,24 @@ public class EmergencyTab extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+        System.out.println("EmergencyFragment: onResume");
     }
 
     @Override
     public void onPause() {
         super.onPause();
+        System.out.println("EmergencyFragment: onPause");
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
+        System.out.println("EmergencyFragment: onDestroy");
     }
 
     @Override
     public void onLowMemory() {
         super.onLowMemory();
+        System.out.println("EmergencyFragment: onLowMemory");
     }
 }
