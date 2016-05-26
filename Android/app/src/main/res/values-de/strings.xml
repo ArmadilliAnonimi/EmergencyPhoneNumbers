@@ -2,8 +2,8 @@
     <string name="app_name">EmergencyPhoneNumbers</string>
       <string name="pref_auto_location">Verwende immer deine aktuelle Position</string>
     <string name="pref_auto_location_summary">Wechsele das Land abhängig von deinem Standort automatisch</string>
-    <string name="pref_auto_calling">Anrufbestätigung</string>
-    <string name="pref_auto_calling_summary">Nach Bestätigung fragen, wenn eine Notrufnummer gedrückt wurde</string>
+    <string name="pref_call_confirmation">Anrufbestätigung</string>
+    <string name="pref_call_confirmation_summary">Nach Bestätigung fragen, wenn eine Notrufnummer gedrückt wurde</string>
     <string name="pref_change_country">Land auswählen</string>
     <string name="pref_change_country_summary">Wählen das gewünschte Land aus der Liste</string>
     <string name="preferences_title_preferences">Einstellungen</string>
@@ -62,5 +62,6 @@
     <string name="DONE">BESTÄTIGEN</string>
     <string name="CLOSE">SCHLIESSEN</string>
     <string name="OK">OK</string>
+    <string name="DISABLE">DEAKTIVIEREN</string>
 
 </resources>

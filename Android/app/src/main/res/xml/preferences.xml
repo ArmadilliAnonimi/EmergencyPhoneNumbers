@@ -16,10 +16,10 @@
             android:summary="@string/pref_auto_location_summary"
             android:defaultValue="false" />
         <android.support.v7.preference.SwitchPreferenceCompat
-            android:key="pref_auto_calling"
-            android:title="@string/pref_auto_calling"
-            android:summary="@string/pref_auto_calling_summary"
-            android:defaultValue="false"/>
+            android:key="pref_call_confirmation"
+            android:title="@string/pref_call_confirmation"
+            android:summary="@string/pref_call_confirmation_summary"
+            android:defaultValue="true"/>
 
     </android.support.v7.preference.PreferenceCategory>
 

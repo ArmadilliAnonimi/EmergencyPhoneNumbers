@@ -2,8 +2,8 @@
     <string name="app_name">EmergencyPhoneNumbers</string>
     <string name="pref_auto_location">Always use current location</string>
     <string name="pref_auto_location_summary">Set the country automatically using your current location</string>
-    <string name="pref_auto_calling">Call confirmation</string>
-    <string name="pref_auto_calling_summary">Ask before calling when an emergency number is pressed</string>
+    <string name="pref_call_confirmation">Call confirmation</string>
+    <string name="pref_call_confirmation_summary">Ask before calling when an emergency number is pressed</string>
     <string name="pref_change_country">Change country</string>
     <string name="pref_change_country_summary">Select your country from a list</string>
     <string name="preferences_title_preferences">Preferences</string>
@@ -68,5 +68,6 @@
     <string name="DONE">DONE</string>
     <string name="CLOSE">CLOSE</string>
     <string name="OK">OK</string>
+    <string name="DISABLE">DISABLE</string>
 
 </resources>

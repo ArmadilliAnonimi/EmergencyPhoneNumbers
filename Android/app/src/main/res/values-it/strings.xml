@@ -2,8 +2,8 @@
     <string name="app_name">EmergencyPhoneNumbers</string>
     <string name="pref_auto_location">Usa sempre la posizione corrente</string>
     <string name="pref_auto_location_summary">Imposta il paese automaticamente utilizzando la posizione corrente</string>
-    <string name="pref_auto_calling">Conferma delle chiamate</string>
-    <string name="pref_auto_calling_summary">Chiedi prima di chiamare quando si preme un numero di emergenza</string>
+    <string name="pref_call_confirmation">Conferma delle chiamate</string>
+    <string name="pref_call_confirmation_summary">Chiedi prima di chiamare quando si preme un numero di emergenza</string>
     <string name="pref_change_country">Cambia paese</string>
     <string name="pref_change_country_summary">Selezionare il paese da un elenco</string>
     <string name="preferences_title_preferences">Preferenze</string>
@@ -56,11 +56,12 @@
     <string name="country_selection_dialog_title_yes">Seleziona il tuo paese:</string>
 
     <string name="country_selection_dialog_title_no">Not available</string>
-    <string name="country_selection_dialog_message_no">Disabilita \"Usa sempre la posizione corrente\" nelle impostationi per poter cambiare il paese</string>
+    <string name="country_selection_dialog_message_no">Disattiva \"Usa sempre la posizione corrente\" nelle impostationi per poter cambiare il paese</string>
 
     <string name="CANCEL">ANNULLA</string>
     <string name="DONE">FATTO</string>
     <string name="CLOSE">CHIUDI</string>
     <string name="OK">OK</string>
+    <string name="DISABLE">DISATTIVA</string>
 
 </resources>
