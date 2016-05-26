@@ -89,19 +89,22 @@ public class EmergencyTab extends Fragment {
 
                 c = new CardView(getContext());
 
-                //c.setMinimumHeight(10);
+                //c.setMinimumHeight(00);
                 c.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
                 l.addView(c);
                 c.isFocusable();
                 c.isClickable();
                 c.setId(i);
                 ViewGroup.MarginLayoutParams m =(ViewGroup.MarginLayoutParams) c.getLayoutParams();
-                m.setMargins(200,200,200,200);
+                m.setMargins(40,80,40,0);
                 c.setLayoutParams(m);
+                c.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        call2(v);
 
-                //c.requestLayout();
-                //System.out.println();
-                //System.out.println(c.getLayoutParams().);
+                    }
+                });
 
                 RelativeLayout r = new RelativeLayout(getContext());
 
@@ -111,15 +114,8 @@ public class EmergencyTab extends Fragment {
                 c.addView(r);
                 r.addView(t);
                 t.setText(selectedContacts.get(i).name);
-           // }
             }
-            c.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    call2(v);
 
-                }
-            });
         }
         System.out.println("EmergencyFragment: onActivityResult");
     }
@@ -150,6 +146,7 @@ public class EmergencyTab extends Fragment {
     public ArrayList<String[]> getElements(){
         return elements;
     }
+
     private void setupAddContactButton() {
         addContactButton.setOnClickListener(new View.OnClickListener() {
             @Override
