@@ -13,7 +13,8 @@
             android:id="@+id/main"
             android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content"
+            android:paddingTop="@dimen/emergency_numbers_cards_vertical_margins" >
 
             <android.support.v7.widget.CardView
                 android:id="@+id/police"
@@ -24,11 +25,12 @@
                 android:layout_gravity="center"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="12dp"
-                android:layout_marginRight="12dp"
-                android:layout_marginTop="24dp"
+                android:layout_marginLeft="@dimen/emergency_numbers_cards_lateral_margins"
+                android:layout_marginRight="@dimen/emergency_numbers_cards_lateral_margins"
+                android:layout_marginBottom="@dimen/emergency_numbers_cards_vertical_margins"
+                android:layout_marginTop="@dimen/emergency_numbers_cards_vertical_margins"
                 card_view:cardCornerRadius="2dp"
-                card_view:contentPadding="10dp">
+                card_view:contentPadding="@dimen/emergency_numbers_cards_content_padding">
 
                 <RelativeLayout
 
@@ -80,11 +82,12 @@
                 android:layout_gravity="center"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="12dp"
-                android:layout_marginRight="12dp"
-                android:layout_marginTop="24dp"
+                android:layout_marginLeft="@dimen/emergency_numbers_cards_lateral_margins"
+                android:layout_marginRight="@dimen/emergency_numbers_cards_lateral_margins"
+                android:layout_marginBottom="@dimen/emergency_numbers_cards_vertical_margins"
+                android:layout_marginTop="@dimen/emergency_numbers_cards_vertical_margins"
                 card_view:cardCornerRadius="2dp"
-                card_view:contentPadding="10dp">
+                card_view:contentPadding="@dimen/emergency_numbers_cards_content_padding">
 
                 <RelativeLayout
 
@@ -134,11 +137,12 @@
                 android:layout_gravity="center"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="12dp"
-                android:layout_marginRight="12dp"
-                android:layout_marginTop="24dp"
+                android:layout_marginLeft="@dimen/emergency_numbers_cards_lateral_margins"
+                android:layout_marginRight="@dimen/emergency_numbers_cards_lateral_margins"
+                android:layout_marginBottom="@dimen/emergency_numbers_cards_vertical_margins"
+                android:layout_marginTop="@dimen/emergency_numbers_cards_vertical_margins"
                 card_view:cardCornerRadius="2dp"
-                card_view:contentPadding="10dp">
+                card_view:contentPadding="@dimen/emergency_numbers_cards_content_padding">
 
                 <RelativeLayout
 

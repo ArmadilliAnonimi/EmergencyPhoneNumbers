@@ -95,8 +95,8 @@ public class EmergencyTab extends Fragment {
                 c.isFocusable();
                 c.isClickable();
                 c.setId(i);
-                ViewGroup.MarginLayoutParams m =(ViewGroup.MarginLayoutParams) c.getLayoutParams();
-                m.setMargins(40,80,40,0);
+                CardView othercard = (CardView) getActivity().findViewById(R.id.fire);
+                ViewGroup.MarginLayoutParams m = (ViewGroup.MarginLayoutParams) othercard.getLayoutParams();
                 c.setLayoutParams(m);
                 c.setOnClickListener(new View.OnClickListener() {
                     @Override

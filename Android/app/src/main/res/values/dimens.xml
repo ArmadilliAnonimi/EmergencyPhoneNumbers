@@ -9,4 +9,7 @@
     <dimen name="disclaimer_title">40sp</dimen>
     <dimen name="disclaimer_message">20sp</dimen>
     <dimen name="disclaimer_message_padding_top">20dp</dimen>
+    <dimen name="emergency_numbers_cards_lateral_margins">10dp</dimen>
+    <dimen name="emergency_numbers_cards_vertical_margins">5dp</dimen>
+    <dimen name="emergency_numbers_cards_content_padding">10dp</dimen>
 </resources>
