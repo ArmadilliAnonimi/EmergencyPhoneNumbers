@@ -156,7 +156,7 @@ public class EmergencyTab extends Fragment {
                     startActivityForResult(intentContactPick, CONTACT_PICK_REQUEST);
                 }else {
                     request(Manifest.permission.READ_CONTACTS);
-                    Toast.makeText(getContext(), "Please, allow call permission.\nIt's good for you!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "Please, if you want to add a contact, allow contact permission.", Toast.LENGTH_SHORT).show();
                 }
 
             }
