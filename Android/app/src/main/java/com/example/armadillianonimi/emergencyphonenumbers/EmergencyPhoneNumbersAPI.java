@@ -157,6 +157,8 @@ public class EmergencyPhoneNumbersAPI {
     private void generateCountriesFromString(String JSONString) {
         JSONObject object;
         try {
+            countries = new ArrayList<Country>();
+            countryHashMap = new HashMap<String, Country>();
             object = new JSONObject(JSONString);
             JSONArray countriesArray = object.getJSONArray("content");
             for (int i = 0; i < countriesArray.length(); i++) {
