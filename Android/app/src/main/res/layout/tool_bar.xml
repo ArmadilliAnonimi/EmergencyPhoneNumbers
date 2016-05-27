@@ -12,24 +12,26 @@
         android:layout_height="match_parent"
         android:orientation="horizontal"
         android:clickable="true"
-        android:focusable="true">
+        android:focusable="true" >
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/set_country">
 
+            <!--Flag of the country: icon-->
             <ImageView
                 android:layout_width="40sp"
                 android:layout_height="30sp"
                 android:id="@+id/flag"
                 android:src="@drawable/br"
+                android:contentDescription="@string/country_flag"
                 android:scaleType="fitCenter"
                 android:background="@null"
                 android:layout_marginRight="20dp"
-                android:layout_marginTop="2.5dp"
-                />
+                android:layout_marginTop="2.5dp" />
 
+            <!--Selected country-->
             <TextView
                 android:id="@+id/country"
                 android:textSize="25sp"
@@ -46,8 +48,10 @@
             android:gravity="right"
             android:paddingRight="20dp">
 
+            <!--Location button-->
             <ImageButton
                 android:id="@+id/location_button"
+                android:contentDescription="@string/location_button"
                 android:layout_width="30sp"
                 android:layout_height="30sp"
                 android:layout_marginTop="2.5dp"

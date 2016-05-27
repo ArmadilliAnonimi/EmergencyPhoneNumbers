@@ -4,6 +4,7 @@
     android:id="@+id/emergency_tab_main_content"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
     <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -17,6 +18,7 @@
             android:paddingTop="@dimen/emergency_tab_padding_top"
             android:paddingBottom="@dimen/emergency_tab_padding_bottom">
 
+            <!--Cardview: police-->
             <android.support.v7.widget.CardView
                 android:id="@+id/police"
                 android:onClick="call"
@@ -34,10 +36,10 @@
                 card_view:contentPadding="@dimen/emergency_numbers_cards_content_padding">
 
                 <RelativeLayout
-
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent">
 
+                    <!--Phone icon-->
                     <ImageView
                         android:layout_width="40sp"
                         android:layout_height="40dp"
@@ -46,9 +48,9 @@
                         android:tint="@color/colorEmergencyCardsText"
                         android:layout_centerInParent="true"
                         android:layout_alignParentRight="true"
-                        android:layout_marginRight="10dp"
-                        />
+                        android:layout_marginRight="10dp" />
 
+                    <!--Police number-->
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -59,8 +61,8 @@
                         android:padding="10dp"
                         android:layout_marginLeft="0sp"
                         android:layout_alignParentRight="true"
-                        android:layout_marginRight="50dp"
-                        />
+                        android:layout_marginRight="50dp" />
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -74,6 +76,8 @@
                 </RelativeLayout>
 
             </android.support.v7.widget.CardView>
+
+            <!--Cardview: medical-->
             <android.support.v7.widget.CardView
                 android:id="@+id/medical"
                 android:onClick="call"
@@ -91,19 +95,21 @@
                 card_view:contentPadding="@dimen/emergency_numbers_cards_content_padding">
 
                 <RelativeLayout
-
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent">
 
+                    <!--Phone icon-->
                     <ImageView
                         android:layout_width="40sp"
                         android:layout_height="40dp"
                         android:src="@drawable/phone_icon"
+                        android:contentDescription="@string/phone_icon"
                         android:tint="@color/colorEmergencyCardsText"
                         android:layout_centerInParent="true"
                         android:layout_alignParentRight="true"
-                        android:layout_marginRight="10dp"
-                        />
+                        android:layout_marginRight="10dp" />
+
+                    <!--Medical number-->
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -114,8 +120,8 @@
                         android:padding="10dp"
                         android:layout_marginLeft="0sp"
                         android:layout_alignParentRight="true"
-                        android:layout_marginRight="50dp"
-                        />
+                        android:layout_marginRight="50dp" />
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -129,6 +135,8 @@
                 </RelativeLayout>
 
             </android.support.v7.widget.CardView>
+
+            <!--Cardview: fire-->
             <android.support.v7.widget.CardView
                 android:id="@+id/fire"
                 android:focusable="true"
@@ -146,19 +154,21 @@
                 card_view:contentPadding="@dimen/emergency_numbers_cards_content_padding">
 
                 <RelativeLayout
-
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent">
 
+                    <!--Phone icon-->
                     <ImageView
                         android:layout_width="40sp"
                         android:layout_height="40dp"
                         android:src="@drawable/phone_icon"
+                        android:contentDescription="@string/phone_icon"
                         android:tint="@color/colorEmergencyCardsText"
                         android:layout_centerInParent="true"
                         android:layout_alignParentRight="true"
-                        android:layout_marginRight="10dp"
-                        />
+                        android:layout_marginRight="10dp" />
+
+                    <!--Fire number-->
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -169,8 +179,8 @@
                         android:padding="10dp"
                         android:layout_marginLeft="0sp"
                         android:layout_alignParentRight="true"
-                        android:layout_marginRight="50dp"
-                        />
+                        android:layout_marginRight="50dp" />
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -178,18 +188,20 @@
                         android:text="@string/fire_string"
                         android:textSize="35sp"
                         android:padding="10dp"
-                        android:textColor="@color/colorEmergencyCardsText"
-                        />
+                        android:textColor="@color/colorEmergencyCardsText" />
 
                 </RelativeLayout>
 
             </android.support.v7.widget.CardView>
+
         </LinearLayout>
-</ScrollView>
+
+    </ScrollView>
 
     <android.support.design.widget.FloatingActionButton
         app:backgroundTint="@color/colorPrimary"
         android:id="@+id/btn"
+        android:contentDescription="@string/plus_contact_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
