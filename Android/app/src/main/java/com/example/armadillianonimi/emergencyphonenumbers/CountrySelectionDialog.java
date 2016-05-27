@@ -34,7 +34,6 @@ public class CountrySelectionDialog extends DialogFragment {
     private CharSequence[] mEntryValues;
     private String mValue;
     SharedPreferences prefs;
-    private int mClickedDialogEntryIndex;
     private int elementInSettings;
     private EmergencyPhoneNumbersAPI api = EmergencyPhoneNumbersAPI.getSharedInstance();
     private ListItem[] items;
@@ -54,7 +53,7 @@ public class CountrySelectionDialog extends DialogFragment {
     @Override public Dialog onCreateDialog(Bundle savedInstanceState) {
         AlertDialog.Builder dialog = new AlertDialog.Builder(getActivity());
         if (choiceAvailable) {
-            elementInSettings = api.getCountries().indexOf(api.getCountryHashMap().get(prefs.getString("select_country", "CH")));
+            elementInSettings = getValueIndex();
             items[elementInSettings].isItemSelected = true;
 
             // Add the buttons
@@ -68,7 +67,7 @@ public class CountrySelectionDialog extends DialogFragment {
                     prefs.edit().putString("select_country", mValue).apply();
                 }
             });
-            dialog.setSingleChoiceItems(mEntries, mClickedDialogEntryIndex, selectItemListener);
+            dialog.setSingleChoiceItems(mEntries, elementInSettings, selectItemListener);
             adapter = new ArrayAdapter<ListItem>(
                     getActivity(),
                     android.R.layout.select_dialog_item,
@@ -154,19 +153,18 @@ public class CountrySelectionDialog extends DialogFragment {
                 }
             }
         }
-        return 0;
+        return -1;
     }
 
     DialogInterface.OnClickListener selectItemListener = new DialogInterface.OnClickListener() {
 
         @Override public void onClick(DialogInterface dialog, int which) {
-            if (mClickedDialogEntryIndex != which) {
-                items[mClickedDialogEntryIndex].isItemSelected = false;
+            if (elementInSettings != which) {
                 items[elementInSettings].isItemSelected = false;
-                mClickedDialogEntryIndex = which;
-                mValue = mEntryValues[mClickedDialogEntryIndex].toString();
+                elementInSettings = which;
+                mValue = mEntryValues[elementInSettings].toString();
             }
-            items[mClickedDialogEntryIndex].isItemSelected = true;
+            items[elementInSettings].isItemSelected = true;
             adapter.notifyDataSetChanged();
         }
     };
