@@ -71,9 +71,9 @@ public class EmergencyTab extends Fragment {
         System.out.println("EmergencyFragment: onCreateView");
         if (elements2.size() > 0){
             for (Integer i : elements2.keySet()){
-                LinearLayout l = (LinearLayout) getView().findViewById(R.id.main);
+//                LinearLayout l = (LinearLayout) getView().findViewById(R.id.main);
                 c.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-                l.addView(c);
+//                l.addView(c);
                 c.isFocusable();
                 c.isClickable();
                 c.setId(i);
