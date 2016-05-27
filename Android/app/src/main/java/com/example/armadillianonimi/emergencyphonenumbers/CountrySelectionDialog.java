@@ -33,11 +33,9 @@ public class CountrySelectionDialog extends DialogFragment {
     private CharSequence[] mEntries;
     private CharSequence[] mEntryValues;
     private String mValue;
-    private boolean mValueSet;
     SharedPreferences prefs;
     private int mClickedDialogEntryIndex;
-    private int currentElement;
-    private String currentValue;
+    private int elementInSettings;
     private EmergencyPhoneNumbersAPI api = EmergencyPhoneNumbersAPI.getSharedInstance();
     private ListItem[] items;
     ArrayAdapter adapter;
@@ -56,6 +54,9 @@ public class CountrySelectionDialog extends DialogFragment {
     @Override public Dialog onCreateDialog(Bundle savedInstanceState) {
         AlertDialog.Builder dialog = new AlertDialog.Builder(getActivity());
         if (choiceAvailable) {
+            elementInSettings = api.getCountries().indexOf(api.getCountryHashMap().get(prefs.getString("select_country", "CH")));
+            items[elementInSettings].isItemSelected = true;
+
             dialog.setTitle(R.string.country_selection_dialog_title_yes);
             // Add the buttons
             dialog.setNeutralButton(R.string.CANCEL, new DialogInterface.OnClickListener() {
@@ -65,7 +66,6 @@ public class CountrySelectionDialog extends DialogFragment {
             });
             dialog.setPositiveButton(R.string.DONE, new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int id) {
-                    mValue = mEntryValues[mClickedDialogEntryIndex].toString();
                     prefs.edit().putString("select_country", mValue).apply();
                 }
             });
@@ -79,12 +79,9 @@ public class CountrySelectionDialog extends DialogFragment {
                     //Use super class to create the View
                     View v = super.getView(position, convertView, parent);
                     ListItem currItem = items[position];
-                    if (currItem.isItemSelected) {
-                        v.setBackgroundColor(Color.LTGRAY);
-                    } else {
-                        v.setBackgroundColor(Color.WHITE);
-                    }
+
                     TextView tv = (TextView)v.findViewById(android.R.id.text1);
+                    tv.setTextColor(getResources().getColor(R.color.colorEmergencyCardsText));
 
                     // Resize the flag pictures.
                     Drawable d = getResources().getDrawable(items[position].icon);
@@ -92,13 +89,25 @@ public class CountrySelectionDialog extends DialogFragment {
                     int dp50 = (int) (50 * getResources().getDisplayMetrics().density + 0.5f);
                     int dp37 = (int) (37.5 * getResources().getDisplayMetrics().density + 0.5f);
                     Drawable d_resized = new BitmapDrawable(getResources(), Bitmap.createScaledBitmap(bitmap, dp50, dp37, true));
+                    Drawable dti = getResources().getDrawable(R.drawable.selected);
+                    Bitmap bitmap2 = ((BitmapDrawable) dti).getBitmap();
+                    Drawable dChecked = new BitmapDrawable(getResources(), Bitmap.createScaledBitmap(bitmap2, dp37, dp37, true));
+                    dChecked.setTint(getResources().getColor(R.color.colorEmergencyCardsText));
 
-                    //Put the image on the TextView
-                    tv.setCompoundDrawablesWithIntrinsicBounds(d_resized, null, null, null);
+
+                    if (currItem.isItemSelected) {
+                        //Put the image on the TextView
+                        tv.setCompoundDrawablesWithIntrinsicBounds(d_resized, null, dChecked, null);
+
+                    } else {
+                        //Put the image on the TextView
+                        tv.setCompoundDrawablesWithIntrinsicBounds(d_resized, null, null, null);
+
+                    }
 
                     //Add margin between image and text (support various screen densities)
-                    int dp5 = (int) (5 * getResources().getDisplayMetrics().density + 0.5f);
-                    tv.setCompoundDrawablePadding(dp5);
+                    int dp15 = (int) (15 * getResources().getDisplayMetrics().density + 0.5f);
+                    tv.setCompoundDrawablePadding(dp15);
 
                     return v;
                 }
@@ -152,15 +161,14 @@ public class CountrySelectionDialog extends DialogFragment {
     DialogInterface.OnClickListener selectItemListener = new DialogInterface.OnClickListener() {
 
         @Override public void onClick(DialogInterface dialog, int which) {
-            currentElement = which;
-            currentValue = prefs.getString("select_country", mValue);
             if (mClickedDialogEntryIndex != which) {
-                items[mClickedDialogEntryIndex].isItemSelected =false;
+                items[mClickedDialogEntryIndex].isItemSelected = false;
+                items[elementInSettings].isItemSelected = false;
                 mClickedDialogEntryIndex = which;
+                mValue = mEntryValues[mClickedDialogEntryIndex].toString();
             }
             items[mClickedDialogEntryIndex].isItemSelected = true;
             adapter.notifyDataSetChanged();
-            System.out.println(items[mClickedDialogEntryIndex].isItemSelected);
         }
     };
 
