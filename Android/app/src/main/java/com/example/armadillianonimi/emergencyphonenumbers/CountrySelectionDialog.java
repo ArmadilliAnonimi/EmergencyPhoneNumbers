@@ -57,7 +57,6 @@ public class CountrySelectionDialog extends DialogFragment {
             elementInSettings = api.getCountries().indexOf(api.getCountryHashMap().get(prefs.getString("select_country", "CH")));
             items[elementInSettings].isItemSelected = true;
 
-            dialog.setTitle(R.string.country_selection_dialog_title_yes);
             // Add the buttons
             dialog.setNeutralButton(R.string.CANCEL, new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int id) {
