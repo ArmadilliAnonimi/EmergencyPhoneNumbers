@@ -1,6 +1,7 @@
 package com.example.armadillianonimi.emergencyphonenumbers;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
@@ -35,14 +36,15 @@ public class SettingsTab extends PreferenceFragmentCompat {
             }
         });
 
-        // Listener for click on "Tutorial" preference
-        Preference tutorialDialog = findPreference("tutorial");
-        tutorialDialog.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
-            public boolean onPreferenceClick(Preference preference) {
-                // TODO: show tutorial that is also TODO
-                return true;
-            }
-        });
+//        // Listener for click on "Tutorial" preference
+//        Preference tutorialDialog = findPreference("tutorial");
+//        tutorialDialog.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+//            public boolean onPreferenceClick(Preference preference) {
+////                startActivity(new Intent(getActivity(), IntroActivity.class));
+////                System.out.println("FUCKING WORKS");
+//                return true;
+//            }
+//        });
 
         // Listener for click on "About" preference
         Preference aboutDialog = findPreference("about_dialog");
@@ -60,7 +62,7 @@ public class SettingsTab extends PreferenceFragmentCompat {
     @Override
     public void onResume() {
         super.onResume();
-        addPreferencesFromResource(R.xml.preferences);
+//        addPreferencesFromResource(R.xml.preferences);
         System.out.println("SettingsTab: onResume");
     }
 

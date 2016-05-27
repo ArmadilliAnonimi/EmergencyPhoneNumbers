@@ -34,7 +34,7 @@
         </Preference>
 
         <Preference android:title="@string/pref_faq">
-            <intent android:action="android.intent.action.MAIN"
+            <intent android:action="android.intent.action.DEFAULT"
                 android:targetPackage="com.example.armadillianonimi.emergencyphonenumbers"
                 android:targetClass="com.example.armadillianonimi.emergencyphonenumbers.DisclaimerActivity"/>
         </Preference>
@@ -42,6 +42,9 @@
             android:key="tutorial"
             android:title="@string/pref_tutorial"
             android:summary="@string/pref_tutorial_summary">
+            <intent android:action="android.intent.action.DEFAULT"
+                android:targetPackage="com.example.armadillianonimi.emergencyphonenumbers"
+                android:targetClass="com.example.armadillianonimi.emergencyphonenumbers.IntroActivity"/>
         </Preference>
         <Preference
             android:key="about_dialog"

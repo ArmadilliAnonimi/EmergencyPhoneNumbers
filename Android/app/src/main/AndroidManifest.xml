@@ -32,6 +32,7 @@
             </intent-filter>
         </activity>
 
+        <!--Contacts activity-->
         <activity android:name=".ContactsPickerActivity"> </activity>
 
         <!--Fabric API key: crash report-->
@@ -39,6 +40,7 @@
             android:name="io.fabric.ApiKey"
             android:value="9fce642c2644fef5ab19ee53e1ec472130a2c78e" />
 
+        <!--Disclaimer activity-->
         <activity android:name=".DisclaimerActivity"
             android:label="@string/pref_disclaimer"
             android:parentActivityName="com.example.armadillianonimi.emergencyphonenumbers.MainActivity">
@@ -48,7 +50,12 @@
         </activity>
 
         <!--IntroActivity: onboarding screen showed the first time the app is opened.-->
-        <activity android:name=".IntroActivity"></activity>
+        <activity android:name=".IntroActivity">
+            <intent-filter>
+                <action android:name="com.example.armadillianonimi.emergencyphonenumbers.IntroActivity" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
 
     </application>
 
