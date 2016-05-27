@@ -66,6 +66,7 @@
     <string name="CLOSE">CLOSE</string>
     <string name="OK">OK</string>
     <string name="DISABLE">DISABLE</string>
+
     <string name="faq"><b>Disclaimer</b>\n
         This app should never be used when not related to emergencies. The cost of the calls is borne by the caller and the rates may vary. Not all numbers are free. This application only facilitates the search of the emergency numbers with your location. Its proper functioning depends on the network coverage and your phone carrier.\n\n
         <b>How can I add my own contacts?</b>\n
