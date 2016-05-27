@@ -68,23 +68,22 @@ public class EmergencyTab extends Fragment {
         addContactButton = (FloatingActionButton)view.findViewById(R.id.btn);
         setupAddContactButton();
 
-        System.out.println("EmergencyFragment: onCreateView");
         if (elements2.size() > 0){
             for (Integer i : elements2.keySet()){
-//                LinearLayout l = (LinearLayout) getView().findViewById(R.id.main);
+                CardView c = new CardView(getContext());
+                LinearLayout l = (LinearLayout) view.findViewById(R.id.main);
                 c.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-//                l.addView(c);
+                l.addView(c);
                 c.isFocusable();
                 c.isClickable();
                 c.setId(i);
-                //CardView othercard = (CardView) getActivity().findViewById(R.id.fire);
-                //ViewGroup.MarginLayoutParams m = (ViewGroup.MarginLayoutParams) othercard.getLayoutParams();
-                //c.setLayoutParams(m);
+                CardView othercard = (CardView) view.findViewById(R.id.fire);
+                ViewGroup.MarginLayoutParams m = (ViewGroup.MarginLayoutParams) othercard.getLayoutParams();
+                c.setLayoutParams(m);
                 c.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         call2(v);
-
                     }
                 });
 
@@ -96,6 +95,8 @@ public class EmergencyTab extends Fragment {
                 t.setText(elements2.get(i)[0]);
             }
         }
+
+        System.out.println("EmergencyFragment: onCreateView");
         return view;
     }
 
