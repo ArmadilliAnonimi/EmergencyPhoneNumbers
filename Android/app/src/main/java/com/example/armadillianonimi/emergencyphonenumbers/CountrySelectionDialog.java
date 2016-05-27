@@ -112,7 +112,15 @@ public class CountrySelectionDialog extends DialogFragment {
         } else {
             dialog.setTitle(R.string.country_selection_dialog_title_no);
             // add buttons
-            dialog.setPositiveButton(R.string.OK, new DialogInterface.OnClickListener() {
+            dialog.setPositiveButton(R.string.DISABLE, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    prefs.edit().putBoolean("pref_auto_location", false).apply();
+
+                    System.out.println("DISABLED AUTO LOCATION FROM DIALOG");
+                }
+            });
+            dialog.setNeutralButton(R.string.CLOSE, new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     //       Doesn't do anything except closing the dialogue.
