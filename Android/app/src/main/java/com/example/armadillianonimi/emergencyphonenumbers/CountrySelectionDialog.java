@@ -161,7 +161,7 @@ public class CountrySelectionDialog extends DialogFragment {
         for (Country country : api.getCountries()) {
             mEntries[i] = country.getName();
             mEntryValues[i] = country.getCode();
-            if ((String)mEntryValues[i] != "DO") {
+            if (!(mEntryValues[i].equals("DO"))) {
                 items[i] = new ListItem(country.getName(), getResources().getIdentifier(mEntryValues[i].toString().toLowerCase(), "drawable", "com.example.armadillianonimi.emergencyphonenumbers"));
             }
             else {
