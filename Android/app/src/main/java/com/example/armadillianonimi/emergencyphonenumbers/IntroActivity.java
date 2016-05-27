@@ -17,22 +17,35 @@ public class IntroActivity extends OnboarderActivity {
         super.onCreate(savedInstanceState);
         onboarderPages = new ArrayList<OnboarderPage>();
 
-        // Create your first page
-        OnboarderPage onboarderPage1 = new OnboarderPage("Title 1", "Description 1");
-        OnboarderPage onboarderPage2 = new OnboarderPage(R.string.app_name, R.string.pref_disclaimer_message, R.drawable.phone_icon);
+        // Each page of the tutorial is created here
+        OnboarderPage onboarderPage1 = new OnboarderPage(R.string.welcome, R.string.thanks,R.mipmap.ic_launcher);
+        OnboarderPage onboarderPage2 = new OnboarderPage(R.string.call_title, R.string.call_description, R.drawable.call);
+        OnboarderPage onboarderPage3 = new OnboarderPage(R.string.country_title, R.string.country_description, R.drawable.country);
+        OnboarderPage onboarderPage4 = new OnboarderPage(R.string.map_title, R.string.map_description, R.drawable.map);
 
-        // You can define title and description colors (by default white)
+        // Background colors
         onboarderPage1.setTitleColor(R.color.colorPrimarySettings);
-        onboarderPage1.setDescriptionColor(R.color.white);
+        onboarderPage1.setDescriptionColor(R.color.colorPrimarySettings);
+        onboarderPage1.setBackgroundColor(R.color.white);
+        onboarderPage2.setTitleColor(R.color.white);
+        onboarderPage2.setDescriptionColor(R.color.white);
+        onboarderPage2.setBackgroundColor(R.color.colorPrimary);
+        onboarderPage3.setTitleColor(R.color.colorPrimarySettings);
+        onboarderPage3.setDescriptionColor(R.color.colorPrimarySettings);
+        onboarderPage3.setBackgroundColor(R.color.white);
+        onboarderPage4.setTitleColor(R.color.white);
+        onboarderPage4.setDescriptionColor(R.color.white);
+        onboarderPage4.setBackgroundColor(R.color.colorPrimary);
 
-        // Don't forget to set background color for your page
-        onboarderPage1.setBackgroundColor(R.color.colorPrimary);
 
-        // Add your pages to the list
+
+        // Each page is added to an ArrayList of pages.
         onboarderPages.add(onboarderPage1);
         onboarderPages.add(onboarderPage2);
+        onboarderPages.add(onboarderPage3);
+        onboarderPages.add(onboarderPage4);
 
-        // And pass your pages to 'setOnboardPagesReady' method
+
         setOnboardPagesReady(onboarderPages);
 
     }
@@ -41,7 +54,7 @@ public class IntroActivity extends OnboarderActivity {
     public void onSkipButtonPressed() {
         // Optional: by default it skips onboarder to the end
         super.onSkipButtonPressed();
-        // Define your actions when the user press 'Skip' button
+        finish();
     }
 
     @Override

@@ -76,4 +76,13 @@
         <b>I found a bug and I have some feedback, what can I do?</b>\n
         Please contact us via email and tell us everything you have to say. We are always listening!</string>
 
+    <string name="welcome">Welcome to Emergency Phone Numbers!</string>
+    <string name="thanks">Thank you for downloading this app.</string>
+    <string name="call_title">To make a call...</string>
+    <string name="call_description">... just click on the buttons!</string>
+    <string name="country_title">To change country...</string>
+    <string name="country_description">... just click on the flag or the name of the country!</string>
+    <string name="map_title">You can see where you are.</string>
+    <string name="map_description">Awesome!</string>
+
 </resources>
