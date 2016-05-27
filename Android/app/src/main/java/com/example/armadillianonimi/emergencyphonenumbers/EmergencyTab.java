@@ -26,6 +26,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Random;
 
 /**
  * Created by patrickbalestra on 14/03/2015.
@@ -40,7 +41,8 @@ public class EmergencyTab extends Fragment {
     private TextView policeTextView;
     private TextView medicalTextView;
     private FloatingActionButton addContactButton;
-    private ArrayList<String[]> elements = new ArrayList<>();
+    //private ArrayList<String[]> elements = new ArrayList<>();
+    private HashMap<Integer,String[]> elements2 = new HashMap<>();
     private CardView c;
     private final int CONTACT_PICK_REQUEST = 1000;
     private final int RESULT_CODE_OK = -1;
@@ -67,37 +69,17 @@ public class EmergencyTab extends Fragment {
         setupAddContactButton();
 
         System.out.println("EmergencyFragment: onCreateView");
-        return view;
-    }
-
-
-
-    @Override
-    public void onActivityResult(int requestCode,int resultCode,Intent data){
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if (requestCode == CONTACT_PICK_REQUEST && resultCode == RESULT_CODE_OK) {
-            final ArrayList<Contact> selectedContacts = data.getParcelableArrayListExtra("SelectedContacts");
-            for (int i = 0; i < selectedContacts.size(); i++){
-               // if (!(elements.containsKey(selectedContacts.get(i).name))) {
-                String[] person = new String[2];
-                person[0]= selectedContacts.get(i).name;
-                person[1] = selectedContacts.get(i).phone;
-                elements.add( person);
-
+        if (elements2.size() > 0){
+            for (Integer i : elements2.keySet()){
                 LinearLayout l = (LinearLayout) getView().findViewById(R.id.main);
-
-                c = new CardView(getContext());
-
-                //c.setMinimumHeight(00);
                 c.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
                 l.addView(c);
                 c.isFocusable();
                 c.isClickable();
                 c.setId(i);
-                CardView othercard = (CardView) getActivity().findViewById(R.id.fire);
-                ViewGroup.MarginLayoutParams m = (ViewGroup.MarginLayoutParams) othercard.getLayoutParams();
-                c.setLayoutParams(m);
+                //CardView othercard = (CardView) getActivity().findViewById(R.id.fire);
+                //ViewGroup.MarginLayoutParams m = (ViewGroup.MarginLayoutParams) othercard.getLayoutParams();
+                //c.setLayoutParams(m);
                 c.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -109,12 +91,68 @@ public class EmergencyTab extends Fragment {
                 RelativeLayout r = new RelativeLayout(getContext());
 
                 TextView t = new TextView(getContext());
-
-
                 c.addView(r);
                 r.addView(t);
-                t.setText(selectedContacts.get(i).name);
+                t.setText(elements2.get(i)[0]);
             }
+        }
+        return view;
+    }
+
+    public void createCard(ArrayList<Contact> selectedContacts){
+        for (int i = 0; i < selectedContacts.size(); i++) {
+            String[] person = new String[2];
+            person[0] = selectedContacts.get(i).name;
+            person[1] = selectedContacts.get(i).phone;
+
+
+            LinearLayout l = (LinearLayout) getView().findViewById(R.id.main);
+
+
+            c = new CardView(getContext());
+            c.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+            l.addView(c);
+            c.isFocusable();
+            c.isClickable();
+            if (!(elements2.containsKey(i))) {
+                elements2.put(i, person);
+                c.setId(i);
+            } else {
+                int n = person[1].hashCode();
+                elements2.put(n, person);
+                c.setId(n);
+            }
+
+            CardView othercard = (CardView) getActivity().findViewById(R.id.fire);
+            ViewGroup.MarginLayoutParams m = (ViewGroup.MarginLayoutParams) othercard.getLayoutParams();
+            c.setLayoutParams(m);
+            c.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    call2(v);
+
+                }
+            });
+
+            RelativeLayout r = new RelativeLayout(getContext());
+
+            TextView t = new TextView(getContext());
+
+
+            c.addView(r);
+            r.addView(t);
+            t.setText(selectedContacts.get(i).name);
+        }
+    }
+
+
+    @Override
+    public void onActivityResult(int requestCode,int resultCode,Intent data){
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == CONTACT_PICK_REQUEST && resultCode == RESULT_CODE_OK) {
+            final ArrayList<Contact> selectedContacts = data.getParcelableArrayListExtra("SelectedContacts");
+            createCard(selectedContacts);
 
         }
         System.out.println("EmergencyFragment: onActivityResult");
@@ -134,7 +172,7 @@ public class EmergencyTab extends Fragment {
     public void call2(View view) {
         if (checkPermission(Manifest.permission.CALL_PHONE)) {
             Intent callIntent = new Intent(Intent.ACTION_CALL);
-            callIntent.setData(Uri.parse("tel:" + elements.get(view.getId())[1]));
+            callIntent.setData(Uri.parse("tel:" + elements2.get(view.getId())[1]));
             startActivity(callIntent);
         } else {
             request(Manifest.permission.CALL_PHONE);
@@ -143,8 +181,8 @@ public class EmergencyTab extends Fragment {
     }
 
 
-    public ArrayList<String[]> getElements(){
-        return elements;
+    public HashMap<Integer,String[]> getElements(){
+        return elements2;
     }
 
     private void setupAddContactButton() {
