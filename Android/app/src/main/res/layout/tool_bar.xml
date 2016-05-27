@@ -26,8 +26,9 @@
                 android:id="@+id/flag"
                 android:contentDescription="@string/country_flag"
                 android:scaleType="fitCenter"
-                android:background="@null"
                 android:layout_marginRight="20dp"
+                android:background="#ffffff"
+                android:padding="1dp"
                 android:layout_marginTop="2.5dp" />
 
             <!--Selected country-->

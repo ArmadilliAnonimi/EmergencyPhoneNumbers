@@ -321,7 +321,7 @@ public class MainActivity extends AppCompatActivity {
                     if (flagID.equals("do")) {
                         flagID += "2";
                     }
-                    flag.setBackground(getResources().getDrawable(getResources().getIdentifier(flagID, "drawable", "com.example.armadillianonimi.emergencyphonenumbers")));
+                    flag.setImageResource((getResources().getIdentifier(flagID, "drawable", "com.example.armadillianonimi.emergencyphonenumbers")));
                 }
             }
         });
