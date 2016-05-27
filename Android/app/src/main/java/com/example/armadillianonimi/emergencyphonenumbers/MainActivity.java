@@ -25,6 +25,7 @@ import android.os.Bundle;
 import android.view.Window;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -53,6 +54,7 @@ public class MainActivity extends AppCompatActivity {
     private EmergencyPhoneNumbersAPI api = EmergencyPhoneNumbersAPI.getSharedInstance();
     private TextView country;
     private Country selectedCountry;
+    private ImageView flag;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,6 +83,7 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         country = (TextView) findViewById(R.id.country);
+        flag = (ImageView) findViewById(R.id.flag);
 
         // Creating The SectionsPagerAdapter and Passing Fragment Manager, Titles fot the Tabs and Number Of Tabs.
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
@@ -297,7 +300,7 @@ public class MainActivity extends AppCompatActivity {
 
         COMING_THROUGH_GEOLOCATION = false;
 
-        String currentCode = prefs.getString("select_country", defaultCountryCode);
+        final String currentCode = prefs.getString("select_country", defaultCountryCode);
         selectedCountry = countryHashMap.get(currentCode);
 
         final EmergencyTab emergencyTab = (EmergencyTab) mSectionsPagerAdapter.getItem(0);
@@ -314,6 +317,11 @@ public class MainActivity extends AppCompatActivity {
                     emergencyTab.medicalNumber = medical;
                     emergencyTab.updateUI();
                     country.setText(name);
+                    String flagID = currentCode.toLowerCase();
+                    if (flagID.equals("do")) {
+                        flagID += "2";
+                    }
+                    flag.setBackground(getResources().getDrawable(getResources().getIdentifier(flagID, "drawable", "com.example.armadillianonimi.emergencyphonenumbers")));
                 }
             }
         });
