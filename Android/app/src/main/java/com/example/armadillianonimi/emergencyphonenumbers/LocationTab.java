@@ -44,7 +44,7 @@ public class LocationTab extends Fragment {
             if (marker != null) {
                 marker.remove();
             }
-            marker = googleMap.addMarker(new MarkerOptions().position(coordinates).title("You are here").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)));
+            marker = googleMap.addMarker(new MarkerOptions().position(coordinates).title(getString(R.string.you_are_here)).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)));
 
             // Adding marker on the map.
             CameraPosition cameraPosition = new CameraPosition.Builder()
@@ -60,6 +60,7 @@ public class LocationTab extends Fragment {
                     android.location.Address myAddress = listAddresses.get(0);
                     String locationString = myAddress.getThoroughfare() + " " + myAddress.getFeatureName() + ", " + myAddress.getPostalCode() + " " + myAddress.getLocality() + ", " + myAddress.getCountryName();
                     addressTextView.setText(locationString + "\n" + latitude + ", " + longitude);
+                    addressTextView.setContentDescription(locationString + "\n" + latitude + ", " + longitude);
 
                     System.out.println(locationString);
                     System.out.println("Found location: " + listAddresses.toString());
@@ -84,6 +85,7 @@ public class LocationTab extends Fragment {
         public void onProviderDisabled(String s) {
             if (addressTextView != null) {
                 addressTextView.setText("Location disabled.\nPlease check your settings.");
+                addressTextView.setContentDescription("Location disabled.\nPlease check your settings.");
             }
         }
     };
@@ -95,6 +97,7 @@ public class LocationTab extends Fragment {
         mapView = (MapView) view.findViewById(R.id.mapView);
         addressTextView = (TextView) view.findViewById(R.id.addresstextview);
         addressTextView.setText(R.string.finding_location);
+        addressTextView.setContentDescription(getString(R.string.finding_location));
         mapView.onCreate(savedInstanceState);
         mapView.onResume();
 
@@ -102,7 +105,8 @@ public class LocationTab extends Fragment {
         locationFinder.setLocationManagerListener(new LocationManagerListener() {
             @Override
             public void locationReceived(UserLocation location) {
-                addressTextView.setText(location.completeAddress);
+        addressTextView.setText(location.completeAddress);
+        addressTextView.setContentDescription(location.completeAddress);
 
                 googleMap = mapView.getMap();
 
@@ -111,7 +115,7 @@ public class LocationTab extends Fragment {
                 }
 
                 // Adding marker on the map.
-                marker = googleMap.addMarker(new MarkerOptions().position(location.position).title(String.valueOf(R.string.you_are_here)).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)));
+                marker = googleMap.addMarker(new MarkerOptions().position(location.position).title(getString(R.string.you_are_here)).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)));
 
                 // Moving position of the camera in the map depending on the position of the marker.
                 CameraPosition cameraPosition = new CameraPosition.Builder().target(location.position).zoom(16).build();
@@ -145,6 +149,7 @@ public class LocationTab extends Fragment {
     public void setProviderDisabled() {
         if (addressTextView != null) {
         addressTextView.setText("Location disabled.\nPlease check your settings.");
+        addressTextView.setContentDescription("Location disabled.\nPlease check your settings.");
         }
     }
 

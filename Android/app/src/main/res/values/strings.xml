@@ -55,9 +55,11 @@
     <string name="you_are_here">You are here</string>
 
     <!--Accessibility-->
-    <string name="country_flag">Country flag</string>
-    <string name="location_button">Location button</string>
+    <string name="country_flag">Select country button</string>
+    <string name="location_button">Location</string>
     <string name="phone_icon">Phone icon</string>
+    <string name="plus_contact_button">Add contact</string>
+    <string name="search_contact">Search contact</string>
 
     <string name="country_selection_dialog_title_yes">Select your country:</string>
 

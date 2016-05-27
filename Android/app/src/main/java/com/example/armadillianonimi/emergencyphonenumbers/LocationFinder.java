@@ -43,7 +43,7 @@ public class LocationFinder {
         @Override
         // Method for finding the location.
         public void onLocationChanged(Location location) {
-
+            System.out.println("onlocationchanged");
             double latitude = location.getLatitude();
             double longitude = location.getLongitude();
             LatLng coordinates = new LatLng(latitude, longitude);
@@ -80,18 +80,19 @@ public class LocationFinder {
 
         @Override
         public void onStatusChanged(String s, int i, Bundle bundle) {
-            //
+            System.out.println("onstatuschanged");
         }
 
         // If the provider is enabled, do nothing.
         @Override
         public void onProviderEnabled(String s) {
-            //
+            System.out.println("onProviderenabled");
         }
 
         // If the provider is disabled, set the text in the addressText in the LocationTab class as "Location disabled ...".
         @Override
         public void onProviderDisabled(String s) {
+            System.out.println("on provider disabled");
             if (activity instanceof MainActivity) {
                 MainActivity main = (MainActivity)activity;
                 LocationTab locationTab = (LocationTab)main.mSectionsPagerAdapter.getItem(1);
@@ -102,6 +103,7 @@ public class LocationFinder {
 
     // If the access to the location was not yet granted, ask for it.
     public boolean hasPermissionToAccessLocation() {
+        System.out.println("has permission location");
         if (!checkLocationPermission()) {
             ActivityCompat.requestPermissions(activity, new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION}, 1);
             return false;

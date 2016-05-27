@@ -49,9 +49,11 @@
     <string name="you_are_here">Du bist hier</string>
 
     <!--Accessibility-->
-    <string name="country_flag">Länderflagge</string>
-    <string name="location_button">Ortungsbutton</string>
+    <string name="country_flag">Land auswählen Taste</string>
+    <string name="location_button">Ortung</string>
     <string name="phone_icon">Telefonsymbol</string>
+    <string name="plus_contact_button">Kontakt hinzufügen</string>
+    <string name="search_contact">Suchen Kontakt</string>
 
     <string name="country_selection_dialog_title_yes">Wähle dein Land:</string>
 
