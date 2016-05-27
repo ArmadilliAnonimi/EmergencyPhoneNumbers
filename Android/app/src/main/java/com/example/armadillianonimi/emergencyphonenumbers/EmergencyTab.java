@@ -85,13 +85,13 @@ public class EmergencyTab extends Fragment {
                 person[1] = selectedContacts.get(i).phone;
                 elements.add( person);
 
-                LinearLayout l = (LinearLayout) getView().findViewById(R.id.main);
+
 
                 c = new CardView(getContext());
 
                 //c.setMinimumHeight(00);
                 c.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-                l.addView(c);
+                
                 c.isFocusable();
                 c.isClickable();
                 c.setId(i);
