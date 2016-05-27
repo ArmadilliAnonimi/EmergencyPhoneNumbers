@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.armadillianonimi.emergencyphonenumbers">
 
     <!--User permissions: ask permissions to access location, contacts and to make phone calls-->
@@ -13,7 +14,8 @@
         android:allowBackup="true"
         android:debuggable="true"
         android:icon="@mipmap/ic_launcher"
-        android:label="Emergency\nNumbers"
+        android:label="@string/icon_name"
+        tools:replace="android:label"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
@@ -44,6 +46,9 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.armadillianonimi.emergencyphonenumbers.MainActivity" />
         </activity>
+
+        <!--IntroActivity: onboarding screen showed the first time the app is opened.-->
+        <activity android:name=".IntroActivity"></activity>
 
     </application>
 

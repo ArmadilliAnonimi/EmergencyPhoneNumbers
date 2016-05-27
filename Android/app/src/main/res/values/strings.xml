@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">EmergencyPhoneNumbers</string>
+    <string name="icon_name">Emergency\nNumbers</string>
+    <string name="pref_previously_started">Previously started</string>
     <string name="pref_auto_location">Always use current location</string>
     <string name="pref_auto_location_summary">Set the country automatically using your current location</string>
     <string name="pref_call_confirmation">Call confirmation</string>
@@ -15,14 +17,7 @@
     <string name="pref_about_summary">Meet who is behind this app</string>
     <string name="pref_disclaimer">Disclaimer</string>
     <string name="pref_disclaimer_message">
-        Legal thingy text and also some very legal stuff about how if everything goes shit we are not
-        responsible for anything ok. And then many other things that I don\'t know because I\'m studying
-        informatics and not law for a reason. And since people should be able to read this text even if
-        they are like almost blind, the text size should be bigger right? Well, let\'s put it at 10dp.
-        Damn, that\'s even smaller than the default text size; let\'s try 20dp. Or better, 20sp, since the
-        auto corrector said that for text sizes it would be better to use sp and not dp. Yep, 20 is indeed
-        better. But let\'s add some padding.
-        But seriously, this app should never be used when not related to emergencies. The cost of the calls is borne by the caller and the rates may vary. Not all numbers are free. This application only facilitates the search of the emergency numbers with your location. Its proper functioning depends on the network coverage and your phone carrier. If something goes wrong contact Emanuele Giuseppe Esposito, it\'s most probably his fault.
+        This app should never be used when not related to emergencies. The cost of the calls is borne by the caller and the rates may vary. Not all numbers are free. This application only facilitates the search of the emergency numbers with your location. Its proper functioning depends on the network coverage and your phone carrier.
     </string>
     <string name="pref_faq">FAQ</string>
     <string name="pref_tutorial">Tutorial</string>

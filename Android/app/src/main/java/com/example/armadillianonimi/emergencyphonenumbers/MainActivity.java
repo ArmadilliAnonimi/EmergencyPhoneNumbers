@@ -65,6 +65,15 @@ public class MainActivity extends AppCompatActivity {
         // Initializes the shared preferences
         prefs = PreferenceManager.getDefaultSharedPreferences(this);
 
+        // IntroActivity showed just the first time the app is opened
+        boolean previouslyStarted = prefs.getBoolean(getString(R.string.pref_previously_started), false);
+        if(!previouslyStarted) {
+            SharedPreferences.Editor edit = prefs.edit();
+            edit.putBoolean(getString(R.string.pref_previously_started), Boolean.TRUE);
+            edit.commit();
+            startActivity(new Intent(this, IntroActivity.class));
+        }
+
         locationFinder = new LocationFinder(this);
         locationFinder.setLocationManagerListener(new LocationManagerListener() {
             @Override
@@ -117,7 +126,6 @@ public class MainActivity extends AppCompatActivity {
             public void onTabReselected(TabLayout.Tab tab) {}
         });
 
-
         // Loads the numbers and country in the emergency tab
         manageEmergencyAPI();
 
@@ -143,14 +151,13 @@ public class MainActivity extends AppCompatActivity {
         };
         prefs.registerOnSharedPreferenceChangeListener(prefsListener);
 
-
         // Permission requests
         if (!(checkPermission(Manifest.permission.CALL_PHONE))) {
                request(Manifest.permission.CALL_PHONE);
         }
 
-
         System.out.println("### - MainActivity created");
+
     }
 
     public void call(View view) {
@@ -336,7 +343,6 @@ public class MainActivity extends AppCompatActivity {
             return api.getCountryHashMap().get(countryCode);
         }
     }
-
 
     public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
