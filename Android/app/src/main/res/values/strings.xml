@@ -66,5 +66,13 @@
     <string name="CLOSE">CLOSE</string>
     <string name="OK">OK</string>
     <string name="DISABLE">DISABLE</string>
+    <string name="faq"><b>Disclaimer</b>\n
+        This app should never be used when not related to emergencies. The cost of the calls is borne by the caller and the rates may vary. Not all numbers are free. This application only facilitates the search of the emergency numbers with your location. Its proper functioning depends on the network coverage and your phone carrier.\n\n
+        <b>How can I add my own contacts?</b>\n
+        In the Emergency tab, you can press on the add button at the bottom right to add new contact from your library. Press on it to start a call.\n\n
+        <b>How can I change the country?</b>\n
+        Tap the current country name or flag in the toolbar and choose another country. You can also turn on the "Always use current location" feature so that the selected country always reflects the country you are in.\n\n
+        <b>I found a bug and I have some feedback, what can I do?</b>\n
+        Please contact us via email and tell us everything you have to say. We are always listening!</string>
 
 </resources>
