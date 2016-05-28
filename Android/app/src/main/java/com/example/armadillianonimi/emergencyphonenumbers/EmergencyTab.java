@@ -100,102 +100,97 @@ public class EmergencyTab extends Fragment {
     }
 
     public void createCard(String name, String phone, boolean flag, int i,LinearLayout l){
-
-            c = new CardView(getContext());
-            FrameLayout.LayoutParams v = new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.WRAP_CONTENT);
-            v.gravity = Gravity.CENTER;
-            c.setLayoutParams(v);
-            l.addView(c);
-            c.isFocusable();
-            c.isClickable();
-            c.setForeground(getSelectedItemDrawable());
-            c.setPadding(40,40,40,40);
-            String[] person = new String[2];
-            person[0] = name;
-            person[1] = phone;
-            if (flag) {
-                if (!(elements2.containsKey(i))) {
-                    elements2.put(i, person);
-                    c.setId(i);
+            if (!(elements2.containsKey(phone.hashCode())) ) {
+                c = new CardView(getContext());
+                FrameLayout.LayoutParams v = new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.WRAP_CONTENT);
+                v.gravity = Gravity.CENTER;
+                c.setLayoutParams(v);
+                l.addView(c);
+                c.isFocusable();
+                c.isClickable();
+                c.setForeground(getSelectedItemDrawable());
+                c.setPadding(40, 40, 40, 40);
+                String[] person = new String[2];
+                person[0] = name;
+                person[1] = phone;
+                if (flag) {
+                        int n = person[1].hashCode();
+                        elements2.put(n, person);
+                        c.setId(n);
                 } else {
-                    int n = person[1].hashCode();
-                    elements2.put(n, person);
-                    c.setId(n);
+                    c.setId(i);
                 }
-            }
-            else {
-                c.setId(i);
-            }
-            ViewGroup.MarginLayoutParams m =(ViewGroup.MarginLayoutParams) c.getLayoutParams();
-            m.setMargins(inDP(10),inDP(5),inDP(10),inDP(5));
-            c.setContentPadding(inDP(10),inDP(10),inDP(10),inDP(10));
-            c.setLayoutParams(m);
-            c.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    call2(v);
+                ViewGroup.MarginLayoutParams m = (ViewGroup.MarginLayoutParams) c.getLayoutParams();
+                m.setMargins(inDP(10), inDP(5), inDP(10), inDP(5));
+                c.setContentPadding(inDP(10), inDP(10), inDP(10), inDP(10));
+                c.setLayoutParams(m);
+                c.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        call2(v);
 
-                }
-            });
+                    }
+                });
 
 
-            RelativeLayout r = new RelativeLayout(getContext());
-            r.setLayoutParams(new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT,
-                    RelativeLayout.LayoutParams.MATCH_PARENT));
-            c.addView(r);
+                RelativeLayout r = new RelativeLayout(getContext());
+                r.setLayoutParams(new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT,
+                        RelativeLayout.LayoutParams.MATCH_PARENT));
+                c.addView(r);
 
 
-            ImageView img = new ImageView(getContext());
-            r.addView(img);
-            img.setImageDrawable(ContextCompat.getDrawable(getContext(),R.drawable.phone_icon));
-            RelativeLayout.LayoutParams d = (RelativeLayout.LayoutParams) img.getLayoutParams();
-            d.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
-            d.addRule(RelativeLayout.CENTER_IN_PARENT, RelativeLayout.TRUE);
-            img.getLayoutParams().height = inDP(40);
-            img.getLayoutParams().width = inDP(40);
-            img.setLayoutParams(d);
-            ViewGroup.MarginLayoutParams ma =(ViewGroup.MarginLayoutParams) img.getLayoutParams();
-            ma.setMargins(0,0,inDP(10),0);
-            img.setContentDescription("Phone icon");
-            img.setColorFilter(Color.parseColor("#616161"));
-            img.setLayoutParams(ma);
+                ImageView img = new ImageView(getContext());
+                r.addView(img);
+                img.setImageDrawable(ContextCompat.getDrawable(getContext(), R.drawable.phone_icon));
+                RelativeLayout.LayoutParams d = (RelativeLayout.LayoutParams) img.getLayoutParams();
+                d.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+                d.addRule(RelativeLayout.CENTER_IN_PARENT, RelativeLayout.TRUE);
+                img.getLayoutParams().height = inDP(40);
+                img.getLayoutParams().width = inDP(40);
+                img.setLayoutParams(d);
+                ViewGroup.MarginLayoutParams ma = (ViewGroup.MarginLayoutParams) img.getLayoutParams();
+                ma.setMargins(0, 0, inDP(10), 0);
+                img.setContentDescription("Phone icon");
+                img.setColorFilter(Color.parseColor("#616161"));
+                img.setLayoutParams(ma);
 //            ImageView otherimg = (ImageView) getActivity().findViewById(R.id.img);
 //            ViewGroup.MarginLayoutParams imgpar = (ViewGroup.MarginLayoutParams) otherimg.getLayoutParams();
 //            img.setLayoutParams(imgpar);
 
 
-            TextView number = new TextView(getContext());
-            r.addView(number);
-            number.setLayoutParams(new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-            RelativeLayout.LayoutParams da = (RelativeLayout.LayoutParams) number.getLayoutParams();
-            da.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
-            da.addRule(RelativeLayout.CENTER_IN_PARENT, RelativeLayout.TRUE);
-            number.setLayoutParams(da);
-            number.setText(phone);
-            number.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
-            number.setTextColor(Color.parseColor("#616161"));
-            number.setPadding(inDP(10),inDP(10),inDP(10),inDP(10));
-            ViewGroup.MarginLayoutParams mar =(ViewGroup.MarginLayoutParams) number.getLayoutParams();
-            mar.setMargins(0,0,inDP(50),0);
-            number.setLayoutParams(mar);
+                TextView number = new TextView(getContext());
+                r.addView(number);
+                number.setLayoutParams(new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+                RelativeLayout.LayoutParams da = (RelativeLayout.LayoutParams) number.getLayoutParams();
+                da.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+                da.addRule(RelativeLayout.CENTER_IN_PARENT, RelativeLayout.TRUE);
+                number.setLayoutParams(da);
+                number.setText(phone);
+                number.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
+                number.setTextColor(Color.parseColor("#616161"));
+                number.setPadding(inDP(10), inDP(10), inDP(10), inDP(10));
+                ViewGroup.MarginLayoutParams mar = (ViewGroup.MarginLayoutParams) number.getLayoutParams();
+                mar.setMargins(0, 0, inDP(50), 0);
+                number.setLayoutParams(mar);
 
 //            TextView othertext = (TextView) getActivity().findViewById(R.id.policenum);
 //            ViewGroup.MarginLayoutParams textparam = (ViewGroup.MarginLayoutParams) othertext.getLayoutParams();
 //            number.setLayoutParams(textparam);
 
-            TextView number2 = new TextView(getContext());
-            r.addView(number2);
-            number2.setText(name);
-            number2.setLayoutParams(new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-            RelativeLayout.LayoutParams das = (RelativeLayout.LayoutParams) number2.getLayoutParams();
-            das.addRule(RelativeLayout.CENTER_VERTICAL, RelativeLayout.TRUE);
-            number2.setLayoutParams(das);
-            number2.setTextSize(TypedValue.COMPLEX_UNIT_SP, 35);
-            number2.setTextColor(Color.parseColor("#616161"));
-            number2.setPadding(inDP(10),inDP(10),inDP(10),inDP(10));
+                TextView number2 = new TextView(getContext());
+                r.addView(number2);
+                number2.setText(name);
+                number2.setLayoutParams(new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+                RelativeLayout.LayoutParams das = (RelativeLayout.LayoutParams) number2.getLayoutParams();
+                das.addRule(RelativeLayout.CENTER_VERTICAL, RelativeLayout.TRUE);
+                number2.setLayoutParams(das);
+                number2.setTextSize(TypedValue.COMPLEX_UNIT_SP, 35);
+                number2.setTextColor(Color.parseColor("#616161"));
+                number2.setPadding(inDP(10), inDP(10), inDP(10), inDP(10));
 //            TextView othertext2 = (TextView) getActivity().findViewById(R.id.pol);
 //            ViewGroup.MarginLayoutParams textparam2 = (ViewGroup.MarginLayoutParams) othertext2.getLayoutParams();
 //            number2.setLayoutParams(textparam2);
+            }
         }
 
 
