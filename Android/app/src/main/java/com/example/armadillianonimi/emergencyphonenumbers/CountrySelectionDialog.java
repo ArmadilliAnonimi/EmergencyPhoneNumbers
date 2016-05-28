@@ -123,7 +123,6 @@ public class CountrySelectionDialog extends DialogFragment {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     prefs.edit().putBoolean("pref_auto_location", false).apply();
-
                     System.out.println("DISABLED AUTO LOCATION FROM DIALOG");
                 }
             });

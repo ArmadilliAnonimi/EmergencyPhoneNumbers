@@ -10,6 +10,7 @@ import android.support.v7.preference.DialogPreference;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceFragmentCompat;
 import android.support.v7.preference.PreferenceManager;
+import android.support.v7.preference.SwitchPreferenceCompat;
 import android.util.AttributeSet;
 
 /**
@@ -18,11 +19,25 @@ import android.util.AttributeSet;
 public class SettingsTab extends PreferenceFragmentCompat {
 
     SharedPreferences prefs;
+    SwitchPreferenceCompat autoLocationSwitch;
+    Preference.OnPreferenceChangeListener autoLocationListener;
 
     @Override
     public void onCreatePreferences(Bundle bundle, String s) {
         addPreferencesFromResource(R.xml.preferences);
         prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
+
+        autoLocationSwitch = (SwitchPreferenceCompat) findPreference("pref_auto_location");
+        autoLocationListener = new Preference.OnPreferenceChangeListener() {
+            @Override
+            public boolean onPreferenceChange(Preference preference, Object newVal) {
+                System.out.println("AUTO LOCATION CHANGED TO " + newVal.toString());
+                final boolean value = (Boolean) newVal;
+                autoLocationSwitch.setChecked(value);
+                return true;
+            }
+        };
+        autoLocationSwitch.setOnPreferenceChangeListener(autoLocationListener);
 
         // Listener for click on "Change country" preference
         Preference dialogPref = findPreference("dialog");
