@@ -2,7 +2,9 @@ package com.example.armadillianonimi.emergencyphonenumbers;
 
 import android.Manifest;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
@@ -18,6 +20,8 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.AlertDialog;
+import android.support.v7.preference.PreferenceManager;
 import android.support.v7.widget.CardView;
 import android.text.Layout;
 import android.util.TypedValue;
@@ -101,9 +105,9 @@ public class EmergencyTab extends Fragment {
     }
 
     public void createCard(String name, String phone, boolean flag, int i,LinearLayout l){
-
                 c = new CardView(getContext());
-                FrameLayout.LayoutParams v = new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.WRAP_CONTENT);
+                FrameLayout.LayoutParams v = new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT,
+                        FrameLayout.LayoutParams.WRAP_CONTENT);
                 v.gravity = Gravity.CENTER;
                 c.setLayoutParams(v);
                 l.addView(c);
@@ -154,10 +158,6 @@ public class EmergencyTab extends Fragment {
                 img.setContentDescription("Phone icon");
                 img.setColorFilter(Color.parseColor("#616161"));
                 img.setLayoutParams(ma);
-//            ImageView otherimg = (ImageView) getActivity().findViewById(R.id.img);
-//            ViewGroup.MarginLayoutParams imgpar = (ViewGroup.MarginLayoutParams) otherimg.getLayoutParams();
-//            img.setLayoutParams(imgpar);
-
 
                 TextView number = new TextView(getContext());
                 r.addView(number);
@@ -174,10 +174,6 @@ public class EmergencyTab extends Fragment {
                 mar.setMargins(0, 0, inDP(50), 0);
                 number.setLayoutParams(mar);
 
-//            TextView othertext = (TextView) getActivity().findViewById(R.id.policenum);
-//            ViewGroup.MarginLayoutParams textparam = (ViewGroup.MarginLayoutParams) othertext.getLayoutParams();
-//            number.setLayoutParams(textparam);
-
                 TextView number2 = new TextView(getContext());
                 r.addView(number2);
                 number2.setText(name);
@@ -188,9 +184,6 @@ public class EmergencyTab extends Fragment {
                 number2.setTextSize(TypedValue.COMPLEX_UNIT_SP, 35);
                 number2.setTextColor(Color.parseColor("#616161"));
                 number2.setPadding(inDP(10), inDP(10), inDP(10), inDP(10));
-//            TextView othertext2 = (TextView) getActivity().findViewById(R.id.pol);
-//            ViewGroup.MarginLayoutParams textparam2 = (ViewGroup.MarginLayoutParams) othertext2.getLayoutParams();
-//            number2.setLayoutParams(textparam2);
 
         }
 
@@ -225,18 +218,36 @@ public class EmergencyTab extends Fragment {
     }
     public void call2(View view) {
         if (checkPermission(Manifest.permission.CALL_PHONE)) {
-            Intent callIntent = new Intent(Intent.ACTION_CALL);
+            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext());
+            final Intent callIntent = new Intent(Intent.ACTION_CALL);
             callIntent.setData(Uri.parse("tel:" + elements2.get(view.getId())[1]));
-            startActivity(callIntent);
+            if (prefs.getBoolean("pref_call_confirmation", true)) {
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                builder.setMessage("Call " + elements2.get(view.getId())[0] + " (" + elements2.get(view.getId())[1] +")?");
+
+                builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        startActivity(callIntent);
+                    }
+                });
+
+                builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        //do things
+                    }
+                });
+
+                AlertDialog alert = builder.create();
+                alert.show();
+            }
+            else{
+                startActivity(callIntent);
+            }
         } else {
             request(Manifest.permission.CALL_PHONE);
             Toast.makeText(getContext(), "Please, allow call permission.\nIt's good for you!", Toast.LENGTH_SHORT).show();
         }
-    }
-
-
-    public HashMap<Integer,String[]> getElements(){
-        return elements2;
     }
 
     private void setupAddContactButton() {

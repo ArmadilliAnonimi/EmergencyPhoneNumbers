@@ -2,6 +2,7 @@ package com.example.armadillianonimi.emergencyphonenumbers;
 
 import android.Manifest;
 
+import android.content.DialogInterface;
 import android.net.Uri;
 import com.crashlytics.android.Crashlytics;
 import io.fabric.sdk.android.Fabric;
@@ -19,6 +20,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.preference.PreferenceManager;
 import android.support.v7.widget.Toolbar;
@@ -165,19 +167,49 @@ public class MainActivity extends AppCompatActivity {
     public void call(View view) {
         if (checkPermission(Manifest.permission.CALL_PHONE)) {
             int id = view.getId();
-            Intent callIntent = new Intent(Intent.ACTION_CALL);
+            final Intent callIntent = new Intent(Intent.ACTION_CALL);
+            String num  = null;
+            String name = null;
             switch(id){
                 case(R.id.fire):
-                    callIntent.setData(Uri.parse("tel: "+ selectedCountry.getFire()));
+                     num = selectedCountry.getFire();
+                    name = "Fire";
+                    callIntent.setData(Uri.parse("tel: "+ num));
                     break;
                 case(R.id.police):
-                    callIntent.setData(Uri.parse("tel:"+ selectedCountry.getPolice()));
+                    num = selectedCountry.getPolice();
+                    name = "Police";
+                    callIntent.setData(Uri.parse("tel:"+ num));
                     break;
                 case(R.id.medical):
-                    callIntent.setData(Uri.parse("tel:" + selectedCountry.getMedical()));
+                    name = "Medical";
+                    num = selectedCountry.getMedical();
+                    callIntent.setData(Uri.parse("tel:" + num));
                     break;
-               }
-            startActivity(callIntent);
+            }
+            if (prefs.getBoolean("pref_call_confirmation", true)) {
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                builder.setMessage("Call " + name + " (" + num +")?");
+
+                builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        startActivity(callIntent);
+                    }
+                });
+
+                builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+
+                    }
+                });
+
+                AlertDialog alert = builder.create();
+                alert.show();
+            }
+            else{
+                startActivity(callIntent);
+            }
         } else {
             request(Manifest.permission.CALL_PHONE);
             Toast.makeText(getApplicationContext(), "Please, allow call permission.\nIt's good for you!", Toast.LENGTH_SHORT).show();
