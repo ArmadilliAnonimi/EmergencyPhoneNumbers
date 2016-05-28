@@ -30,7 +30,7 @@ public class AboutDialog extends DialogFragment {
         AlertDialog.Builder dialog = new AlertDialog.Builder(getActivity());
         dialog.setTitle(R.string.about_dialog_title);
 
-        dialog.setNeutralButton(R.string.CLOSE, new DialogInterface.OnClickListener() {
+        dialog.setPositiveButton(R.string.CLOSE, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) { }
         });
 
@@ -42,5 +42,4 @@ public class AboutDialog extends DialogFragment {
         });
         return dialog.create();
     }
-
 }

@@ -66,13 +66,17 @@
     <string name="OK">OK</string>
     <string name="DISABLE">DEAKTIVIEREN</string>
 
-    <string name="faq"><b>Haftungsausschluss</b>\n
-        Diese App sollte niemals verwendet werden, wenn sie nicht auf Notfälle. Die Kosten für die Anrufe wird durch den Anrufer getragen und die Preise variieren. Nicht alle Zahlen sind frei. Diese Anwendung erleichtert nur die Suche nach den Notrufnummern mit Ihrem Standort. Die einwandfreie Funktion ist abhängig von der Netzabdeckung und Ihre Telefon Träger.\n\n
-        <b>Wie kann ich meine eigenen Kontakte hinzufügen?</b>\n
-        Im Notfall Register können Sie auf die Schaltfläche Hinzufügen in der unteren rechten drücken neuen Kontakt aus Ihrer Bibliothek hinzuzufügen. Drücken Sie auf sie einen Anruf zu starten.\n\n
-        <b>Wie kann ich das Land ändern?</b>\n
-        Tippen Sie auf den aktuellen Ländernamen oder Flagge in der Werkzeugleiste und wählen Sie ein anderes Land. Sie können auch wiederum auf die Funktion \"Verwende immer deine aktuelle Position\", so dass das ausgewählte Land immer das Land spiegelt sich in Sie sind.\n\n
-        <b>Ich habe einen Fehler und ich habe ein Feedback, was kann ich tun?</b>\n
-        Bitte kontaktieren Sie uns per E-Mail und sagen Sie uns alles, was Sie zu sagen haben. Wir hören immer!</string>
+    <string-array name="faq_titles">
+        <item>Haftungsausschluss</item>
+        <item>Wie kann ich meine eigenen Kontakte hinzufügen?</item>
+        <item>Wie kann ich das Land ändern?</item>
+        <item>Ich habe einen Fehler und ich habe ein Feedback, was kann ich tun?</item>
+    </string-array>
+    <string-array name="faq_contents">
+        <item>Diese App sollte niemals verwendet werden, wenn sie nicht auf Notfälle. Die Kosten für die Anrufe wird durch den Anrufer getragen und die Preise variieren. Nicht alle Zahlen sind frei. Diese Anwendung erleichtert nur die Suche nach den Notrufnummern mit Ihrem Standort. Die einwandfreie Funktion ist abhängig von der Netzabdeckung und Ihre Telefon Träger.</item>
+        <item>Im Notfall Register können Sie auf die Schaltfläche Hinzufügen in der unteren rechten drücken neuen Kontakt aus Ihrer Bibliothek hinzuzufügen. Drücken Sie auf sie einen Anruf zu starten.</item>
+        <item>Tippen Sie auf den aktuellen Ländernamen oder Flagge in der Werkzeugleiste und wählen Sie ein anderes Land. Sie können auch wiederum auf die Funktion \"Verwende immer deine aktuelle Position\", so dass das ausgewählte Land immer das Land spiegelt sich in Sie sind.</item>
+        <item>Bitte kontaktieren Sie uns per E-Mail und sagen Sie uns alles, was Sie zu sagen haben. Wir hören immer!</item>
+    </string-array>
 
 </resources>

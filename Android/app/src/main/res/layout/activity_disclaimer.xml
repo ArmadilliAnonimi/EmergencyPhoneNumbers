@@ -16,20 +16,27 @@
         app:popupTheme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         android:backgroundTint="@color/colorPrimarySettings"/>
 
-        <TextView
-            android:id="@+id/textView"
-            android:paddingTop="@dimen/disclaimer_message_padding_top"
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/disclaimer_toolbar">
+        <LinearLayout
+            android:id="@+id/faq_scroll"
             android:paddingBottom="@dimen/activity_vertical_margin"
             android:paddingLeft="@dimen/activity_horizontal_margin"
             android:paddingRight="@dimen/activity_horizontal_margin"
+            android:paddingTop="@dimen/faq_padding_top"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:text="@string/pref_disclaimer_message"
-            android:textColor="@color/colorEmergencyCardsText"
-            android:textSize="@dimen/disclaimer_message"
             android:layout_gravity="top"
-            android:layout_below="@+id/disclaimer_toolbar"
             android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"/>
+            android:layout_alignParentStart="true"
+            android:orientation="vertical">
+
+            <!-- Content added programmatically -->
+
+        </LinearLayout>
+    </ScrollView>
+
 
 </RelativeLayout>

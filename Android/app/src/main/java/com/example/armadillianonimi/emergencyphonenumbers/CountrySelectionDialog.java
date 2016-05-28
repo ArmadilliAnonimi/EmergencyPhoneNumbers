@@ -110,7 +110,7 @@ public class CountrySelectionDialog extends DialogFragment {
                     return v;
                 }
             };
-             dialog.setAdapter(adapter, selectItemListener);
+            dialog.setAdapter(adapter, selectItemListener);
 
 //            Test how to include images,
 //            dialog.setIcon(getResources().getIdentifier(mEntryValues[0].toString().toLowerCase(), "drawable", "com.example.armadillianonimi.emergencyphonenumbers"));

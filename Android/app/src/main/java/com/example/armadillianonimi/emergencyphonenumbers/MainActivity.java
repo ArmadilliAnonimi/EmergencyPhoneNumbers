@@ -421,4 +421,17 @@ public class MainActivity extends AppCompatActivity {
         System.out.println("### - MainActivity destroyed");
         System.out.println("APP IS QUIT");
     }
+
+    @Override
+    public void onSaveInstanceState(Bundle savedInstanceState) {
+
+        // Always call the superclass so it can save the view hierarchy state
+        super.onSaveInstanceState(savedInstanceState);
+    }
+
+    public void onRestoreInstanceState(Bundle savedInstanceState) {
+        // Always call the superclass so it can restore the view hierarchy
+        super.onRestoreInstanceState(savedInstanceState);
+
+    }
 }

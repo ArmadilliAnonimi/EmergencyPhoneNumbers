@@ -66,13 +66,17 @@
     <string name="OK">OK</string>
     <string name="DISABLE">DESACTIVAR</string>
 
-    <string name="faq"><b>Descargo de responsabilidad</b>\n
-        Esta aplicación nunca debe ser usado cuando no están relacionadas con situaciones de emergencia. El coste de las llamadas es soportado por la persona que llama y las tasas pueden variar. No todos los números son gratuitas. Esta aplicación sólo facilita la búsqueda de los números de emergencia con su ubicación. Su buen funcionamiento depende de la cobertura de red y el operador de telefonía.\n\n
-        <b>¿Cómo puedo añadir mis propios contactos?</b>\n
-        En la ficha de emergencia, puede pulsar en el botón Añadir en la parte inferior derecha para agregar nuevo contacto de la biblioteca. Pulse en él para iniciar una llamada.\n\n
-        <b>¿Cómo puedo cambiar el país?</b>\n
-        Toca el nombre del país actual o la bandera en la barra de herramientas y elegir otro país. También puede activar la función \"Utilizar siempre la ubicación actual\" para que el país seleccionado siempre refleja el país donde se encuentra.\n\n
-        <b>He encontrado un fallo y tengo algunos comentarios, ¿qué puedo hacer?</b>\n
-        Por favor, póngase en contacto con nosotros a través de correo electrónico y nos dicen todo lo que tiene que decir. Siempre estamos escuchando!</string>
+    <string-array name="faq_titles">
+        <item>Descargo de responsabilidad</item>
+        <item>¿Cómo puedo añadir mis propios contactos?</item>
+        <item>¿Cómo puedo cambiar el país?</item>
+        <item>He encontrado un fallo y tengo algunos comentarios, ¿qué puedo hacer?</item>
+    </string-array>
+    <string-array name="faq_contents">
+        <item>Esta aplicación nunca debe ser usado cuando no están relacionadas con situaciones de emergencia. El coste de las llamadas es soportado por la persona que llama y las tasas pueden variar. No todos los números son gratuitas. Esta aplicación sólo facilita la búsqueda de los números de emergencia con su ubicación. Su buen funcionamiento depende de la cobertura de red y el operador de telefonía.</item>
+        <item>En la ficha de emergencia, puede pulsar en el botón Añadir en la parte inferior derecha para agregar nuevo contacto de la biblioteca. Pulse en él para iniciar una llamada.</item>
+        <item>Toca el nombre del país actual o la bandera en la barra de herramientas y elegir otro país. También puede activar la función \"Utilizar siempre la ubicación actual\" para que el país seleccionado siempre refleja el país donde se encuentra.</item>
+        <item>Por favor, póngase en contacto con nosotros a través de correo electrónico y nos dicen todo lo que tiene que decir. Siempre estamos escuchando!</item>
+    </string-array>
 
 </resources>

@@ -66,13 +66,17 @@
     <string name="OK">OK</string>
     <string name="DISABLE">DÉACTIVER</string>
 
-    <string name="faq"><b>Avertissement</b>\n
-        Cette application ne devrait jamais être utilisé lorsque ne sont pas liées aux situations d\'urgence. Le coût des appels est pris en charge par l\'appelant et les tarifs peuvent varier. tous les numéros ne sont pas libres. Cette application ne facilite la recherche des numéros d\'urgence avec votre emplacement. Son bon fonctionnement dépend de la couverture du réseau et de votre opérateur de téléphonie.\n\n
-        <b>Comment puis\-je ajouter mes propres contacts?</b>\n
-        Dans l\'onglet d\'urgence, vous pouvez appuyer sur le bouton Ajouter en bas à droite pour ajouter un nouveau contact à partir de votre bibliothèque. Appuyez dessus pour lancer un appel.\n\n
-        <b>Comment puis\-je changer le pays?</b>\n
-        Appuyez sur le nom du pays en cours ou drapeau dans la barre d\'outils et choisissez un autre pays. Vous pouvez également activer la fonction "Toujours utiliser l\'emplacement actuel" pour que le pays sélectionné reflète toujours le pays où vous êtes.\n\n
-        <b>Je l\'ai trouvé un bug et j\'ai quelques commentaires, que puis-je faire?</b>\n
-        S\'il vous plaît nous contacter par email et nous dire tout ce que vous avez à dire. Nous sommes toujours à l\'écoute!</string>
+    <string-array name="faq_titles">
+        <item>Avertissement</item>
+        <item>Comment puis\-je ajouter mes propres contacts?</item>
+        <item>Comment puis\-je changer le pays?</item>
+        <item>J\'ai trouvé un bug et j\'ai quelques commentaires, que puis-je faire?</item>
+    </string-array>
+    <string-array name="faq_contents">
+        <item>Cette application ne devrait jamais être utilisé lorsque ne sont pas liées aux situations d\'urgence. Le coût des appels est pris en charge par l\'appelant et les tarifs peuvent varier. tous les numéros ne sont pas libres. Cette application ne facilite la recherche des numéros d\'urgence avec votre emplacement. Son bon fonctionnement dépend de la couverture du réseau et de votre opérateur de téléphonie.</item>
+        <item>Dans l\'onglet d\'urgence, vous pouvez appuyer sur le bouton Ajouter en bas à droite pour ajouter un nouveau contact à partir de votre bibliothèque. Appuyez dessus pour lancer un appel.</item>
+        <item>Appuyez sur le nom du pays en cours ou drapeau dans la barre d\'outils et choisissez un autre pays. Vous pouvez également activer la fonction "Toujours utiliser l\'emplacement actuel" pour que le pays sélectionné reflète toujours le pays où vous êtes.</item>
+        <item>S\'il vous plaît nous contacter par email et nous dire tout ce que vous avez à dire. Nous sommes toujours à l\'écoute!</item>
+    </string-array>
 
 </resources>
