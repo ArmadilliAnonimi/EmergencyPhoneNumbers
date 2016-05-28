@@ -78,29 +78,9 @@ public class EmergencyTab extends Fragment {
 
         if (elements2.size() > 0){
             for (Integer i : elements2.keySet()){
-                CardView c = new CardView(getContext());
                 LinearLayout l = (LinearLayout) view.findViewById(R.id.main);
-                c.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-                l.addView(c);
-                c.isFocusable();
-                c.isClickable();
-                c.setId(i);
-                CardView othercard = (CardView) view.findViewById(R.id.fire);
-                ViewGroup.MarginLayoutParams m = (ViewGroup.MarginLayoutParams) othercard.getLayoutParams();
-                c.setLayoutParams(m);
-                c.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        call2(v);
-                    }
-                });
+                createCard(elements2.get(i)[0],elements2.get(i)[1], false,i, l);
 
-                RelativeLayout r = new RelativeLayout(getContext());
-
-                TextView t = new TextView(getContext());
-                c.addView(r);
-                r.addView(t);
-                t.setText(elements2.get(i)[0]);
             }
         }
 
@@ -108,6 +88,9 @@ public class EmergencyTab extends Fragment {
         return view;
     }
 
+    private int inDP(int num){
+        return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, num, getResources().getDisplayMetrics());
+    }
     public Drawable getSelectedItemDrawable() {
         int[] attrs = new int[]{R.attr.selectableItemBackground};
         TypedArray ta = getActivity().obtainStyledAttributes(attrs);
@@ -116,14 +99,7 @@ public class EmergencyTab extends Fragment {
         return selectedItemDrawable;
     }
 
-    public void createCard(ArrayList<Contact> selectedContacts){
-        for (int i = 0; i < selectedContacts.size(); i++) {
-            String[] person = new String[2];
-            person[0] = selectedContacts.get(i).name;
-            person[1] = selectedContacts.get(i).phone;
-
-
-            LinearLayout l = (LinearLayout) getView().findViewById(R.id.main);
+    public void createCard(String name, String phone, boolean flag, int i,LinearLayout l){
 
             c = new CardView(getContext());
             FrameLayout.LayoutParams v = new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.WRAP_CONTENT);
@@ -134,22 +110,25 @@ public class EmergencyTab extends Fragment {
             c.isClickable();
             c.setForeground(getSelectedItemDrawable());
             c.setPadding(40,40,40,40);
-            if (!(elements2.containsKey(i))) {
-                elements2.put(i, person);
-                c.setId(i);
-            } else {
-                int n = person[1].hashCode();
-                elements2.put(n, person);
-                c.setId(n);
+            String[] person = new String[2];
+            person[0] = name;
+            person[1] = phone;
+            if (flag) {
+                if (!(elements2.containsKey(i))) {
+                    elements2.put(i, person);
+                    c.setId(i);
+                } else {
+                    int n = person[1].hashCode();
+                    elements2.put(n, person);
+                    c.setId(n);
+                }
             }
-            CardView othercard = (CardView) getActivity().findViewById(R.id.fire);
-            int ten = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, 10, getResources().getDisplayMetrics());
-            int five = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, 5, getResources().getDisplayMetrics());
-            int forty = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, 40, getResources().getDisplayMetrics());
-            int fifty = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, 50, getResources().getDisplayMetrics());
+            else {
+                c.setId(i);
+            }
             ViewGroup.MarginLayoutParams m =(ViewGroup.MarginLayoutParams) c.getLayoutParams();
-            m.setMargins(ten,five,ten,five);
-            c.setContentPadding(ten,ten,ten,ten);
+            m.setMargins(inDP(10),inDP(5),inDP(10),inDP(5));
+            c.setContentPadding(inDP(10),inDP(10),inDP(10),inDP(10));
             c.setLayoutParams(m);
             c.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -172,11 +151,11 @@ public class EmergencyTab extends Fragment {
             RelativeLayout.LayoutParams d = (RelativeLayout.LayoutParams) img.getLayoutParams();
             d.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
             d.addRule(RelativeLayout.CENTER_IN_PARENT, RelativeLayout.TRUE);
-            img.getLayoutParams().height = forty;
-            img.getLayoutParams().width = forty;
+            img.getLayoutParams().height = inDP(40);
+            img.getLayoutParams().width = inDP(40);
             img.setLayoutParams(d);
             ViewGroup.MarginLayoutParams ma =(ViewGroup.MarginLayoutParams) img.getLayoutParams();
-            ma.setMargins(0,0,ten,0);
+            ma.setMargins(0,0,inDP(10),0);
             img.setContentDescription("Phone icon");
             img.setColorFilter(Color.parseColor("#616161"));
             img.setLayoutParams(ma);
@@ -192,12 +171,12 @@ public class EmergencyTab extends Fragment {
             da.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
             da.addRule(RelativeLayout.CENTER_IN_PARENT, RelativeLayout.TRUE);
             number.setLayoutParams(da);
-            number.setText(selectedContacts.get(i).phone);
+            number.setText(phone);
             number.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
             number.setTextColor(Color.parseColor("#616161"));
-            number.setPadding(ten,ten,ten,ten);
+            number.setPadding(inDP(10),inDP(10),inDP(10),inDP(10));
             ViewGroup.MarginLayoutParams mar =(ViewGroup.MarginLayoutParams) number.getLayoutParams();
-            mar.setMargins(0,0,fifty,0);
+            mar.setMargins(0,0,inDP(50),0);
             number.setLayoutParams(mar);
 
 //            TextView othertext = (TextView) getActivity().findViewById(R.id.policenum);
@@ -206,25 +185,19 @@ public class EmergencyTab extends Fragment {
 
             TextView number2 = new TextView(getContext());
             r.addView(number2);
-            number2.setText(selectedContacts.get(i).name);
+            number2.setText(name);
             number2.setLayoutParams(new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
             RelativeLayout.LayoutParams das = (RelativeLayout.LayoutParams) number2.getLayoutParams();
             das.addRule(RelativeLayout.CENTER_VERTICAL, RelativeLayout.TRUE);
             number2.setLayoutParams(das);
             number2.setTextSize(TypedValue.COMPLEX_UNIT_SP, 35);
             number2.setTextColor(Color.parseColor("#616161"));
-            number2.setPadding(ten,ten,ten,ten);
+            number2.setPadding(inDP(10),inDP(10),inDP(10),inDP(10));
 //            TextView othertext2 = (TextView) getActivity().findViewById(R.id.pol);
 //            ViewGroup.MarginLayoutParams textparam2 = (ViewGroup.MarginLayoutParams) othertext2.getLayoutParams();
 //            number2.setLayoutParams(textparam2);
-
-
-
-
-
-
         }
-    }
+
 
 
     @Override
@@ -233,8 +206,11 @@ public class EmergencyTab extends Fragment {
 
         if (requestCode == CONTACT_PICK_REQUEST && resultCode == RESULT_CODE_OK) {
             final ArrayList<Contact> selectedContacts = data.getParcelableArrayListExtra("SelectedContacts");
-            createCard(selectedContacts);
+            for (int i = 0; i < selectedContacts.size(); i++) {
+                LinearLayout l = (LinearLayout) getView().findViewById(R.id.main);
+                createCard(selectedContacts.get(i).name,selectedContacts.get(i).phone, true,i, l);
 
+            }
         }
         System.out.println("EmergencyFragment: onActivityResult");
     }
