@@ -4,6 +4,11 @@ import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.content.res.TypedArray;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.ColorFilter;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -12,13 +17,16 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.CardView;
 import android.text.Layout;
+import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -100,6 +108,14 @@ public class EmergencyTab extends Fragment {
         return view;
     }
 
+    public Drawable getSelectedItemDrawable() {
+        int[] attrs = new int[]{R.attr.selectableItemBackground};
+        TypedArray ta = getActivity().obtainStyledAttributes(attrs);
+        Drawable selectedItemDrawable = ta.getDrawable(0);
+        ta.recycle();
+        return selectedItemDrawable;
+    }
+
     public void createCard(ArrayList<Contact> selectedContacts){
         for (int i = 0; i < selectedContacts.size(); i++) {
             String[] person = new String[2];
@@ -109,12 +125,15 @@ public class EmergencyTab extends Fragment {
 
             LinearLayout l = (LinearLayout) getView().findViewById(R.id.main);
 
-
             c = new CardView(getContext());
-            c.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+            FrameLayout.LayoutParams v = new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.WRAP_CONTENT);
+            v.gravity = Gravity.CENTER;
+            c.setLayoutParams(v);
             l.addView(c);
             c.isFocusable();
             c.isClickable();
+            c.setForeground(getSelectedItemDrawable());
+            c.setPadding(40,40,40,40);
             if (!(elements2.containsKey(i))) {
                 elements2.put(i, person);
                 c.setId(i);
@@ -123,9 +142,14 @@ public class EmergencyTab extends Fragment {
                 elements2.put(n, person);
                 c.setId(n);
             }
-
             CardView othercard = (CardView) getActivity().findViewById(R.id.fire);
-            ViewGroup.MarginLayoutParams m = (ViewGroup.MarginLayoutParams) othercard.getLayoutParams();
+            int ten = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, 10, getResources().getDisplayMetrics());
+            int five = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, 5, getResources().getDisplayMetrics());
+            int forty = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, 40, getResources().getDisplayMetrics());
+            int fifty = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, 50, getResources().getDisplayMetrics());
+            ViewGroup.MarginLayoutParams m =(ViewGroup.MarginLayoutParams) c.getLayoutParams();
+            m.setMargins(ten,five,ten,five);
+            c.setContentPadding(ten,ten,ten,ten);
             c.setLayoutParams(m);
             c.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -135,14 +159,70 @@ public class EmergencyTab extends Fragment {
                 }
             });
 
+
             RelativeLayout r = new RelativeLayout(getContext());
-
-            TextView t = new TextView(getContext());
-
-
+            r.setLayoutParams(new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT,
+                    RelativeLayout.LayoutParams.MATCH_PARENT));
             c.addView(r);
-            r.addView(t);
-            t.setText(selectedContacts.get(i).name);
+
+
+            ImageView img = new ImageView(getContext());
+            r.addView(img);
+            img.setImageDrawable(ContextCompat.getDrawable(getContext(),R.drawable.phone_icon));
+            RelativeLayout.LayoutParams d = (RelativeLayout.LayoutParams) img.getLayoutParams();
+            d.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+            d.addRule(RelativeLayout.CENTER_IN_PARENT, RelativeLayout.TRUE);
+            img.getLayoutParams().height = forty;
+            img.getLayoutParams().width = forty;
+            img.setLayoutParams(d);
+            ViewGroup.MarginLayoutParams ma =(ViewGroup.MarginLayoutParams) img.getLayoutParams();
+            ma.setMargins(0,0,ten,0);
+            img.setContentDescription("Phone icon");
+            img.setColorFilter(Color.parseColor("#616161"));
+            img.setLayoutParams(ma);
+//            ImageView otherimg = (ImageView) getActivity().findViewById(R.id.img);
+//            ViewGroup.MarginLayoutParams imgpar = (ViewGroup.MarginLayoutParams) otherimg.getLayoutParams();
+//            img.setLayoutParams(imgpar);
+
+
+            TextView number = new TextView(getContext());
+            r.addView(number);
+            number.setLayoutParams(new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+            RelativeLayout.LayoutParams da = (RelativeLayout.LayoutParams) number.getLayoutParams();
+            da.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+            da.addRule(RelativeLayout.CENTER_IN_PARENT, RelativeLayout.TRUE);
+            number.setLayoutParams(da);
+            number.setText(selectedContacts.get(i).phone);
+            number.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
+            number.setTextColor(Color.parseColor("#616161"));
+            number.setPadding(ten,ten,ten,ten);
+            ViewGroup.MarginLayoutParams mar =(ViewGroup.MarginLayoutParams) number.getLayoutParams();
+            mar.setMargins(0,0,fifty,0);
+            number.setLayoutParams(mar);
+
+//            TextView othertext = (TextView) getActivity().findViewById(R.id.policenum);
+//            ViewGroup.MarginLayoutParams textparam = (ViewGroup.MarginLayoutParams) othertext.getLayoutParams();
+//            number.setLayoutParams(textparam);
+
+            TextView number2 = new TextView(getContext());
+            r.addView(number2);
+            number2.setText(selectedContacts.get(i).name);
+            number2.setLayoutParams(new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+            RelativeLayout.LayoutParams das = (RelativeLayout.LayoutParams) number2.getLayoutParams();
+            das.addRule(RelativeLayout.CENTER_VERTICAL, RelativeLayout.TRUE);
+            number2.setLayoutParams(das);
+            number2.setTextSize(TypedValue.COMPLEX_UNIT_SP, 35);
+            number2.setTextColor(Color.parseColor("#616161"));
+            number2.setPadding(ten,ten,ten,ten);
+//            TextView othertext2 = (TextView) getActivity().findViewById(R.id.pol);
+//            ViewGroup.MarginLayoutParams textparam2 = (ViewGroup.MarginLayoutParams) othertext2.getLayoutParams();
+//            number2.setLayoutParams(textparam2);
+
+
+
+
+
+
         }
     }
 

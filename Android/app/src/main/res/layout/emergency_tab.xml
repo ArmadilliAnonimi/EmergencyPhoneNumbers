@@ -41,7 +41,8 @@
 
                     <!--Phone icon-->
                     <ImageView
-                        android:layout_width="40sp"
+                        android:id="@+id/img"
+                        android:layout_width="40dp"
                         android:layout_height="40dp"
                         android:src="@drawable/phone_icon"
                         android:contentDescription="@string/phone_icon"
@@ -59,11 +60,11 @@
                         android:textColor="@color/colorEmergencyCardsText"
                         android:layout_centerInParent="true"
                         android:padding="10dp"
-                        android:layout_marginLeft="0sp"
                         android:layout_alignParentRight="true"
                         android:layout_marginRight="50dp" />
 
                     <TextView
+                        android:id="@+id/pol"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
@@ -100,7 +101,7 @@
 
                     <!--Phone icon-->
                     <ImageView
-                        android:layout_width="40sp"
+                        android:layout_width="40dp"
                         android:layout_height="40dp"
                         android:src="@drawable/phone_icon"
                         android:contentDescription="@string/phone_icon"
@@ -159,7 +160,7 @@
 
                     <!--Phone icon-->
                     <ImageView
-                        android:layout_width="40sp"
+                        android:layout_width="40dp"
                         android:layout_height="40dp"
                         android:src="@drawable/phone_icon"
                         android:contentDescription="@string/phone_icon"
