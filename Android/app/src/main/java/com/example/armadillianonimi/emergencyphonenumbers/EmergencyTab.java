@@ -34,6 +34,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Random;
 
 /**
@@ -50,7 +51,7 @@ public class EmergencyTab extends Fragment {
     private TextView medicalTextView;
     private FloatingActionButton addContactButton;
     //private ArrayList<String[]> elements = new ArrayList<>();
-    private HashMap<Integer,String[]> elements2 = new HashMap<>();
+    private LinkedHashMap<Integer,String[]> elements2 = new LinkedHashMap<>();
     private CardView c;
     private final int CONTACT_PICK_REQUEST = 1000;
     private final int RESULT_CODE_OK = -1;
@@ -100,7 +101,7 @@ public class EmergencyTab extends Fragment {
     }
 
     public void createCard(String name, String phone, boolean flag, int i,LinearLayout l){
-            if (!(elements2.containsKey(phone.hashCode())) ) {
+
                 c = new CardView(getContext());
                 FrameLayout.LayoutParams v = new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.WRAP_CONTENT);
                 v.gravity = Gravity.CENTER;
@@ -190,7 +191,7 @@ public class EmergencyTab extends Fragment {
 //            TextView othertext2 = (TextView) getActivity().findViewById(R.id.pol);
 //            ViewGroup.MarginLayoutParams textparam2 = (ViewGroup.MarginLayoutParams) othertext2.getLayoutParams();
 //            number2.setLayoutParams(textparam2);
-            }
+
         }
 
 
@@ -203,8 +204,9 @@ public class EmergencyTab extends Fragment {
             final ArrayList<Contact> selectedContacts = data.getParcelableArrayListExtra("SelectedContacts");
             for (int i = 0; i < selectedContacts.size(); i++) {
                 LinearLayout l = (LinearLayout) getView().findViewById(R.id.main);
-                createCard(selectedContacts.get(i).name,selectedContacts.get(i).phone, true,i, l);
-
+                if (!(elements2.containsKey(selectedContacts.get(i).phone.hashCode()))) {
+                    createCard(selectedContacts.get(i).name, selectedContacts.get(i).phone, true, i, l);
+                }
             }
         }
         System.out.println("EmergencyFragment: onActivityResult");
