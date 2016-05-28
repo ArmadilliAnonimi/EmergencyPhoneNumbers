@@ -79,4 +79,13 @@
         <item>Bitte kontaktieren Sie uns per E-Mail und sagen Sie uns alles, was Sie zu sagen haben. Wir hören immer!</item>
     </string-array>
 
+    <string name="welcome">Willkommen!</string>
+    <string name="thanks">Vielen Dank dieser App zum Download bereit</string>
+    <string name="call_title">Drücke einen Knopf</string>
+    <string name="call_description">einen Anruf im Notfall zu starten.</string>
+    <string name="country_title">Land wählen</string>
+    <string name="country_description">indem Sie auf den Namen des Landes zu drücken.</string>
+    <string name="map_title">Ihre Position</string>
+    <string name="map_description">wird auf der Karte angezeigt.</string>
+
 </resources>

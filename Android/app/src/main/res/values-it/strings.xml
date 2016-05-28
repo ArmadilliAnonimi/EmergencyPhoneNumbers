@@ -79,4 +79,13 @@
         <item>Ti preghiamo di contattarci via e-mail e dirci tutto quello che hai da dire. Siamo sempre in ascolto!</item>
     </string-array>
 
+    <string name="welcome">Welcome!</string>
+    <string name="thanks">Thank you for downloading this app.</string>
+    <string name="call_title">Press a button</string>
+    <string name="call_description">to start a call in case of emergency.</string>
+    <string name="country_title">Change country</string>
+    <string name="country_description">by pressing on the country name.</string>
+    <string name="map_title">Your position</string>
+    <string name="map_description">is displayed on the map.</string>
+
 </resources>
