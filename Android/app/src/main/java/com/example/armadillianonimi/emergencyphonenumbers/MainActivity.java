@@ -11,6 +11,7 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.Context;
 
+import android.os.Build;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.view.ViewPager;
@@ -24,6 +25,7 @@ import android.support.v7.widget.Toolbar;
 import android.os.Bundle;
 import android.view.Window;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -198,34 +200,25 @@ public class MainActivity extends AppCompatActivity {
 
     public void selectAppBarColour(int position) {
         switch (position) {
-            case 0:
-                int emergencyColour = getResources().getColor(R.color.colorPrimary);
-                int emergencyColourDark = getResources().getColor(R.color.colorPrimaryDark);
-                toolbar.setBackgroundColor(emergencyColour);
-                tabs.setBackgroundColor(emergencyColour);
-                findViewById(R.id.appbar).setBackgroundColor(emergencyColour);
-                Window emergencyWindow = getWindow();
-                emergencyWindow.setStatusBarColor(emergencyColourDark);
-                break;
-            case 1:
-                int locationColour = getResources().getColor(R.color.colorPrimaryLocation);
-                int locationColourDark = getResources().getColor(R.color.colorPrimaryLocationDark);
-                toolbar.setBackgroundColor(locationColour);
-                tabs.setBackgroundColor(locationColour);
-                findViewById(R.id.appbar).setBackgroundColor(locationColour);
-                Window locationWindow = getWindow();
-                locationWindow.setStatusBarColor(locationColourDark);
-                break;
-            case 2:
-                int settingsColour = getResources().getColor(R.color.colorPrimarySettings);
-                int settingsColourDark = getResources().getColor(R.color.colorPrimarySettingsDark);
-                toolbar.setBackgroundColor(settingsColour);
-                tabs.setBackgroundColor(settingsColour);
-                findViewById(R.id.appbar).setBackgroundColor(settingsColour);
-                Window settingsWindow = getWindow();
-                settingsWindow.setStatusBarColor(settingsColourDark);
-                break;
+            case 0: setColorsForTab(getResources().getColor(R.color.colorPrimary),
+                        getResources().getColor(R.color.colorPrimaryDark)); break;
+            case 1: setColorsForTab(getResources().getColor(R.color.colorPrimaryLocation),
+                        getResources().getColor(R.color.colorPrimaryLocationDark)); break;
+            case 2: setColorsForTab(getResources().getColor(R.color.colorPrimarySettings),
+                        getResources().getColor(R.color.colorPrimarySettingsDark)); break;
         }
+    }
+    private void setColorsForTab(int primaryColour, int primaryColourDark) {
+        // if version is above API 21 -> can change status bar colour
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            Window window = getWindow();
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            window.setStatusBarColor(primaryColourDark);
+        }
+        // change appbar, toolbar and tabs colour
+        toolbar.setBackgroundColor(primaryColour);
+        tabs.setBackgroundColor(primaryColour);
+        findViewById(R.id.appbar).setBackgroundColor(primaryColour);
     }
 
     public void setupLocationButton() {

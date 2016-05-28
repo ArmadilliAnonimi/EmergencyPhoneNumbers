@@ -1,11 +1,13 @@
 package com.example.armadillianonimi.emergencyphonenumbers;
 
 import android.graphics.Typeface;
+import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Window;
+import android.view.WindowManager;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -21,8 +23,11 @@ public class DisclaimerActivity extends AppCompatActivity {
         disclaimerToolbar.setTitle("FAQ");
         setSupportActionBar(disclaimerToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        Window window = getWindow();
-        window.setStatusBarColor(getResources().getColor(R.color.colorPrimarySettingsDark));
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            Window window = getWindow();
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            window.setStatusBarColor(getResources().getColor(R.color.colorPrimarySettingsDark));
+        }
 
         disclaimerToolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
