@@ -80,13 +80,13 @@
         <item>Please contact us via email and tell us everything you have to say. We are always listening!</item>
     </string-array>
 
-    <string name="welcome">Welcome to Emergency Phone Numbers!</string>
+    <string name="welcome">Welcome!</string>
     <string name="thanks">Thank you for downloading this app.</string>
-    <string name="call_title">To make a call&#8230;</string>
-    <string name="call_description">&#8230; just click on the buttons!</string>
-    <string name="country_title">To change country&#8230;</string>
-    <string name="country_description">&#8230; just click on the flag or the name of the country!</string>
-    <string name="map_title">You can see where you are.</string>
-    <string name="map_description">Awesome!</string>
+    <string name="call_title">Press a button</string>
+    <string name="call_description">to start a call in case of emergency.</string>
+    <string name="country_title">Change country</string>
+    <string name="country_description">by pressing on the country name.</string>
+    <string name="map_title">Your position</string>
+    <string name="map_description">is displayed on the map.</string>
 
 </resources>

@@ -23,19 +23,33 @@ public class IntroActivity extends OnboarderActivity {
         OnboarderPage onboarderPage3 = new OnboarderPage(R.string.country_title, R.string.country_description, R.drawable.country);
         OnboarderPage onboarderPage4 = new OnboarderPage(R.string.map_title, R.string.map_description, R.drawable.map);
 
-        // Background colors
-        onboarderPage1.setTitleColor(R.color.colorPrimarySettings);
-        onboarderPage1.setDescriptionColor(R.color.colorPrimarySettings);
-        onboarderPage1.setBackgroundColor(R.color.white);
+        // Onboarder 1: settings
+        onboarderPage1.setTitleColor(R.color.white);
+        onboarderPage1.setDescriptionColor(R.color.white);
+        onboarderPage1.setBackgroundColor(R.color.colorPrimarySettings);
+        onboarderPage1.setTitleTextSize(30);
+        onboarderPage1.setDescriptionTextSize(19);
+
+        // Onboarder 2: settings
         onboarderPage2.setTitleColor(R.color.white);
         onboarderPage2.setDescriptionColor(R.color.white);
-        onboarderPage2.setBackgroundColor(R.color.colorPrimary);
-        onboarderPage3.setTitleColor(R.color.colorPrimarySettings);
-        onboarderPage3.setDescriptionColor(R.color.colorPrimarySettings);
-        onboarderPage3.setBackgroundColor(R.color.white);
+        onboarderPage2.setBackgroundColor(R.color.colorPrimarySettings);
+        onboarderPage2.setTitleTextSize(30);
+        onboarderPage2.setDescriptionTextSize(19);
+
+        // Onboarder 3: settings
+        onboarderPage3.setTitleColor(R.color.white);
+        onboarderPage3.setDescriptionColor(R.color.white);
+        onboarderPage3.setBackgroundColor(R.color.colorPrimarySettings);
+        onboarderPage3.setTitleTextSize(30);
+        onboarderPage3.setDescriptionTextSize(19);
+
+        // Onboarder 4: settings
         onboarderPage4.setTitleColor(R.color.white);
         onboarderPage4.setDescriptionColor(R.color.white);
-        onboarderPage4.setBackgroundColor(R.color.colorPrimary);
+        onboarderPage4.setBackgroundColor(R.color.colorPrimarySettings);
+        onboarderPage4.setTitleTextSize(30);
+        onboarderPage4.setDescriptionTextSize(19);
 
 
 
@@ -47,6 +61,7 @@ public class IntroActivity extends OnboarderActivity {
 
 
         setOnboardPagesReady(onboarderPages);
+
 
     }
 
