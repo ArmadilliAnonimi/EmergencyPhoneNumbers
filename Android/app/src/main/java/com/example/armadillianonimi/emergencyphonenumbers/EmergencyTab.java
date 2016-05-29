@@ -24,6 +24,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.preference.PreferenceManager;
 import android.support.v7.widget.CardView;
 import android.text.Layout;
+import android.text.TextUtils;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -107,13 +108,13 @@ public class EmergencyTab extends Fragment {
         CardView contactCard = new CardView(getContext());
         FrameLayout.LayoutParams layoutParams = new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT,
                 FrameLayout.LayoutParams.WRAP_CONTENT);
+        contactCard.setRadius(inDP(2));
         layoutParams.gravity = Gravity.CENTER;
         contactCard.setLayoutParams(layoutParams);
         layout.addView(contactCard);
         contactCard.isClickable();
         contactCard.isFocusable();
         contactCard.setForeground(getSelectedItemDrawable());
-        contactCard.setPadding(40, 40, 40, 40);
         ViewGroup.MarginLayoutParams marginLayoutParams = (ViewGroup.MarginLayoutParams) contactCard.getLayoutParams();
         marginLayoutParams.setMargins(inDP(10), inDP(5), inDP(10), inDP(5));
         contactCard.setContentPadding(inDP(10), inDP(10), inDP(10), inDP(10));
@@ -138,14 +139,16 @@ public class EmergencyTab extends Fragment {
         RelativeLayout.LayoutParams d = (RelativeLayout.LayoutParams) img.getLayoutParams();
         d.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
         d.addRule(RelativeLayout.CENTER_IN_PARENT, RelativeLayout.TRUE);
-        img.getLayoutParams().height = inDP(50);
-        img.getLayoutParams().width = inDP(50);
+        img.getLayoutParams().height = inDP(40);
+        img.getLayoutParams().width = inDP(40);
         img.setLayoutParams(d);
         ViewGroup.MarginLayoutParams ma = (ViewGroup.MarginLayoutParams) img.getLayoutParams();
         ma.setMargins(inDP(10), 0, inDP(10), 0);
         img.setContentDescription("Phone icon");
         img.setColorFilter(Color.parseColor("#616161"));
         img.setLayoutParams(ma);
+
+
 
         TextView contactName = new TextView(getContext());
         relativeLayout.addView(contactName);
@@ -162,10 +165,16 @@ public class EmergencyTab extends Fragment {
         mar.setMargins(0, 0, inDP(50), 0);
         contactName.setLayoutParams(mar);
 
+
         TextView contactPhone = new TextView(getContext());
         relativeLayout.addView(contactPhone);
-        contactPhone.setText(contact.name);
-        contactPhone.setLayoutParams(new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+        String name = contact.name;
+        if (name.length() > 6) {
+            name = name.substring(0, 6)+ "...";
+        }
+        contactPhone.setText(name);
+        RelativeLayout.LayoutParams rel = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        contactPhone.setLayoutParams(rel);
         RelativeLayout.LayoutParams das = (RelativeLayout.LayoutParams) contactPhone.getLayoutParams();
         das.addRule(RelativeLayout.CENTER_VERTICAL, RelativeLayout.TRUE);
         contactPhone.setLayoutParams(das);

@@ -36,11 +36,6 @@ public class ContactsListAdapter extends BaseAdapter {
 
     public void setSelectedContactsList(HashMap<String, Contact> alreadyAddedContacts) {
         selectedContactsList = alreadyAddedContacts;
-        System.out.println("######## Added list of already added contacts:");
-        for (Contact c : selectedContactsList.values()) {
-            System.out.println("---: "+c.name+" = "+c.id);
-        }
-        System.out.println("%%%%%%%%%%%% Selected: "+selectedContactsList.size());
     }
 
     public void filter(String filterContactName){
