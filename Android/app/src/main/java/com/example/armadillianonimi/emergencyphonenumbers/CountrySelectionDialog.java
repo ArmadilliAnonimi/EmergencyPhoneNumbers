@@ -7,7 +7,10 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
+import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.RectF;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.DrawableRes;
@@ -17,6 +20,7 @@ import android.support.v7.preference.PreferenceManager;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.TextView;
 
@@ -87,11 +91,18 @@ public class CountrySelectionDialog extends DialogFragment {
                     Bitmap bitmap = ((BitmapDrawable) d).getBitmap();
                     int dp50 = (int) (50 * getResources().getDisplayMetrics().density + 0.5f);
                     int dp37 = (int) (37.5 * getResources().getDisplayMetrics().density + 0.5f);
-                    Drawable d_resized = new BitmapDrawable(getResources(), Bitmap.createScaledBitmap(bitmap, dp50, dp37, true));
                     Drawable dti = getResources().getDrawable(R.drawable.selected);
                     Bitmap bitmap2 = ((BitmapDrawable) dti).getBitmap();
                     Drawable dChecked = new BitmapDrawable(getResources(), Bitmap.createScaledBitmap(bitmap2, dp37, dp37, true));
                     dChecked.setTint(getResources().getColor(R.color.colorEmergencyCardsText));
+                    Bitmap mutableBitmap = bitmap.copy(Bitmap.Config.ARGB_8888, true);
+                    int borderSize = 10;
+                    Bitmap bmpWithBorder = Bitmap.createBitmap(mutableBitmap.getWidth() + borderSize * 2, mutableBitmap.getHeight() + borderSize * 2, mutableBitmap.getConfig());
+                    Canvas canvas = new Canvas(bmpWithBorder);
+                    canvas.drawColor(R.color.colorEmergencyCardsText);
+                    canvas.drawBitmap(mutableBitmap, borderSize, borderSize, null);
+                    Drawable d_resized = new BitmapDrawable(getResources(), Bitmap.createScaledBitmap(bmpWithBorder, dp50, dp37, true));
+
 
 
                     if (currItem.isItemSelected) {
