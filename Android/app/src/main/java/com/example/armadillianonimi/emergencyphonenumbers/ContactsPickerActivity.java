@@ -15,10 +15,15 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import java.util.HashMap;
+
 public class ContactsPickerActivity extends AppCompatActivity {
+
+    public static String SELECTED = "selected";
 
     ListView contactsChooser;
     Button btnDone;
+    Button btnCancel;
     EditText txtFilter;
     TextView txtLoadInfo;
     ContactsListAdapter contactsListAdapter;
@@ -31,18 +36,19 @@ public class ContactsPickerActivity extends AppCompatActivity {
 
         contactsChooser = (ListView) findViewById(R.id.lst_contacts_chooser);
         btnDone = (Button) findViewById(R.id.btn_done);
+        btnCancel = (Button) findViewById(R.id.btn_cancel);
         txtFilter = (EditText) findViewById(R.id.txt_filter);
         txtLoadInfo = (TextView) findViewById(R.id.txt_load_progress);
 
-
-        contactsListAdapter = new ContactsListAdapter(this,new ContactsList());
+        contactsListAdapter = new ContactsListAdapter(this, new ContactsList());
 
         contactsChooser.setAdapter(contactsListAdapter);
 
-
         loadContacts("");
 
-
+        Bundle extras = getIntent().getExtras();
+        final HashMap<String, Contact> alreadyAdded = (HashMap<String, Contact>) extras.get(EmergencyTab.ALREADY_ADDED);
+        contactsListAdapter.setSelectedContactsList(alreadyAdded);
 
         txtFilter.addTextChangedListener(new TextWatcher() {
             @Override
@@ -66,20 +72,19 @@ public class ContactsPickerActivity extends AppCompatActivity {
         btnDone.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                if(contactsListAdapter.selectedContactsList.contactArrayList.isEmpty()){
-                    setResult(RESULT_CANCELED);
-                }
-                else{
-
-                    Intent resultIntent = new Intent();
-
-                    resultIntent.putParcelableArrayListExtra("SelectedContacts", contactsListAdapter.selectedContactsList.contactArrayList);
-                    setResult(RESULT_OK,resultIntent);
-
-                }
+                Intent resultIntent = new Intent();
+                resultIntent.putExtra(ContactsPickerActivity.SELECTED, contactsListAdapter.selectedContactsList);
+                setResult(RESULT_OK, resultIntent);
                 finish();
+            }
+        });
 
+        btnCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent resultIntent = new Intent();
+                setResult(RESULT_CANCELED, resultIntent);
+                finish();
             }
         });
     }
@@ -88,21 +93,22 @@ public class ContactsPickerActivity extends AppCompatActivity {
 
     private void loadContacts(String filter){
 
-        if(contactsLoader!=null && contactsLoader.getStatus()!= AsyncTask.Status.FINISHED){
-            try{
+        if (contactsLoader!=null && contactsLoader.getStatus()!= AsyncTask.Status.FINISHED) {
+            try {
                 contactsLoader.cancel(true);
-            }catch (Exception e){
-
+            } catch (Exception e){
+                e.printStackTrace();
             }
         }
-        if(filter==null) filter="";
 
-        try{
+        if (filter==null) filter="";
+
+        try {
             //Running AsyncLoader with adapter and  filter
             contactsLoader = new ContactsLoader(this,contactsListAdapter);
             contactsLoader.txtProgress = txtLoadInfo;
             contactsLoader.execute(filter);
-        }catch(Exception e){
+        } catch(Exception e){
             e.printStackTrace();
         }
     }

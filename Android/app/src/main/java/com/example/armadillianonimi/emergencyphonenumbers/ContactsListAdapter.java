@@ -5,8 +5,6 @@ package com.example.armadillianonimi.emergencyphonenumbers;
  */
 import android.app.Activity;
 import android.content.Context;
-import android.database.DataSetObservable;
-import android.database.DataSetObserver;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,12 +14,14 @@ import android.widget.CompoundButton;
 
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 
 public class ContactsListAdapter extends BaseAdapter {
 
     Context context;
-    ContactsList contactsList,filteredContactsList,selectedContactsList;
+    ContactsList contactsList,filteredContactsList;
+    HashMap<String, Contact> selectedContactsList;
     String filterContactName;
 
     ContactsListAdapter(Context context, ContactsList contactsList){
@@ -29,18 +29,25 @@ public class ContactsListAdapter extends BaseAdapter {
         super();
         this.context = context;
         this.contactsList = contactsList;
-        this.filteredContactsList=new ContactsList();
-        this.selectedContactsList = new ContactsList();
+        this.filteredContactsList = new ContactsList();
+        this.selectedContactsList = new HashMap<>();
         this.filterContactName = "";
+    }
+
+    public void setSelectedContactsList(HashMap<String, Contact> alreadyAddedContacts) {
+        selectedContactsList = alreadyAddedContacts;
+        System.out.println("######## Added list of already added contacts:");
+        for (Contact c : selectedContactsList.values()) {
+            System.out.println("---: "+c.name+" = "+c.id);
+        }
+        System.out.println("%%%%%%%%%%%% Selected: "+selectedContactsList.size());
     }
 
     public void filter(String filterContactName){
 
-
-
         filteredContactsList.contactArrayList.clear();
 
-        if(filterContactName.isEmpty() || filterContactName.length()<1){
+        if (filterContactName.isEmpty() || filterContactName.length()<1){
             filteredContactsList.contactArrayList.addAll(contactsList.contactArrayList);
             this.filterContactName = "";
 
@@ -60,7 +67,6 @@ public class ContactsListAdapter extends BaseAdapter {
     public void addContacts(ArrayList<Contact> contacts){
         this.contactsList.contactArrayList.addAll(contacts);
         this.filter(this.filterContactName);
-
     }
 
     @Override
@@ -92,7 +98,7 @@ public class ContactsListAdapter extends BaseAdapter {
             viewHolder.chkContact = (CheckBox) convertView.findViewById(R.id.chk_contact);
             convertView.setTag(viewHolder);
 
-        }else {
+        } else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
 
@@ -106,10 +112,14 @@ public class ContactsListAdapter extends BaseAdapter {
                 Contact contact = filteredContactsList.getContact(buttonView.getId());
 
                 if(contact!=null && isChecked && !alreadySelected(contact)){
-                    selectedContactsList.addContact(contact);
+                    selectedContactsList.put(contact.id, contact);
+                    System.out.println("======+ Added: "+contact.name+" --- id "+contact.id);
+                    System.out.println("\t\t\t Selected: "+selectedContactsList.size());
                 }
                 else if(contact!=null && !isChecked){
-                    selectedContactsList.removeContact(contact);
+                    selectedContactsList.remove(contact.id);
+                    System.out.println("======x Removed: "+contact.name+" --- id "+contact.id);
+                    System.out.println("\t\t\t Selected: "+selectedContactsList.size());
                 }
             }
         });
@@ -117,15 +127,11 @@ public class ContactsListAdapter extends BaseAdapter {
         return convertView;
     }
 
-    public boolean alreadySelected(Contact contact)
-    {
-        if(this.selectedContactsList.getContact(Integer.parseInt(contact.id))!=null)
-            return true;
-
-        return false;
+    public boolean alreadySelected(Contact contact) {
+        return (this.selectedContactsList.containsKey(contact.id));
     }
 
-    public static class ViewHolder{
+    public static class ViewHolder {
 
         CheckBox chkContact;
     }

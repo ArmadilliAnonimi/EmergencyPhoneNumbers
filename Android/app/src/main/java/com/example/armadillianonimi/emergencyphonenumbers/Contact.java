@@ -40,7 +40,7 @@ public class Contact implements Parcelable {
     @Override
     public String toString()
     {
-        return name+" | "+label+" : "+phone;
+        return name+" | "+label+" : "+phone+" --- id "+id;
     }
 
     @Override

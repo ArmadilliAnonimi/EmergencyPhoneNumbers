@@ -46,6 +46,8 @@ import java.util.Random;
  */
 public class EmergencyTab extends Fragment {
 
+    public static String ALREADY_ADDED = "contacts";
+
     public String fireNumber;
     public String policeNumber;
     public String medicalNumber;
@@ -54,9 +56,7 @@ public class EmergencyTab extends Fragment {
     private TextView policeTextView;
     private TextView medicalTextView;
     private FloatingActionButton addContactButton;
-    //private ArrayList<String[]> elements = new ArrayList<>();
-    private LinkedHashMap<Integer,String[]> elements2 = new LinkedHashMap<>();
-    private CardView c;
+    private HashMap<String, Contact> addedContacts = new HashMap<>();
     private final int CONTACT_PICK_REQUEST = 1000;
     private final int RESULT_CODE_OK = -1;
     private static final int PERMISSION_REQUEST_CODE = 1;
@@ -81,11 +81,10 @@ public class EmergencyTab extends Fragment {
         addContactButton = (FloatingActionButton)view.findViewById(R.id.btn);
         setupAddContactButton();
 
-        if (elements2.size() > 0){
-            for (Integer i : elements2.keySet()){
-                LinearLayout l = (LinearLayout) view.findViewById(R.id.main);
-                createCard(elements2.get(i)[0],elements2.get(i)[1], false,i, l);
-
+        LinearLayout l = (LinearLayout) view.findViewById(R.id.main);
+        if (!(addedContacts.isEmpty())) {
+            for (Contact c : addedContacts.values()) {
+                addContactCard(c, l);
             }
         }
 
@@ -104,127 +103,121 @@ public class EmergencyTab extends Fragment {
         return selectedItemDrawable;
     }
 
-    public void createCard(String name, String phone, boolean flag, int i,LinearLayout l){
-                c = new CardView(getContext());
-                FrameLayout.LayoutParams v = new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT,
-                        FrameLayout.LayoutParams.WRAP_CONTENT);
-                v.gravity = Gravity.CENTER;
-                c.setLayoutParams(v);
-                l.addView(c);
-                c.isFocusable();
-                c.isClickable();
-                c.setForeground(getSelectedItemDrawable());
-                c.setPadding(40, 40, 40, 40);
-                String[] person = new String[2];
-                person[0] = name;
-                person[1] = phone;
-                if (flag) {
-                        int n = person[1].hashCode();
-                        elements2.put(n, person);
-                        c.setId(n);
-                } else {
-                    c.setId(i);
-                }
-                ViewGroup.MarginLayoutParams m = (ViewGroup.MarginLayoutParams) c.getLayoutParams();
-                m.setMargins(inDP(10), inDP(5), inDP(10), inDP(5));
-                c.setContentPadding(inDP(10), inDP(10), inDP(10), inDP(10));
-                c.setLayoutParams(m);
-                c.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        call2(v);
+    private void addContactCard(Contact contact, LinearLayout layout) {
+        CardView contactCard = new CardView(getContext());
+        FrameLayout.LayoutParams layoutParams = new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT,
+                FrameLayout.LayoutParams.WRAP_CONTENT);
+        layoutParams.gravity = Gravity.CENTER;
+        contactCard.setLayoutParams(layoutParams);
+        layout.addView(contactCard);
+        contactCard.isClickable();
+        contactCard.isFocusable();
+        contactCard.setForeground(getSelectedItemDrawable());
+        contactCard.setPadding(40, 40, 40, 40);
+        ViewGroup.MarginLayoutParams marginLayoutParams = (ViewGroup.MarginLayoutParams) contactCard.getLayoutParams();
+        marginLayoutParams.setMargins(inDP(10), inDP(5), inDP(10), inDP(5));
+        contactCard.setContentPadding(inDP(10), inDP(10), inDP(10), inDP(10));
+        contactCard.setLayoutParams(marginLayoutParams);
+        contactCard.setId(Integer.parseInt(contact.id));
+        contactCard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Call the clicked contact
+                callContact(v);
+            }
+        });
 
-                    }
-                });
+        RelativeLayout relativeLayout = new RelativeLayout(getContext());
+        relativeLayout.setLayoutParams(new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT,
+                RelativeLayout.LayoutParams.MATCH_PARENT));
+        contactCard.addView(relativeLayout);
 
+        ImageView img = new ImageView(getContext());
+        relativeLayout.addView(img);
+        img.setImageDrawable(ContextCompat.getDrawable(getContext(), R.drawable.phone_icon));
+        RelativeLayout.LayoutParams d = (RelativeLayout.LayoutParams) img.getLayoutParams();
+        d.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+        d.addRule(RelativeLayout.CENTER_IN_PARENT, RelativeLayout.TRUE);
+        img.getLayoutParams().height = inDP(50);
+        img.getLayoutParams().width = inDP(50);
+        img.setLayoutParams(d);
+        ViewGroup.MarginLayoutParams ma = (ViewGroup.MarginLayoutParams) img.getLayoutParams();
+        ma.setMargins(inDP(10), 0, inDP(10), 0);
+        img.setContentDescription("Phone icon");
+        img.setColorFilter(Color.parseColor("#616161"));
+        img.setLayoutParams(ma);
 
-                RelativeLayout r = new RelativeLayout(getContext());
-                r.setLayoutParams(new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT,
-                        RelativeLayout.LayoutParams.MATCH_PARENT));
-                c.addView(r);
+        TextView contactName = new TextView(getContext());
+        relativeLayout.addView(contactName);
+        contactName.setText(contact.phone);
+        contactName.setLayoutParams(new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+        RelativeLayout.LayoutParams da = (RelativeLayout.LayoutParams) contactName.getLayoutParams();
+        da.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+        da.addRule(RelativeLayout.CENTER_IN_PARENT, RelativeLayout.TRUE);
+        contactName.setLayoutParams(da);
+        contactName.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
+        contactName.setTextColor(Color.parseColor("#616161"));
+        contactName.setPadding(inDP(10), inDP(10), inDP(10), inDP(10));
+        ViewGroup.MarginLayoutParams mar = (ViewGroup.MarginLayoutParams) contactName.getLayoutParams();
+        mar.setMargins(0, 0, inDP(50), 0);
+        contactName.setLayoutParams(mar);
 
-
-                ImageView img = new ImageView(getContext());
-                r.addView(img);
-                img.setImageDrawable(ContextCompat.getDrawable(getContext(), R.drawable.phone_icon));
-                RelativeLayout.LayoutParams d = (RelativeLayout.LayoutParams) img.getLayoutParams();
-                d.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
-                d.addRule(RelativeLayout.CENTER_IN_PARENT, RelativeLayout.TRUE);
-                img.getLayoutParams().height = inDP(40);
-                img.getLayoutParams().width = inDP(40);
-                img.setLayoutParams(d);
-                ViewGroup.MarginLayoutParams ma = (ViewGroup.MarginLayoutParams) img.getLayoutParams();
-                ma.setMargins(0, 0, inDP(10), 0);
-                img.setContentDescription("Phone icon");
-                img.setColorFilter(Color.parseColor("#616161"));
-                img.setLayoutParams(ma);
-
-                TextView number = new TextView(getContext());
-                r.addView(number);
-                number.setLayoutParams(new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-                RelativeLayout.LayoutParams da = (RelativeLayout.LayoutParams) number.getLayoutParams();
-                da.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
-                da.addRule(RelativeLayout.CENTER_IN_PARENT, RelativeLayout.TRUE);
-                number.setLayoutParams(da);
-                number.setText(phone);
-                number.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
-                number.setTextColor(Color.parseColor("#616161"));
-                number.setPadding(inDP(10), inDP(10), inDP(10), inDP(10));
-                ViewGroup.MarginLayoutParams mar = (ViewGroup.MarginLayoutParams) number.getLayoutParams();
-                mar.setMargins(0, 0, inDP(50), 0);
-                number.setLayoutParams(mar);
-
-                TextView number2 = new TextView(getContext());
-                r.addView(number2);
-                number2.setText(name);
-                number2.setLayoutParams(new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-                RelativeLayout.LayoutParams das = (RelativeLayout.LayoutParams) number2.getLayoutParams();
-                das.addRule(RelativeLayout.CENTER_VERTICAL, RelativeLayout.TRUE);
-                number2.setLayoutParams(das);
-                number2.setTextSize(TypedValue.COMPLEX_UNIT_SP, 35);
-                number2.setTextColor(Color.parseColor("#616161"));
-                number2.setPadding(inDP(10), inDP(10), inDP(10), inDP(10));
-
-        }
-
-
+        TextView contactPhone = new TextView(getContext());
+        relativeLayout.addView(contactPhone);
+        contactPhone.setText(contact.name);
+        contactPhone.setLayoutParams(new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+        RelativeLayout.LayoutParams das = (RelativeLayout.LayoutParams) contactPhone.getLayoutParams();
+        das.addRule(RelativeLayout.CENTER_VERTICAL, RelativeLayout.TRUE);
+        contactPhone.setLayoutParams(das);
+        contactPhone.setTextSize(TypedValue.COMPLEX_UNIT_SP, 25);
+        contactPhone.setTextColor(Color.parseColor("#616161"));
+        contactPhone.setPadding(inDP(10), inDP(10), inDP(10), inDP(10));
+    }
 
     @Override
     public void onActivityResult(int requestCode,int resultCode,Intent data){
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == CONTACT_PICK_REQUEST && resultCode == RESULT_CODE_OK) {
-            final ArrayList<Contact> selectedContacts = data.getParcelableArrayListExtra("SelectedContacts");
-            for (int i = 0; i < selectedContacts.size(); i++) {
-                LinearLayout l = (LinearLayout) getView().findViewById(R.id.main);
-                if (!(elements2.containsKey(selectedContacts.get(i).phone.hashCode()))) {
-                    createCard(selectedContacts.get(i).name, selectedContacts.get(i).phone, true, i, l);
-                }
+            Bundle extras = data.getExtras();
+            final HashMap<String, Contact> selectedContacts = (HashMap<String, Contact>) extras.get(ContactsPickerActivity.SELECTED);
+
+            System.out.println("\n\n########################\nRECEIVED: "+selectedContacts.size()+" contacts.");
+
+            LinearLayout linearLayout = (LinearLayout) getView().findViewById(R.id.main);
+            linearLayout.removeViews(3, addedContacts.size());
+            // set field to new list of contacts
+            addedContacts = selectedContacts;
+            System.out.println("\n\t\t\t\t\tAdding: "+addedContacts.size()+" contacts.\n########################\n");
+
+            for (Contact contact : addedContacts.values()) {
+                addContactCard(contact, linearLayout);
             }
         }
         System.out.println("EmergencyFragment: onActivityResult");
     }
+
     public boolean checkPermission(String permission){
-        if (ContextCompat.checkSelfPermission(getContext(), permission)
-                != PackageManager.PERMISSION_GRANTED) {
-            return false;
-        }
-        return true;
+        return (ContextCompat.checkSelfPermission(getContext(), permission)
+                == PackageManager.PERMISSION_GRANTED);
     }
+
     public void request(String permission){
         ActivityCompat.requestPermissions(getActivity(),
                 new String[]{permission},
                 PERMISSION_REQUEST_CODE);
     }
-    public void call2(View view) {
+
+    public void callContact(View view) {
+        Contact contact = addedContacts.get(Integer.toString(view.getId()));
         if (checkPermission(Manifest.permission.CALL_PHONE)) {
             SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext());
             final Intent callIntent = new Intent(Intent.ACTION_CALL);
-            callIntent.setData(Uri.parse("tel:" + elements2.get(view.getId())[1]));
+            callIntent.setData(Uri.parse("tel:" + contact.phone));
             if (prefs.getBoolean("pref_call_confirmation", true)) {
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-                builder.setMessage("Call " + elements2.get(view.getId())[0] + " (" + elements2.get(view.getId())[1] +")?");
+                builder.setMessage("Call " + contact.name + " (" + contact.phone +")?");
 
                 builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
@@ -256,8 +249,9 @@ public class EmergencyTab extends Fragment {
             public void onClick(View v) {
                 if (checkPermission(Manifest.permission.READ_CONTACTS)) {
                     Intent intentContactPick = new Intent(getContext(), ContactsPickerActivity.class);
+                    intentContactPick.putExtra(ALREADY_ADDED, addedContacts);
                     startActivityForResult(intentContactPick, CONTACT_PICK_REQUEST);
-                }else {
+                } else {
                     request(Manifest.permission.READ_CONTACTS);
                     Toast.makeText(getContext(), "Please, if you want to add a contact, allow contact permission.", Toast.LENGTH_SHORT).show();
                 }

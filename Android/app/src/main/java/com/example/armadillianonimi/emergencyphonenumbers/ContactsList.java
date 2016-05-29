@@ -10,9 +10,13 @@ public class ContactsList{
 
     public ArrayList<Contact> contactArrayList;
 
-    ContactsList(){
+    public ContactsList(){
 
         contactArrayList = new ArrayList<Contact>();
+    }
+
+    public ContactsList(ArrayList<Contact> contacts) {
+        contactArrayList = contacts;
     }
 
     public int getCount(){
