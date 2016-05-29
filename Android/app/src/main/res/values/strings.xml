@@ -89,4 +89,8 @@
     <string name="map_title">Your position</string>
     <string name="map_description">is displayed on the map.</string>
 
+    <string name="contact_us">Contact us</string>
+    <string name="contact_us_description">Send us an an email with your feedback.</string>
+    <string name="contact_developer_uri">mailto:emergencyphonenumbers@gmail.com</string>
+
 </resources>
