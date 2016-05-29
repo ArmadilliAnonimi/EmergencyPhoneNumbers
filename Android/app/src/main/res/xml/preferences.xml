@@ -52,6 +52,17 @@
             android:summary="@string/pref_about_summary"
             android:onClick="showAboutScreen"/>
 
+        <Preference
+            android:key="contact_us"
+            android:title="@string/contact_us"
+            android:summary="@string/contact_us_description">
+            <intent android:action="android.intent.action.VIEW"
+                android:data="@string/contact_developer_uri">
+                <extra android:name="android.intent.extra.SUBJECT"
+                    android:value="Feedback about Emergency Phone Numbers" />
+            </intent>
+        </Preference>
+
     </android.support.v7.preference.PreferenceCategory>
 
 </android.support.v7.preference.PreferenceScreen>
