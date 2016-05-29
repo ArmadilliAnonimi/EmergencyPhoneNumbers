@@ -140,10 +140,8 @@ public class MainActivity extends AppCompatActivity {
         prefsListener = new SharedPreferences.OnSharedPreferenceChangeListener() {
             @Override
             public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-                System.out.println("Should update UI 1");
 
                 if (key.equals("select_country")) {
-                    System.out.println("Should update UI with key: " + sharedPreferences.getString(key, ""));
                     changeCountry(api.getCountryHashMap());
                 }
 

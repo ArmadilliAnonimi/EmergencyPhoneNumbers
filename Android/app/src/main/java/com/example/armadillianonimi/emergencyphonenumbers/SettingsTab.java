@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.v14.preference.SwitchPreference;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.ShareCompat;
 import android.support.v7.preference.DialogPreference;
@@ -16,7 +17,7 @@ import android.util.AttributeSet;
 /**
  * Created by Aron Fiechter on 2016-05-04.
  */
-public class SettingsTab extends PreferenceFragmentCompat {
+public class SettingsTab extends PreferenceFragmentCompat implements SharedPreferences.OnSharedPreferenceChangeListener {
 
     SharedPreferences prefs;
     SwitchPreferenceCompat autoLocationSwitch;
@@ -39,6 +40,9 @@ public class SettingsTab extends PreferenceFragmentCompat {
         };
         autoLocationSwitch.setOnPreferenceChangeListener(autoLocationListener);
 
+        // Register shared preferences to update the switch when it's changed from the dialog
+        prefs.registerOnSharedPreferenceChangeListener(this);
+
         // Listener for click on "Change country" preference
         Preference dialogPref = findPreference("dialog");
         dialogPref.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
@@ -50,16 +54,6 @@ public class SettingsTab extends PreferenceFragmentCompat {
                 return true;
             }
         });
-
-//        // Listener for click on "Tutorial" preference
-//        Preference tutorialDialog = findPreference("tutorial");
-//        tutorialDialog.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
-//            public boolean onPreferenceClick(Preference preference) {
-////                startActivity(new Intent(getActivity(), IntroActivity.class));
-////                System.out.println("FUCKING WORKS");
-//                return true;
-//            }
-//        });
 
         // Listener for click on "About" preference
         Preference aboutDialog = findPreference("about_dialog");
@@ -75,9 +69,16 @@ public class SettingsTab extends PreferenceFragmentCompat {
     }
 
     @Override
+    public void onSharedPreferenceChanged(SharedPreferences prefs, String key) {
+        if (key.equals("pref_auto_location")) {
+            SwitchPreferenceCompat switchPreference = (SwitchPreferenceCompat) findPreference(key);
+            switchPreference.setChecked(prefs.getBoolean(key, false));
+        }
+    }
+
+    @Override
     public void onResume() {
         super.onResume();
-//        addPreferencesFromResource(R.xml.preferences);
         System.out.println("SettingsTab: onResume");
     }
 

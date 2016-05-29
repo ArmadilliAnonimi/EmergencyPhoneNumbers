@@ -50,8 +50,9 @@ public class CountrySelectionDialog extends DialogFragment {
         createCountryArray();
     }
 
-    @Override public Dialog onCreateDialog(Bundle savedInstanceState) {
+    @Override public Dialog onCreateDialog(final Bundle savedInstanceState) {
         AlertDialog.Builder dialog = new AlertDialog.Builder(getActivity());
+
         if (choiceAvailable) {
             elementInSettings = getValueIndex();
             items[elementInSettings].isItemSelected = true;
@@ -112,10 +113,6 @@ public class CountrySelectionDialog extends DialogFragment {
             };
             dialog.setAdapter(adapter, selectItemListener);
 
-//            Test how to include images,
-//            dialog.setIcon(getResources().getIdentifier(mEntryValues[0].toString().toLowerCase(), "drawable", "com.example.armadillianonimi.emergencyphonenumbers"));
-
-       //     System.out.println("CHECK SAVED COUNTRY CODE: "+ PreferenceManager.getDefaultSharedPreferences(getActivity()).getString("select_country", "CH"));
         } else {
             dialog.setTitle(R.string.country_selection_dialog_title_no);
             // add buttons
@@ -123,6 +120,12 @@ public class CountrySelectionDialog extends DialogFragment {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     prefs.edit().putBoolean("pref_auto_location", false).apply();
+
+                    // Immediately show the dialog again so that the user can change country
+                    android.app.FragmentManager fm = getFragmentManager();
+                    CountrySelectionDialog countrySelector = new CountrySelectionDialog();
+                    countrySelector.setChoiceAvailable(!(prefs.getBoolean("pref_auto_location", false)));
+                    countrySelector.show(fm, "Country_Selector");
                     System.out.println("DISABLED AUTO LOCATION FROM DIALOG");
                 }
             });
