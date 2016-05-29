@@ -182,13 +182,11 @@ public class EmergencyTab extends Fragment {
             Bundle extras = data.getExtras();
             final HashMap<String, Contact> selectedContacts = (HashMap<String, Contact>) extras.get(ContactsPickerActivity.SELECTED);
 
-            System.out.println("\n\n########################\nRECEIVED: "+selectedContacts.size()+" contacts.");
 
             LinearLayout linearLayout = (LinearLayout) getView().findViewById(R.id.main);
             linearLayout.removeViews(3, addedContacts.size());
             // set field to new list of contacts
             addedContacts = selectedContacts;
-            System.out.println("\n\t\t\t\t\tAdding: "+addedContacts.size()+" contacts.\n########################\n");
 
             for (Contact contact : addedContacts.values()) {
                 addContactCard(contact, linearLayout);
