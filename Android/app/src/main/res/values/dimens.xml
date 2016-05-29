@@ -17,4 +17,5 @@
     <dimen name="emergency_numbers_cards_content_padding">10dp</dimen>
     <dimen name="emergency_tab_padding_top">10dp</dimen>
     <dimen name="emergency_tab_padding_bottom">50dp</dimen>
+
 </resources>

@@ -1,25 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.preference.PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent">
+<android.support.v7.preference.PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
 
     <android.support.v7.preference.PreferenceCategory
-        android:title="@string/preferences_title_preferences">
+        android:title="@string/preferences_title_preferences" >
 
         <android.support.v7.preference.Preference
             android:key="dialog"
             android:title="@string/pref_change_country"
             android:summary="@string/pref_change_country_summary"
             android:onClick="showDialog" />
+
         <android.support.v7.preference.SwitchPreferenceCompat
             android:key="pref_auto_location"
             android:title="@string/pref_auto_location"
             android:summary="@string/pref_auto_location_summary"
             android:defaultValue="false" />
+
         <android.support.v7.preference.SwitchPreferenceCompat
             android:key="pref_call_confirmation"
             android:title="@string/pref_call_confirmation"
             android:summary="@string/pref_call_confirmation_summary"
-            android:defaultValue="true"/>
+            android:defaultValue="true" />
 
     </android.support.v7.preference.PreferenceCategory>
 
@@ -28,37 +32,45 @@
 
         <Preference
             android:title="@string/pref_web_page"
-            android:summary="@string/pref_web_page_summary">
-            <intent android:action="android.intent.action.VIEW"
-                android:data="https://github.com/BalestraPatrick/EmergencyPhoneNumbers"/>
+            android:summary="@string/pref_web_page_summary" >
+            <intent
+                android:action="android.intent.action.VIEW"
+                android:data="https://github.com/BalestraPatrick/EmergencyPhoneNumbers" />
         </Preference>
 
-        <Preference android:title="@string/pref_faq">
-            <intent android:action="android.intent.action.DEFAULT"
+        <Preference
+            android:title="@string/pref_faq" >
+            <intent
+                android:action="android.intent.action.DEFAULT"
                 android:targetPackage="com.example.armadillianonimi.emergencyphonenumbers"
-                android:targetClass="com.example.armadillianonimi.emergencyphonenumbers.DisclaimerActivity"/>
+                android:targetClass="com.example.armadillianonimi.emergencyphonenumbers.DisclaimerActivity" />
         </Preference>
+
         <Preference
             android:key="tutorial"
             android:title="@string/pref_tutorial"
-            android:summary="@string/pref_tutorial_summary">
-            <intent android:action="android.intent.action.DEFAULT"
+            android:summary="@string/pref_tutorial_summary" >
+            <intent
+                android:action="android.intent.action.DEFAULT"
                 android:targetPackage="com.example.armadillianonimi.emergencyphonenumbers"
-                android:targetClass="com.example.armadillianonimi.emergencyphonenumbers.IntroActivity"/>
+                android:targetClass="com.example.armadillianonimi.emergencyphonenumbers.IntroActivity" />
         </Preference>
+
         <Preference
             android:key="about_dialog"
             android:title="@string/pref_about"
             android:summary="@string/pref_about_summary"
-            android:onClick="showAboutScreen"/>
+            android:onClick="showAboutScreen" />
 
         <Preference
             android:key="contact_us"
             android:title="@string/contact_us"
-            android:summary="@string/contact_us_description">
-            <intent android:action="android.intent.action.VIEW"
-                android:data="@string/contact_developer_uri">
-                <extra android:name="android.intent.extra.SUBJECT"
+            android:summary="@string/contact_us_description" >
+            <intent
+                android:action="android.intent.action.VIEW"
+                android:data="@string/contact_developer_uri" >
+                <extra
+                    android:name="android.intent.extra.SUBJECT"
                     android:value="Feedback about Emergency Phone Numbers" />
             </intent>
         </Preference>
