@@ -24,7 +24,9 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyAHFeYmuLkhc8JVA_FRlWPt7OwmUnFNHw4" />
 
-        <activity android:name=".MainActivity">
+        <activity
+            android:name=".MainActivity"
+            android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -33,7 +35,9 @@
         </activity>
 
         <!--Contacts activity-->
-        <activity android:name=".ContactsPickerActivity"> </activity>
+        <activity
+            android:name=".ContactsPickerActivity"
+            android:screenOrientation="portrait"> </activity>
 
         <!--Fabric API key: crash report-->
         <meta-data
@@ -43,14 +47,16 @@
         <!--Disclaimer activity-->
         <activity android:name=".DisclaimerActivity"
             android:label="@string/pref_disclaimer"
-            android:parentActivityName="com.example.armadillianonimi.emergencyphonenumbers.MainActivity">
+            android:parentActivityName="com.example.armadillianonimi.emergencyphonenumbers.MainActivity"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.armadillianonimi.emergencyphonenumbers.MainActivity" />
         </activity>
 
         <!--IntroActivity: onboarding screen showed the first time the app is opened.-->
-        <activity android:name=".IntroActivity">
+        <activity android:name=".IntroActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="com.example.armadillianonimi.emergencyphonenumbers.IntroActivity" />
                 <category android:name="android.intent.category.DEFAULT" />
