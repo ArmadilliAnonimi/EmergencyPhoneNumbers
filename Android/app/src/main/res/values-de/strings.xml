@@ -49,11 +49,11 @@
     <string name="you_are_here">Du bist hier</string>
 
     <!--Accessibility-->
-    <string name="country_flag">Land auswählen Taste</string>
+    <string name="country_flag">Land auswählen</string>
     <string name="location_button">Ortung</string>
     <string name="phone_icon">Telefonsymbol</string>
     <string name="plus_contact_button">Kontakt hinzufügen</string>
-    <string name="search_contact">Suchen Kontakt</string>
+    <string name="search_contact">Kontakt suchen</string>
 
     <string name="country_selection_dialog_title_yes">Wähle dein Land:</string>
 
@@ -70,22 +70,23 @@
         <item>Haftungsausschluss</item>
         <item>Wie kann ich meine eigenen Kontakte hinzufügen?</item>
         <item>Wie kann ich das Land ändern?</item>
-        <item>Ich habe einen Fehler und ich habe ein Feedback, was kann ich tun?</item>
+        <item>Ich habe einen Fehler gefunden und möchte Feedback geben, was kann ich tun?</item>
     </string-array>
     <string-array name="faq_contents">
-        <item>Diese App sollte niemals verwendet werden, wenn sie nicht auf Notfälle. Die Kosten für die Anrufe wird durch den Anrufer getragen und die Preise variieren. Nicht alle Zahlen sind frei. Diese Anwendung erleichtert nur die Suche nach den Notrufnummern mit Ihrem Standort. Die einwandfreie Funktion ist abhängig von der Netzabdeckung und Ihre Telefon Träger.</item>
-        <item>Im Notfall Register können Sie auf die Schaltfläche Hinzufügen in der unteren rechten drücken neuen Kontakt aus Ihrer Bibliothek hinzuzufügen. Drücken Sie auf sie einen Anruf zu starten.</item>
-        <item>Tippen Sie auf den aktuellen Ländernamen oder Flagge in der Werkzeugleiste und wählen Sie ein anderes Land. Sie können auch wiederum auf die Funktion \"Verwende immer deine aktuelle Position\", so dass das ausgewählte Land immer das Land spiegelt sich in Sie sind.</item>
-        <item>Bitte kontaktieren Sie uns per E-Mail und sagen Sie uns alles, was Sie zu sagen haben. Wir hören immer!</item>
+        <item>        Diese App sollte ausschließlich in Notfallsituationen verwendet werden. Die Kosten für die Anrufe werden vom Anrufer getragen; die Preise variieren. Nicht jede Notrufnummer ist kostenlos. Diese Anwendung erleichtert lediglich die Suche nach Notrufnummern basierend auf deinem Standort. Die einwandfreie Funktion dieser App ist abhängig von der Netzabdeckung und deinem Mobilfunkanbieter.
+</item>
+        <item>Im Notfalltab kannst du auf die Schaltfläche "Hinzufügen: in der unteren rechten Ecke drücken, um einen neuen Kontakt aus deiner Bibliothek hinzuzufügen. Drücke auf den neu erstellten Kontakt, um einen Anruf zu starten.</item>
+        <item>Tippe auf den Ländernamen oder die Flagge links daneben und wähle ein anderes Land. Du kannst auch die Funktion \"Verwende immer deine aktuelle Position\" verwenden, sodass das ausgewählte Land immer auf jenes Land wechselt, in dem du dich gerade befindest.</item>
+        <item>Du kannst uns via E-Mail kontaktieren.</item>
     </string-array>
 
     <string name="welcome">Willkommen!</string>
     <string name="thanks">Vielen Dank dieser App zum Download bereit</string>
     <string name="call_title">Drücke einen Knopf</string>
-    <string name="call_description">einen Anruf im Notfall zu starten.</string>
-    <string name="country_title">Land wählen</string>
-    <string name="country_description">indem Sie auf den Namen des Landes zu drücken.</string>
-    <string name="map_title">Ihre Position</string>
+    <string name="call_description">um einen Notfallanruf zu starten.</string>
+    <string name="country_title">Wähle dein gewünschtes Land</string>
+    <string name="country_description">indem du auf den Namen des Landes drückst.</string>
+    <string name="map_title">Deine Position</string>
     <string name="map_description">wird auf der Karte angezeigt.</string>
 
 </resources>

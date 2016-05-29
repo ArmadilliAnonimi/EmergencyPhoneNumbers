@@ -108,6 +108,7 @@ public class MainActivity extends AppCompatActivity {
 
         // Assigning the TabLayout View
         tabs = (TabLayout) findViewById(R.id.tabs);
+        tabs.setTabGravity(TabLayout.GRAVITY_FILL);
 
         // Setting Custom Color for the Scroll bar indicator of the TabLayout View
         tabs.setSelectedTabIndicatorColor(getResources().getColor(R.color.colorAccent));
@@ -258,6 +259,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 System.out.println("pressed location button");
                 locationFinder.requestLocation();
+                
             }
         });
     }
