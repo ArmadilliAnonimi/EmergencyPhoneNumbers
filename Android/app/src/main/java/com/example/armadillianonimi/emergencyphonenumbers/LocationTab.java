@@ -153,8 +153,8 @@ public class LocationTab extends Fragment {
     // If the provider is disabled, set the addressTextView as:
     public void setProviderDisabled() {
         if (addressTextView != null) {
-        addressTextView.setText("Location disabled.\nPlease check your settings.");
-        addressTextView.setContentDescription("Location disabled.\nPlease check your settings.");
+            addressTextView.setText("Location disabled.\nPlease check your settings.");
+            addressTextView.setContentDescription("Location disabled.\nPlease check your settings.");
         }
     }
 
@@ -163,6 +163,9 @@ public class LocationTab extends Fragment {
     public void onResume() {
         super.onResume();
         mapView.onResume();
+        if (locationFinder.hasPermissionToAccessLocation()) {
+            loadMap();
+        }
     }
 
     @Override

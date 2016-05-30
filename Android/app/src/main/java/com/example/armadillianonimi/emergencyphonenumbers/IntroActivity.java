@@ -1,6 +1,9 @@
 package com.example.armadillianonimi.emergencyphonenumbers;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+
 import com.chyrta.onboarder.OnboarderActivity;
 import com.chyrta.onboarder.OnboarderPage;
 import java.util.ArrayList;
@@ -62,11 +65,17 @@ public class IntroActivity extends OnboarderActivity {
     public void onSkipButtonPressed() {
         // Optional: by default it skips onboarder to the end
         super.onSkipButtonPressed();
-        finish();
+        dismiss();
     }
 
     @Override
     public void onFinishButtonPressed() {
+        dismiss();
+    }
+
+    private void dismiss() {
+        Intent resultIntent = new Intent();
+        setResult(RESULT_OK, resultIntent);
         finish();
     }
 }

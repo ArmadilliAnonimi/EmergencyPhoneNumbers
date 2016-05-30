@@ -102,9 +102,7 @@ public class LocationFinder {
 
     // If the access to the location was not yet granted, ask for it.
     public boolean hasPermissionToAccessLocation() {
-        System.out.println("has permission location");
         if (!checkLocationPermission()) {
-            ActivityCompat.requestPermissions(activity, new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION}, 1);
             return false;
         } else {
             return true;

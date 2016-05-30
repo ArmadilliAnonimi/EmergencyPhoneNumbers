@@ -71,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
             SharedPreferences.Editor edit = prefs.edit();
             edit.putBoolean(getString(R.string.pref_previously_started), Boolean.TRUE);
             edit.commit();
-            startActivity(new Intent(this, IntroActivity.class));
+            startActivityForResult(new Intent(this, IntroActivity.class), 0);
         }
 
         locationFinder = new LocationFinder(this);
@@ -150,13 +150,16 @@ public class MainActivity extends AppCompatActivity {
         };
         prefs.registerOnSharedPreferenceChangeListener(prefsListener);
 
-        // Permission requests
-        if (!(checkPermission(Manifest.permission.CALL_PHONE))) {
-               request(Manifest.permission.CALL_PHONE);
-        }
-
         System.out.println("### - MainActivity created");
+    }
 
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        // Permission requests
+        if (resultCode == RESULT_OK) {
+            if (!(checkPermission(Manifest.permission.CALL_PHONE))) {
+                requestPermissions();
+            }
+        }
     }
 
     public void call(View view) {
@@ -167,7 +170,7 @@ public class MainActivity extends AppCompatActivity {
             String name = null;
             switch(id){
                 case(R.id.fire):
-                     num = selectedCountry.getFire();
+                    num = selectedCountry.getFire();
                     name = "Fire";
                     callIntent.setData(Uri.parse("tel: "+ num));
                     break;
@@ -205,7 +208,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(callIntent);
             }
         } else {
-            request(Manifest.permission.CALL_PHONE);
+            requestPermissions();
             Toast.makeText(getApplicationContext(), "Please, allow call permission.\nIt's good for you!", Toast.LENGTH_SHORT).show();
         }
     }
@@ -218,10 +221,9 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
-    public void request(String permission){
-        ActivityCompat.requestPermissions(this,
-                new String[]{permission},
-                PERMISSION_REQUEST_CODE);
+    public void requestPermissions(){
+        String[] permissions = new String[]{Manifest.permission.CALL_PHONE, Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION};
+        ActivityCompat.requestPermissions(this, permissions, PERMISSION_REQUEST_CODE);
     }
 
     public void selectAppBarColour(int position) {
@@ -301,7 +303,6 @@ public class MainActivity extends AppCompatActivity {
             case 3: {
                 // If request is cancelled, the result arrays are empty.
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    System.out.println("AAAAAAAAAAAAAAA");
                     EmergencyTab emergency = (EmergencyTab) mSectionsPagerAdapter.getItem(0);
                     emergency.selectContacts(this);
                 } else {
