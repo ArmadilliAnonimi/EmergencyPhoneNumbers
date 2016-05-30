@@ -22,6 +22,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.preference.PreferenceManager;
 import android.support.v7.widget.CardView;
 import android.text.TextUtils;
+import android.util.DisplayMetrics;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -188,13 +189,19 @@ public class EmergencyTab extends Fragment {
         TextView contactPhone = new TextView(getContext());
         relativeLayout.addView(contactPhone);
         String name = contact.name;
-        if (bounds2.width() > 336){
+//        if (bounds2.width() > 336) {
             //contactPhone.setMaxEms(4);
-            contactPhone.setMaxWidth(850 - 50 - bounds2.width());
-        }
-        else {
-            contactPhone.setMaxEms(5);
-        }
+            DisplayMetrics displayMetrics = getContext().getResources().getDisplayMetrics();
+            int width = displayMetrics.widthPixels;
+            contactPhone.setMaxWidth(width - 275 - bounds2.width());
+//        }
+//        else {
+//            //contactPhone.setMaxEms(5);
+//                DisplayMetrics displayMetrics = getContext().getResources().getDisplayMetrics();
+//                int width = displayMetrics.widthPixels;
+//                contactPhone.setMaxWidth(width - 275 - bounds2.width());
+//
+//        }
         contactPhone.setMaxLines(1);
         contactPhone.setEllipsize(TextUtils.TruncateAt.END);
 //        if (name.length() > 6) {
