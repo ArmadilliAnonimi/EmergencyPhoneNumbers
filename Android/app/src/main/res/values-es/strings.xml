@@ -17,7 +17,7 @@
     <string name="pref_disclaimer_message">
       Esta aplicación nunca debe ser usado cuando no están relacionadas con situaciones de emergencia. El coste de las llamadas es soportado por la persona que llama y las tasas pueden variar. No todos los números son gratuitas. Esta aplicación sólo facilita la búsqueda de los números de emergencia con su ubicación. Su buen funcionamiento depende de la cobertura de red y el operador de telefonía.
     </string>
-    <string name="pref_faq">FAQ</string>
+    <string name="pref_faq">FAQ/Disclaimer</string>
     <string name="pref_tutorial">Tutorial</string>
     <string name="pref_tutorial_summary">Aprender rápidamente cómo utilizar mejor las características de este app</string>
 

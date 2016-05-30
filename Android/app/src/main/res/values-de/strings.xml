@@ -14,10 +14,8 @@
     <string name="pref_about">About</string>
     <string name="pref_about_summary">Die Studenten hinter dieser App</string>
     <string name="pref_disclaimer">Disclaimer</string>
-    <string name="pref_disclaimer_message">
-        Diese App sollte ausschließlich in Notfallsituationen verwendet werden. Die Kosten für die Anrufe werden vom Anrufer getragen; die Preise variieren. Nicht jede Notrufnummer ist kostenlos. Diese Anwendung erleichtert lediglich die Suche nach Notrufnummern basierend auf deinem Standort. Die einwandfreie Funktion dieser App ist abhängig von der Netzabdeckung und deinem Mobilfunkanbieter.
-    </string>
-    <string name="pref_faq">FAQ</string>
+    <string name="pref_disclaimer_message">Mit dem Download dieser App akzeptierst du die folgenden Bedingungen: Diese App sollte ausschließlich in Notfallsituationen verwendet werden. Die Kosten für die Anrufe werden vom Anrufer getragen; die Preise variieren. Nicht jede Notrufnummer ist kostenlos. Diese Anwendung erleichtert lediglich die Suche nach Notrufnummern basierend auf deinem Standort. Die einwandfreie Funktion dieser App ist abhängig von der Netzabdeckung und deinem Mobilfunkanbieter. Die Macher dieser Applikation sind nicht verantwortlich</string>
+    <string name="pref_faq">FAQ/Disclaimer</string>
     <string name="pref_tutorial">Tutorial</string>
     <string name="pref_tutorial_summary">Lass dir erklären, wie die App benutzt wird</string>
 
@@ -73,7 +71,7 @@
         <item>Ich habe einen Fehler gefunden und möchte Feedback geben, was kann ich tun?</item>
     </string-array>
     <string-array name="faq_contents">
-        <item>        Diese App sollte ausschließlich in Notfallsituationen verwendet werden. Die Kosten für die Anrufe werden vom Anrufer getragen; die Preise variieren. Nicht jede Notrufnummer ist kostenlos. Diese Anwendung erleichtert lediglich die Suche nach Notrufnummern basierend auf deinem Standort. Die einwandfreie Funktion dieser App ist abhängig von der Netzabdeckung und deinem Mobilfunkanbieter.
+        <item>Mit dem Download dieser App akzeptierst du die folgenden Bedingungen: \nDiese App sollte ausschließlich in Notfallsituationen verwendet werden. Die Kosten für die Anrufe werden vom Anrufer getragen; die Preise variieren. Nicht jede Notrufnummer ist kostenlos. Diese Anwendung erleichtert lediglich die Suche nach Notrufnummern basierend auf deinem Standort. Die einwandfreie Funktion dieser App ist abhängig von der Netzabdeckung und deinem Mobilfunkanbieter. Die Macher dieser Applikation sind nicht verantwortlich für deine Handlungen oder etwaige Probleme.
 </item>
         <item>Im Notfalltab kannst du auf die Schaltfläche "Hinzufügen: in der unteren rechten Ecke drücken, um einen neuen Kontakt aus deiner Bibliothek hinzuzufügen. Drücke auf den neu erstellten Kontakt, um einen Anruf zu starten.</item>
         <item>Tippe auf den Ländernamen oder die Flagge links daneben und wähle ein anderes Land. Du kannst auch die Funktion \"Verwende immer deine aktuelle Position\" verwenden, sodass das ausgewählte Land immer auf jenes Land wechselt, in dem du dich gerade befindest.</item>

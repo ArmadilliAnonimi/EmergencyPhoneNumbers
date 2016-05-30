@@ -17,7 +17,7 @@
     <string name="pref_disclaimer_message">
       Cette application ne devrait jamais être utilisé lorsque ne sont pas liées aux situations d\'urgence. Le coût des appels est pris en charge par l\'appelant et les tarifs peuvent varier. tous les numéros ne sont pas libres. Cette application ne facilite la recherche des numéros d\'urgence avec votre emplacement. Son bon fonctionnement dépend de la couverture du réseau et de votre opérateur de téléphonie.
     </string>
-    <string name="pref_faq">FAQ</string>
+    <string name="pref_faq">FAQ/Disclaimer</string>
     <string name="pref_tutorial">Tutorial</string>
     <string name="pref_tutorial_summary">Apprenez rapidement comment utiliser au mieux cette application fonctionnalités</string>
 
