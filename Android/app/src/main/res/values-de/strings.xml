@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">EmergencyPhoneNumbers</string>
       <string name="pref_auto_location">Verwende immer deine aktuelle Position</string>
-    <string name="pref_auto_location_summary">Wechsele das Land abhängig von deinem Standort automatisch</string>
+    <string name="pref_auto_location_summary">Wechsle das Land abhängig von deinem Standort automatisch</string>
     <string name="pref_call_confirmation">Anrufbestätigung</string>
     <string name="pref_call_confirmation_summary">Nach Bestätigung fragen, wenn eine Notrufnummer gedrückt wurde</string>
     <string name="pref_change_country">Land auswählen</string>
@@ -88,5 +88,8 @@
     <string name="country_description">indem du auf den Namen des Landes drückst.</string>
     <string name="map_title">Deine Position</string>
     <string name="map_description">wird auf der Karte angezeigt.</string>
+    <string name="contact_us">Kontaktiere uns</string>
+    <string name="contact_us_description">Sende uns eine E-Mail mit deinem Feedback</string>
+    <string name="pref_previously_started"></string>
 
 </resources>
