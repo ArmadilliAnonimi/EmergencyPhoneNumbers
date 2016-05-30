@@ -32,13 +32,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
-import com.google.gson.internal.LinkedTreeMap;
 import com.google.gson.reflect.TypeToken;
 
 
-import java.lang.reflect.Type;
 import java.util.HashMap;
-import java.util.Map;
 
 public class EmergencyTab extends Fragment {
 
@@ -55,7 +52,7 @@ public class EmergencyTab extends Fragment {
     private HashMap<String, Contact> addedContacts = new HashMap<>();
     private final int CONTACT_PICK_REQUEST = 1000;
     private final int RESULT_CODE_OK = -1;
-    private static final int PERMISSION_REQUEST_CODE = 1;
+    private static final int PERMISSION_REQUEST_CODE = 3;
     private SharedPreferences prefs;
 
 
@@ -86,7 +83,6 @@ public class EmergencyTab extends Fragment {
             String json = prefs.getString("MyObject", "");
             if (!(json.equals(""))) {
                 java.lang.reflect.Type type = new TypeToken<HashMap<String,Contact>>(){}.getType();
-                //Type type = new TypeToken<Map<String, Contact>>(){}.getType();
                 HashMap<String, Contact> obj = gson.fromJson(json, type);
 
                 addedContacts = obj;
@@ -264,17 +260,22 @@ public class EmergencyTab extends Fragment {
         }
     }
 
+    public void selectContacts(Context context) {
+        Intent intentContactPick = new Intent(context, ContactsPickerActivity.class);
+        intentContactPick.putExtra(ALREADY_ADDED, addedContacts);
+        startActivityForResult(intentContactPick, CONTACT_PICK_REQUEST);
+    }
+
     private void setupAddContactButton() {
         addContactButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (checkPermission(Manifest.permission.READ_CONTACTS)) {
-                    Intent intentContactPick = new Intent(getContext(), ContactsPickerActivity.class);
-                    intentContactPick.putExtra(ALREADY_ADDED, addedContacts);
-                    startActivityForResult(intentContactPick, CONTACT_PICK_REQUEST);
+                    selectContacts(getContext());
                 } else {
                     request(Manifest.permission.READ_CONTACTS);
                     Toast.makeText(getContext(), "Please, if you want to add a contact, allow contact permission.", Toast.LENGTH_SHORT).show();
+
                 }
             }
         });

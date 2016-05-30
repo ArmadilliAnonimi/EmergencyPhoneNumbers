@@ -84,8 +84,18 @@ public class ContactsLoader extends AsyncTask<String,Void,Void> {
                             );
 
                             String phNo = phoneCursor.getString(phoneCursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
+                            boolean flag = true;
+
+                            for(Contact c : tempContactHolder){
+                                if ((c.phone.replaceAll("\\s+","").equals(phNo.replaceAll("\\s+","")) ) && (c.name.replaceAll("\\s+","").equals(name.replaceAll("\\s+","")))){
+                                    flag = false;
+                                }
+                            }
+                            if (flag) {
                                 tempContactHolder.add(new Contact(phId, name, phNo, label));
-                        }
+                            }
+
+                    }
 
                         phoneCursor.close();
 

@@ -298,10 +298,25 @@ public class MainActivity extends AppCompatActivity {
                 }
                 return;
             }
+            case 3: {
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    System.out.println("AAAAAAAAAAAAAAA");
+                    EmergencyTab emergency = (EmergencyTab) mSectionsPagerAdapter.getItem(0);
+                    emergency.selectContacts(this);
+                } else {
+                    // permission denied, boo! Disable the
+                    // functionality that depends on this permission.
+                }
+                return;
+            }
             // other 'case' lines to check for other
             // permissions this app might request
         }
+            // other 'case' lines to check for other
+            // permissions this app might request
     }
+
 
     private void manageEmergencyAPI() {
         EmergencyPhoneNumbersAPI api = EmergencyPhoneNumbersAPI.getSharedInstance();

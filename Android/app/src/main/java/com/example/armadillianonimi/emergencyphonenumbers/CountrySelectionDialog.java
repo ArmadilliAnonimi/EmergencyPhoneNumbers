@@ -132,7 +132,6 @@ public class CountrySelectionDialog extends DialogFragment {
                 }
             });
             dialog.setMessage(R.string.country_selection_dialog_message_no);
-            System.out.println("DISPLAYED NEGATION TO CHANGE COUNTRY MWAHAHAHAH - You suck.");
         }
         return dialog.create();
     }
