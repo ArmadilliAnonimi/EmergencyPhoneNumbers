@@ -73,7 +73,7 @@
         <item>Ho trovato un bug e ho un feedback, cosa posso fare?</item>
     </string-array>
     <string-array name="faq_contents">
-        <item>Questa applicazione non dovrebbe mai essere utilizzato quando non legate a situazioni di emergenza. Il costo delle chiamate è a carico del chiamante e le tariffe possono variare. Non tutti i numeri sono gratuiti. Questa applicazione facilita solo la ricerca dei numeri di emergenza con la vostra posizione. Il suo corretto funzionamento dipende dalla copertura di rete e il gestore di telefonia.</item>
+        <item>Scaricando quest\'app, accetta esplicitamente queste condizioni: \nQuesta applicazione non dovrebbe mai essere utilizzato quando non legate a situazioni di emergenza. Il costo delle chiamate è a carico del chiamante e le tariffe possono variare. Non tutti i numeri sono gratuiti. Questa applicazione facilita solo la ricerca dei numeri di emergenza con la vostra posizione. Il suo corretto funzionamento dipende dalla copertura di rete e il gestore di telefonia. Noi NON siamo responsabili per qualsiasi uso fara dell app, ognuno è responsabile delle sue azioni!</item>
         <item>Nella sezione emergenza, è possibile premere sul pulsante Aggiungi in basso a destra per aggiungere un nuovo contatto dalla libreria. Premere su di esso per avviare una chiamata.</item>
         <item>Toccare il nome del paese corrente o la bandiera nella barra degli strumenti e scegliere un altro paese. È inoltre possibile attivare la funzione \"Usa sempre posizione corrente\" in modo che il paese selezionato riflette sempre il paese di residenza.</item>
         <item>Ti preghiamo di contattarci via e-mail e dirci tutto quello che hai da dire. Siamo sempre in ascolto!</item>

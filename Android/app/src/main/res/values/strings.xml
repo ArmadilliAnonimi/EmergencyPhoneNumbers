@@ -19,7 +19,7 @@
     <string name="pref_disclaimer_message">
         This app should never be used when not related to emergencies. The cost of the calls is borne by the caller and the rates may vary. Not all numbers are free. This application only facilitates the search of the emergency numbers with your location. Its proper functioning depends on the network coverage and your phone carrier.
     </string>
-    <string name="pref_faq">FAQ</string>
+    <string name="pref_faq">FAQ/Disclaimer</string>
     <string name="pref_tutorial">Tutorial</string>
     <string name="pref_tutorial_summary">Quickly learn how to best use this app\'s features.</string>
 
@@ -74,7 +74,7 @@
         <item>I found a bug and I have some feedback, what can I do?</item>
     </string-array>
     <string-array name="faq_contents">
-        <item>This app should never be used when not related to emergencies. The cost of the calls is borne by the caller and the rates may vary. Not all numbers are free. This application only facilitates the search of the emergency numbers with your location. Its proper functioning depends on the network coverage and your phone carrier. We are NOT responsible for any use you will do of this app, you are responsible for your action! By downloading this app, you explicitly accept these conditions.</item>
+        <item>By downloading this app, you explicitly accept these conditions: \nThis app should never be used when not related to emergencies. The cost of the calls is borne by the caller and the rates may vary. Not all numbers are free. This application only facilitates the search of the emergency numbers with your location. Its proper functioning depends on the network coverage and your phone carrier. We are NOT responsible for any use you will do of this app, you are responsible for your action! </item>
         <item>In the Emergency tab, you can press on the add button at the bottom right to add new contact from your library. Press on it to start a call.</item>
         <item>Tap the current country name or flag in the toolbar and choose another country. You can also turn on the "Always use current location" feature so that the selected country always reflects the country you are in.</item>
         <item>Please contact us via email and tell us everything you have to say. We are always listening!</item>
