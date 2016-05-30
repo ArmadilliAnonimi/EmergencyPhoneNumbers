@@ -42,26 +42,6 @@
 
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="right"
-            android:paddingRight="20dp">
-
-            <!--Location button-->
-            <ImageButton
-                android:id="@+id/location_button"
-                android:contentDescription="@string/location_button"
-                android:layout_width="30sp"
-                android:layout_height="30sp"
-                android:layout_marginTop="2.5dp"
-                android:src="@drawable/selector"
-                android:scaleType="fitXY"
-                android:background="@null"
-                android:clickable="true" />
-
-        </LinearLayout>
-
     </LinearLayout>
 
 </android.support.v7.widget.Toolbar>

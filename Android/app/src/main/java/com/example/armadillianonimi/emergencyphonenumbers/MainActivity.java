@@ -131,7 +131,6 @@ public class MainActivity extends AppCompatActivity {
         manageEmergencyAPI();
 
         setupFlagButton();
-        setupLocationButton();
 
         // Changes the country when it's changed in the preferences
         prefsListener = new SharedPreferences.OnSharedPreferenceChangeListener() {
@@ -247,18 +246,6 @@ public class MainActivity extends AppCompatActivity {
         toolbar.setBackgroundColor(primaryColour);
         tabs.setBackgroundColor(primaryColour);
         findViewById(R.id.appbar).setBackgroundColor(primaryColour);
-    }
-
-    public void setupLocationButton() {
-        ImageButton locationButton = (ImageButton) findViewById(R.id.location_button);
-        locationButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                System.out.println("pressed location button");
-                locationFinder.requestLocation();
-                
-            }
-        });
     }
 
     public void updateCountry(UserLocation country) {
