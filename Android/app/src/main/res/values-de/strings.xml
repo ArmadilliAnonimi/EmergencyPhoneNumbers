@@ -79,7 +79,7 @@
     </string-array>
 
     <string name="welcome">Willkommen!</string>
-    <string name="thanks">Vielen Dank dieser App zum Download bereit</string>
+    <string name="thanks">Danke, dass du diese App gedownloadet hast</string>
     <string name="call_title">Drücke einen Knopf</string>
     <string name="call_description">um einen Notfallanruf zu starten.</string>
     <string name="country_title">Wähle dein gewünschtes Land</string>
