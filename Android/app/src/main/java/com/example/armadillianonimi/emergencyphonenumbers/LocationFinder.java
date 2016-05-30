@@ -77,7 +77,6 @@ public class LocationFinder {
             }
         }
 
-
         @Override
         public void onStatusChanged(String s, int i, Bundle bundle) {
             System.out.println("onstatuschanged");

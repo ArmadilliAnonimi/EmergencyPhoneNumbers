@@ -1,8 +1,5 @@
 package com.example.armadillianonimi.emergencyphonenumbers;
 
-/**
- * Created by Emanuele on 23/05/16.
- */
 import android.app.Activity;
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -16,7 +13,6 @@ import android.widget.CompoundButton;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-
 public class ContactsListAdapter extends BaseAdapter {
 
     Context context;
@@ -25,7 +21,6 @@ public class ContactsListAdapter extends BaseAdapter {
     String filterContactName;
 
     ContactsListAdapter(Context context, ContactsList contactsList){
-
         super();
         this.context = context;
         this.contactsList = contactsList;
@@ -38,28 +33,26 @@ public class ContactsListAdapter extends BaseAdapter {
         selectedContactsList = alreadyAddedContacts;
     }
 
-    public void filter(String filterContactName){
+    public void filter(String filterContactName) {
 
         filteredContactsList.contactArrayList.clear();
 
-        if (filterContactName.isEmpty() || filterContactName.length()<1){
+        if (filterContactName.isEmpty() || filterContactName.length()<1) {
             filteredContactsList.contactArrayList.addAll(contactsList.contactArrayList);
             this.filterContactName = "";
-
-        }
-        else {
+        } else {
             this.filterContactName = filterContactName.toLowerCase().trim();
             for (int i = 0; i < contactsList.contactArrayList.size(); i++) {
-
                 if (contactsList.contactArrayList.get(i).name.toLowerCase().contains(filterContactName))
                     filteredContactsList.addContact(contactsList.contactArrayList.get(i));
             }
         }
+
         notifyDataSetChanged();
 
     }
 
-    public void addContacts(ArrayList<Contact> contacts){
+    public void addContacts(ArrayList<Contact> contacts) {
         this.contactsList.contactArrayList.addAll(contacts);
         this.filter(this.filterContactName);
     }
@@ -127,7 +120,6 @@ public class ContactsListAdapter extends BaseAdapter {
     }
 
     public static class ViewHolder {
-
         CheckBox chkContact;
     }
 }

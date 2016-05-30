@@ -3,32 +3,21 @@ package com.example.armadillianonimi.emergencyphonenumbers;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Paint;
-import android.graphics.RectF;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
-import android.support.annotation.DrawableRes;
 import android.support.annotation.Nullable;
 import android.os.Bundle;
 import android.support.v7.preference.PreferenceManager;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
-import android.widget.ListAdapter;
 import android.widget.TextView;
 
-import com.google.android.gms.nearby.connection.AppIdentifier;
-
-
 /**
- * Created by val on 19/05/16.
  * This class opens up an dialogue and edits the selected country in the preferences if the
  * Done button is pressed.
  */
@@ -42,7 +31,6 @@ public class CountrySelectionDialog extends DialogFragment {
     private EmergencyPhoneNumbersAPI api = EmergencyPhoneNumbersAPI.getSharedInstance();
     private ListItem[] items;
     ArrayAdapter adapter;
-
 
     @Override public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -77,7 +65,8 @@ public class CountrySelectionDialog extends DialogFragment {
                     getActivity(),
                     android.R.layout.select_dialog_item,
                     android.R.id.text1,
-                    items){
+                    items) {
+
                 public View getView(int position, View convertView, ViewGroup parent) {
                     //Use super class to create the View
                     View v = super.getView(position, convertView, parent);
@@ -103,16 +92,12 @@ public class CountrySelectionDialog extends DialogFragment {
                     canvas.drawBitmap(mutableBitmap, borderSize, borderSize, null);
                     Drawable d_resized = new BitmapDrawable(getResources(), Bitmap.createScaledBitmap(bmpWithBorder, dp50, dp37, true));
 
-
-
                     if (currItem.isItemSelected) {
                         //Put the image on the TextView
                         tv.setCompoundDrawablesWithIntrinsicBounds(d_resized, null, dChecked, null);
-
                     } else {
                         //Put the image on the TextView
                         tv.setCompoundDrawablesWithIntrinsicBounds(d_resized, null, null, null);
-
                     }
 
                     //Add margin between image and text (support various screen densities)
@@ -152,8 +137,6 @@ public class CountrySelectionDialog extends DialogFragment {
         return dialog.create();
     }
 
-
-
     private int getValueIndex() {
         return findIndexOfValue(mValue);
     }
@@ -189,8 +172,7 @@ public class CountrySelectionDialog extends DialogFragment {
             mEntryValues[i] = country.getCode();
             if (!(mEntryValues[i].equals("DO"))) {
                 items[i] = new ListItem(country.getName(), getResources().getIdentifier(mEntryValues[i].toString().toLowerCase(), "drawable", "com.example.armadillianonimi.emergencyphonenumbers"));
-            }
-            else {
+            } else {
                 items[i] = new ListItem(country.getName(), getResources().getIdentifier(mEntryValues[i].toString().toLowerCase() + "2", "drawable", "com.example.armadillianonimi.emergencyphonenumbers"));
             }
             i++;

@@ -1,30 +1,23 @@
 package com.example.armadillianonimi.emergencyphonenumbers;
 
 import android.Manifest;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.res.TypedArray;
-import android.graphics.Canvas;
 import android.graphics.Color;
-import android.graphics.ColorFilter;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
-import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.preference.PreferenceManager;
 import android.support.v7.widget.CardView;
-import android.text.Layout;
-import android.text.TextUtils;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -36,15 +29,8 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.Random;
 
-/**
- * Created by patrickbalestra on 14/03/2015.
- */
 public class EmergencyTab extends Fragment {
 
     public static String ALREADY_ADDED = "contacts";
@@ -88,14 +74,14 @@ public class EmergencyTab extends Fragment {
                 addContactCard(c, l);
             }
         }
-
         System.out.println("EmergencyFragment: onCreateView");
         return view;
     }
 
-    private int inDP(int num){
+    private int inDP(int num) {
         return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, num, getResources().getDisplayMetrics());
     }
+
     public Drawable getSelectedItemDrawable() {
         int[] attrs = new int[]{R.attr.selectableItemBackground};
         TypedArray ta = getActivity().obtainStyledAttributes(attrs);
@@ -148,8 +134,6 @@ public class EmergencyTab extends Fragment {
         img.setColorFilter(Color.parseColor("#616161"));
         img.setLayoutParams(ma);
 
-
-
         TextView contactName = new TextView(getContext());
         relativeLayout.addView(contactName);
         contactName.setText(contact.phone);
@@ -164,7 +148,6 @@ public class EmergencyTab extends Fragment {
         ViewGroup.MarginLayoutParams mar = (ViewGroup.MarginLayoutParams) contactName.getLayoutParams();
         mar.setMargins(0, 0, inDP(50), 0);
         contactName.setLayoutParams(mar);
-
 
         TextView contactPhone = new TextView(getContext());
         relativeLayout.addView(contactPhone);
@@ -191,7 +174,6 @@ public class EmergencyTab extends Fragment {
             Bundle extras = data.getExtras();
             final HashMap<String, Contact> selectedContacts = (HashMap<String, Contact>) extras.get(ContactsPickerActivity.SELECTED);
 
-
             LinearLayout linearLayout = (LinearLayout) getView().findViewById(R.id.main);
             linearLayout.removeViews(3, addedContacts.size());
             // set field to new list of contacts
@@ -204,12 +186,12 @@ public class EmergencyTab extends Fragment {
         System.out.println("EmergencyFragment: onActivityResult");
     }
 
-    public boolean checkPermission(String permission){
+    public boolean checkPermission(String permission) {
         return (ContextCompat.checkSelfPermission(getContext(), permission)
                 == PackageManager.PERMISSION_GRANTED);
     }
 
-    public void request(String permission){
+    public void request(String permission) {
         ActivityCompat.requestPermissions(getActivity(),
                 new String[]{permission},
                 PERMISSION_REQUEST_CODE);
@@ -234,14 +216,12 @@ public class EmergencyTab extends Fragment {
 
                 builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        //do things
                     }
                 });
 
                 AlertDialog alert = builder.create();
                 alert.show();
-            }
-            else{
+            } else{
                 startActivity(callIntent);
             }
         } else {
@@ -262,7 +242,6 @@ public class EmergencyTab extends Fragment {
                     request(Manifest.permission.READ_CONTACTS);
                     Toast.makeText(getContext(), "Please, if you want to add a contact, allow contact permission.", Toast.LENGTH_SHORT).show();
                 }
-
             }
         });
     }

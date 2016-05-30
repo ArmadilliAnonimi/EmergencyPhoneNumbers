@@ -1,8 +1,5 @@
 package com.example.armadillianonimi.emergencyphonenumbers;
 
-/**
- * Created by Emanuele on 23/05/16.
- */
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
@@ -14,7 +11,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
-
 import java.util.HashMap;
 
 public class ContactsPickerActivity extends AppCompatActivity {
@@ -53,19 +49,15 @@ public class ContactsPickerActivity extends AppCompatActivity {
         txtFilter.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
             }
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 contactsListAdapter.filter(s.toString());
-
             }
 
             @Override
             public void afterTextChanged(Editable s) {
-
-
             }
         });
 
@@ -89,10 +81,7 @@ public class ContactsPickerActivity extends AppCompatActivity {
         });
     }
 
-
-
-    private void loadContacts(String filter){
-
+    private void loadContacts(String filter) {
         if (contactsLoader!=null && contactsLoader.getStatus()!= AsyncTask.Status.FINISHED) {
             try {
                 contactsLoader.cancel(true);
@@ -112,8 +101,4 @@ public class ContactsPickerActivity extends AppCompatActivity {
             e.printStackTrace();
         }
     }
-
-
-
-
 }
