@@ -97,6 +97,7 @@ public class ContactsPickerActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 contactsListAdapter.selectedContactsList = new LinkedHashMap<>();
+                contactsListAdapter.notifyDataSetChanged();
                 CharSequence message = getResources().getString(R.string.contacts_toast);
                 Toast toast = Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG);
                 toast.setGravity(Gravity.CENTER,0,-100);
