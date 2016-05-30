@@ -1,10 +1,8 @@
 package com.example.armadillianonimi.emergencyphonenumbers;
 
 import android.os.Bundle;
-
 import com.chyrta.onboarder.OnboarderActivity;
 import com.chyrta.onboarder.OnboarderPage;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -51,18 +49,13 @@ public class IntroActivity extends OnboarderActivity {
         onboarderPage4.setTitleTextSize(30);
         onboarderPage4.setDescriptionTextSize(19);
 
-
-
         // Each page is added to an ArrayList of pages.
         onboarderPages.add(onboarderPage1);
         onboarderPages.add(onboarderPage2);
         onboarderPages.add(onboarderPage3);
         onboarderPages.add(onboarderPage4);
 
-
         setOnboardPagesReady(onboarderPages);
-
-
     }
 
     @Override
@@ -76,5 +69,4 @@ public class IntroActivity extends OnboarderActivity {
     public void onFinishButtonPressed() {
         finish();
     }
-
 }

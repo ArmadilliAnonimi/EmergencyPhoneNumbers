@@ -6,12 +6,9 @@ import android.content.DialogInterface;
 import android.net.Uri;
 import com.crashlytics.android.Crashlytics;
 import io.fabric.sdk.android.Fabric;
-
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.content.Context;
-
 import android.os.Build;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.ActivityCompat;
@@ -33,7 +30,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import java.util.HashMap;
 import java.util.Locale;
 
@@ -205,8 +201,7 @@ public class MainActivity extends AppCompatActivity {
 
                 AlertDialog alert = builder.create();
                 alert.show();
-            }
-            else{
+            } else{
                 startActivity(callIntent);
             }
         } else {
@@ -449,7 +444,6 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onSaveInstanceState(Bundle savedInstanceState) {
-
         // Always call the superclass so it can save the view hierarchy state
         super.onSaveInstanceState(savedInstanceState);
     }
@@ -457,6 +451,5 @@ public class MainActivity extends AppCompatActivity {
     public void onRestoreInstanceState(Bundle savedInstanceState) {
         // Always call the superclass so it can restore the view hierarchy
         super.onRestoreInstanceState(savedInstanceState);
-
     }
 }

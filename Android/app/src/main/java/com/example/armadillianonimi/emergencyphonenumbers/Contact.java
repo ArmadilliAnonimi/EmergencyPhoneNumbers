@@ -1,11 +1,7 @@
 package com.example.armadillianonimi.emergencyphonenumbers;
 
-/**
- * Created by Emanuele on 23/05/16.
- */
 import android.os.Parcel;
 import android.os.Parcelable;
-
 
 public class Contact implements Parcelable {
 
@@ -38,8 +34,7 @@ public class Contact implements Parcelable {
     };
 
     @Override
-    public String toString()
-    {
+    public String toString() {
         return name+" |  " +phone;
     }
 

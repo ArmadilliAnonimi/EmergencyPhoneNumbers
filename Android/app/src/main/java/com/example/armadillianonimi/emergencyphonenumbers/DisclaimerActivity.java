@@ -36,12 +36,12 @@ public class DisclaimerActivity extends AppCompatActivity {
             }
         });
 
-        // get container LinearLayout and load titles and contents from resources
+        // Get container LinearLayout and load titles and contents from resources
         faqContainer = (LinearLayout) findViewById(R.id.faq_scroll);
         String[] titles = getResources().getStringArray(R.array.faq_titles);
         String[] contents = getResources().getStringArray(R.array.faq_contents);
 
-        // add each title followed by its content to the container
+        // Add each title followed by its content to the container
         for (int i = 0; i < titles.length; i++) {
             TextView t = setFaqTitle(titles[i]);
             TextView c = setFaqContent(contents[i]);

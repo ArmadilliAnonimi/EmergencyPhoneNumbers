@@ -1,8 +1,5 @@
 package com.example.armadillianonimi.emergencyphonenumbers;
 
-/**
- * Created by Emanuele on 23/05/16.
- */
 import android.content.ContentResolver;
 import android.content.Context;
 import android.database.Cursor;
@@ -11,9 +8,7 @@ import android.os.AsyncTask;
 import android.provider.ContactsContract;
 import android.view.View;
 import android.widget.TextView;
-
 import java.util.ArrayList;
-
 
 public class ContactsLoader extends AsyncTask<String,Void,Void> {
 
@@ -22,7 +17,6 @@ public class ContactsLoader extends AsyncTask<String,Void,Void> {
     private ArrayList<Contact> tempContactHolder;
     TextView txtProgress;
     int totalContactsCount,loadedContactsCount;
-
 
     ContactsLoader(Context context,ContactsListAdapter contactsListAdapter){
         this.context = context;
@@ -36,7 +30,6 @@ public class ContactsLoader extends AsyncTask<String,Void,Void> {
     @Override
     protected Void doInBackground(String[] filters) {
 
-
         String filter = filters[0];
 
         ContentResolver contentResolver = context.getContentResolver();
@@ -48,6 +41,7 @@ public class ContactsLoader extends AsyncTask<String,Void,Void> {
                 ContactsContract.Contacts.DISPLAY_NAME,
                 ContactsContract.Contacts.HAS_PHONE_NUMBER
         };
+
         Cursor cursor;
         if(filter.length()>0) {
             cursor = contentResolver.query(
@@ -57,8 +51,7 @@ public class ContactsLoader extends AsyncTask<String,Void,Void> {
                     new String[]{filter},
                     ContactsContract.Contacts.DISPLAY_NAME + " ASC"
             );
-        }else {
-
+        } else {
             cursor = contentResolver.query(
                     uri,
                     projection,
@@ -69,17 +62,11 @@ public class ContactsLoader extends AsyncTask<String,Void,Void> {
 
         }
         totalContactsCount = cursor.getCount();
-        if(cursor!=null && cursor.getCount()>0){
-
-
-
+        if(cursor!=null && cursor.getCount()>0) {
             while(cursor.moveToNext()) {
                 if (Integer.parseInt(cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts.HAS_PHONE_NUMBER))) > 0) {
-
                     String id = cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts._ID));
                     String name = cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME));
-
-
                     Cursor phoneCursor = contentResolver.query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
                             null,
                             ContactsContract.CommonDataKinds.Phone.CONTACT_ID + "=?",
@@ -88,73 +75,46 @@ public class ContactsLoader extends AsyncTask<String,Void,Void> {
                     );
 
                     if (phoneCursor != null && phoneCursor.getCount() > 0) {
-
                         while (phoneCursor.moveToNext()) {
                             String phId = phoneCursor.getString(phoneCursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone._ID));
-
                             String customLabel = phoneCursor.getString(phoneCursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.LABEL));
-
                             String label = (String) ContactsContract.CommonDataKinds.Phone.getTypeLabel(context.getResources(),
                                     phoneCursor.getInt(phoneCursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.TYPE)),
                                     customLabel
                             );
 
                             String phNo = phoneCursor.getString(phoneCursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
-//                            boolean flag = true;
-//
-//                            for(Contact c : tempContactHolder){
-//                                if ((c.phone.replaceAll("\\s+","").equals(phNo.replaceAll("\\s+","")) ) && (c.name.replaceAll("\\s+","").equals(name.replaceAll("\\s+","")))){
-//                                    flag = false;
-//                                }
-//                            }
-//                            if (flag) {
                                 tempContactHolder.add(new Contact(phId, name, phNo, label));
-//                            }
-
                         }
+
                         phoneCursor.close();
 
                     }
-
                 }
                 loadedContactsCount++;
-
                 publishProgress();
-
-
             }
             cursor.close();
         }
-
         return null;
     }
 
     @Override
-    protected void onProgressUpdate(Void[] v){
-
-
-
-
+    protected void onProgressUpdate(Void[] v) {
         if(this.tempContactHolder.size()>=100) {
-
-
             contactsListAdapter.addContacts(tempContactHolder);
-
             this.tempContactHolder.clear();
 
-            if(txtProgress!=null){
+            if(txtProgress!=null) {
                 txtProgress.setVisibility(View.VISIBLE);
                 String progressMessage = "Loading...("+loadedContactsCount+"/"+totalContactsCount+")";
                 txtProgress.setText(progressMessage);
             }
-
         }
-
     }
 
     @Override
-    protected void onPostExecute(Void v){
-
+    protected void onPostExecute(Void v) {
         contactsListAdapter.addContacts(tempContactHolder);
         tempContactHolder.clear();
 

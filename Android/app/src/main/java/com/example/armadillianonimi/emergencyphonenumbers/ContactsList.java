@@ -1,17 +1,12 @@
 package com.example.armadillianonimi.emergencyphonenumbers;
 
-/**
- * Created by Emanuele on 23/05/16.
- */
 import java.util.ArrayList;
-
 
 public class ContactsList{
 
     public ArrayList<Contact> contactArrayList;
 
     public ContactsList(){
-
         contactArrayList = new ArrayList<Contact>();
     }
 
@@ -20,7 +15,6 @@ public class ContactsList{
     }
 
     public int getCount(){
-
         return contactArrayList.size();
     }
 

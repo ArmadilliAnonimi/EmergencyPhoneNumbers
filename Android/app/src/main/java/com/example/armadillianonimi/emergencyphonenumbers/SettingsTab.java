@@ -1,22 +1,12 @@
 package com.example.armadillianonimi.emergencyphonenumbers;
 
-import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.v14.preference.SwitchPreference;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.ShareCompat;
-import android.support.v7.preference.DialogPreference;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceFragmentCompat;
 import android.support.v7.preference.PreferenceManager;
 import android.support.v7.preference.SwitchPreferenceCompat;
-import android.util.AttributeSet;
 
-/**
- * Created by Aron Fiechter on 2016-05-04.
- */
 public class SettingsTab extends PreferenceFragmentCompat implements SharedPreferences.OnSharedPreferenceChangeListener {
 
     SharedPreferences prefs;

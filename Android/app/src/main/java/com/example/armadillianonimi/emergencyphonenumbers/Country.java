@@ -3,10 +3,6 @@ package com.example.armadillianonimi.emergencyphonenumbers;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-/**
- * Created by patrickbalestra on 4/30/16.
- * Object that stored all the information for a country.
- */
 public class Country {
 
     // JSON keys returned from the Server
