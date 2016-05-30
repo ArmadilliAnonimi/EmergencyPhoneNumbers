@@ -1,6 +1,7 @@
 package com.example.armadillianonimi.emergencyphonenumbers;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -29,7 +30,15 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.gson.Gson;
+import com.google.gson.internal.LinkedTreeMap;
+import com.google.gson.reflect.TypeToken;
+
+
+import java.lang.reflect.Type;
 import java.util.HashMap;
+import java.util.Map;
 
 public class EmergencyTab extends Fragment {
 
@@ -47,6 +56,8 @@ public class EmergencyTab extends Fragment {
     private final int CONTACT_PICK_REQUEST = 1000;
     private final int RESULT_CODE_OK = -1;
     private static final int PERMISSION_REQUEST_CODE = 1;
+    private SharedPreferences prefs;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -69,11 +80,28 @@ public class EmergencyTab extends Fragment {
         setupAddContactButton();
 
         LinearLayout l = (LinearLayout) view.findViewById(R.id.main);
+        prefs = PreferenceManager.getDefaultSharedPreferences(getContext());
+        if (prefs != null) {
+            Gson gson = new Gson();
+            String json = prefs.getString("MyObject", "");
+            if (!(json.equals(""))) {
+                java.lang.reflect.Type type = new TypeToken<HashMap<String,Contact>>(){}.getType();
+                //Type type = new TypeToken<Map<String, Contact>>(){}.getType();
+                HashMap<String, Contact> obj = gson.fromJson(json, type);
+
+                addedContacts = obj;
+            }
+        }
+
         if (!(addedContacts.isEmpty())) {
             for (Contact c : addedContacts.values()) {
+
                 addContactCard(c, l);
             }
         }
+
+
+
         System.out.println("EmergencyFragment: onCreateView");
         return view;
     }
@@ -179,6 +207,12 @@ public class EmergencyTab extends Fragment {
             // set field to new list of contacts
             addedContacts = selectedContacts;
 
+            SharedPreferences.Editor prefsEditor = prefs.edit();
+            Gson gson = new Gson();
+            String json = gson.toJson(addedContacts);
+            prefsEditor.putString("MyObject", json);
+            prefsEditor.apply();
+
             for (Contact contact : addedContacts.values()) {
                 addContactCard(contact, linearLayout);
             }
@@ -276,6 +310,10 @@ public class EmergencyTab extends Fragment {
     public void onDestroy() {
         super.onDestroy();
         System.out.println("EmergencyFragment: onDestroy");
+    }
+    @Override
+    public void onStop() {
+        super.onStop();
     }
 
     @Override
