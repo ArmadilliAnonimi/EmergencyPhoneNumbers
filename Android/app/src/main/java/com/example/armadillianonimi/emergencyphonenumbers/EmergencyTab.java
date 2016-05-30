@@ -8,6 +8,8 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.res.TypedArray;
 import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
@@ -19,6 +21,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.preference.PreferenceManager;
 import android.support.v7.widget.CardView;
+import android.text.TextUtils;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -158,6 +161,8 @@ public class EmergencyTab extends Fragment {
         img.setColorFilter(Color.parseColor("#616161"));
         img.setLayoutParams(ma);
 
+        // PHONE NUMBER
+
         TextView contactName = new TextView(getContext());
         relativeLayout.addView(contactName);
         contactName.setText(contact.phone);
@@ -172,13 +177,30 @@ public class EmergencyTab extends Fragment {
         ViewGroup.MarginLayoutParams mar = (ViewGroup.MarginLayoutParams) contactName.getLayoutParams();
         mar.setMargins(0, 0, inDP(50), 0);
         contactName.setLayoutParams(mar);
+        Rect bounds2 = new Rect();
+        Paint textPaint2 = contactName.getPaint();
+        textPaint2.getTextBounds(contact.phone,0,contact.phone.length(),bounds2);
+        System.out.println("NAME " + contact.phone + " " + bounds2.width());
+
+
+
+        // NAME
 
         TextView contactPhone = new TextView(getContext());
         relativeLayout.addView(contactPhone);
         String name = contact.name;
-        if (name.length() > 6) {
-            name = name.substring(0, 6)+ "...";
+        if (bounds2.width() > 336){
+            //contactPhone.setMaxEms(4);
+            contactPhone.setMaxWidth(850 - 50 - bounds2.width());
         }
+        else {
+            contactPhone.setMaxEms(5);
+        }
+        contactPhone.setMaxLines(1);
+        contactPhone.setEllipsize(TextUtils.TruncateAt.END);
+//        if (name.length() > 6) {
+//            name = name.substring(0, 6)+ "...";
+//        }
         contactPhone.setText(name);
         RelativeLayout.LayoutParams rel = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         contactPhone.setLayoutParams(rel);
@@ -188,6 +210,10 @@ public class EmergencyTab extends Fragment {
         contactPhone.setTextSize(TypedValue.COMPLEX_UNIT_SP, 25);
         contactPhone.setTextColor(Color.parseColor("#616161"));
         contactPhone.setPadding(inDP(10), inDP(10), inDP(10), inDP(10));
+        Rect bounds = new Rect();
+        Paint textPaint = contactPhone.getPaint();
+        textPaint.getTextBounds(contact.name,0,contact.name.length(),bounds);
+        System.out.println("NAME " + contact.name + " " + bounds.width());
     }
 
     @Override
