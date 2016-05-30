@@ -105,22 +105,24 @@ public class LocationTab extends Fragment {
         locationFinder.setLocationManagerListener(new LocationManagerListener() {
             @Override
             public void locationReceived(UserLocation location) {
-                addressTextView.setText(location.completeAddress);
-                addressTextView.setContentDescription(location.completeAddress);
+                if (getActivity() != null) {
+                    addressTextView.setText(location.completeAddress);
+                    addressTextView.setContentDescription(location.completeAddress);
 
-                if (mapView != null) {
-                    googleMap = mapView.getMap();
+                    if (mapView != null) {
+                        googleMap = mapView.getMap();
 
-                    if (marker != null) {
-                        marker.remove();
+                        if (marker != null) {
+                            marker.remove();
+                        }
+
+                        // Adding marker on the map.
+                        marker = googleMap.addMarker(new MarkerOptions().position(location.position).title(getString(R.string.you_are_here)).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)));
+
+                        // Moving position of the camera in the map depending on the position of the marker.
+                        CameraPosition cameraPosition = new CameraPosition.Builder().target(location.position).zoom(16).build();
+                        googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
                     }
-
-                    // Adding marker on the map.
-                    marker = googleMap.addMarker(new MarkerOptions().position(location.position).title(getString(R.string.you_are_here)).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)));
-
-                    // Moving position of the camera in the map depending on the position of the marker.
-                    CameraPosition cameraPosition = new CameraPosition.Builder().target(location.position).zoom(16).build();
-                    googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
                 }
             }
         });
