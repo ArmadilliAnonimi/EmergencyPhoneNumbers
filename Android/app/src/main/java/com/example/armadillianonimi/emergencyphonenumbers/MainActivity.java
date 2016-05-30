@@ -152,7 +152,9 @@ public class MainActivity extends AppCompatActivity {
         System.out.println("### - MainActivity created");
     }
 
+    @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
         // Permission requests
         if (resultCode == RESULT_OK) {
             if (!(checkPermission(Manifest.permission.CALL_PHONE))) {
