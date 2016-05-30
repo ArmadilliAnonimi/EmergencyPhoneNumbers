@@ -39,6 +39,7 @@ import com.google.gson.reflect.TypeToken;
 
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 
 public class EmergencyTab extends Fragment {
 
@@ -52,7 +53,7 @@ public class EmergencyTab extends Fragment {
     private TextView policeTextView;
     private TextView medicalTextView;
     private FloatingActionButton addContactButton;
-    private HashMap<String, Contact> addedContacts = new HashMap<>();
+    private LinkedHashMap<String, Contact> addedContacts = new LinkedHashMap<>();
     private final int CONTACT_PICK_REQUEST = 1000;
     private final int RESULT_CODE_OK = -1;
     private static final int PERMISSION_REQUEST_CODE = 3;
@@ -85,10 +86,8 @@ public class EmergencyTab extends Fragment {
             Gson gson = new Gson();
             String json = prefs.getString("MyObject", "");
             if (!(json.equals(""))) {
-                java.lang.reflect.Type type = new TypeToken<HashMap<String,Contact>>(){}.getType();
-                HashMap<String, Contact> obj = gson.fromJson(json, type);
-
-                addedContacts = obj;
+                java.lang.reflect.Type type = new TypeToken<LinkedHashMap<String, Contact>>(){}.getType();
+                addedContacts = gson.fromJson(json, type);
             }
         }
 
@@ -221,8 +220,10 @@ public class EmergencyTab extends Fragment {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == CONTACT_PICK_REQUEST && resultCode == RESULT_CODE_OK) {
-            Bundle extras = data.getExtras();
-            final HashMap<String, Contact> selectedContacts = (HashMap<String, Contact>) extras.get(ContactsPickerActivity.SELECTED);
+            String addedContactsList =  data.getStringExtra(ContactsPickerActivity.SELECTED);
+            Gson gsonFromIntent = new Gson();
+            java.lang.reflect.Type type = new TypeToken<LinkedHashMap<String, Contact>>(){}.getType();
+            final LinkedHashMap<String, Contact> selectedContacts = gsonFromIntent.fromJson(addedContactsList, type);
 
             LinearLayout linearLayout = (LinearLayout) getView().findViewById(R.id.main);
             linearLayout.removeViews(3, addedContacts.size());
@@ -288,7 +289,9 @@ public class EmergencyTab extends Fragment {
 
     public void selectContacts(Context context) {
         Intent intentContactPick = new Intent(context, ContactsPickerActivity.class);
-        intentContactPick.putExtra(ALREADY_ADDED, addedContacts);
+        Gson gson = new Gson();
+        String addedContactsList = gson.toJson(addedContacts);
+        intentContactPick.putExtra(ALREADY_ADDED, addedContactsList);
         startActivityForResult(intentContactPick, CONTACT_PICK_REQUEST);
     }
 

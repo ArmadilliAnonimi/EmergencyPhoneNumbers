@@ -46,12 +46,22 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:id="@+id/btn_remove_all"
+            android:contentDescription="@string/CLEAR"
+            android:text="@string/CLEAR"
+            android:layout_weight="0.02"
+            android:textColor="@color/colorAccent"
+            android:backgroundTint="@color/colorClearContacts"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:id="@+id/btn_cancel"
             android:contentDescription="@string/CANCEL"
             android:text="@string/CANCEL"
             android:layout_weight="0.5"
             android:textColor="@color/colorAccent"
-            android:backgroundTint="@color/colorPrimary"/>
+            android:backgroundTint="@color/colorCancelContacts"/>
 
         <Button
             android:layout_width="wrap_content"
@@ -61,7 +71,7 @@
             android:text="@string/DONE"
             android:layout_weight="0.5"
             android:textColor="@color/colorAccent"
-            android:backgroundTint="@color/colorPrimary"/>
+            android:backgroundTint="@color/colorDoneContacts"/>
 
     </LinearLayout>
 

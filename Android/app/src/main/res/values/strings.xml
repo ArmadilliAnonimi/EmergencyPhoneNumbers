@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">EmergencyPhoneNumbers</string>
-    <string name="icon_name">Emergency\nNumbers</string>
-    <string name="pref_previously_started">Previously started</string>
+    <string name="icon_name" translatable="false">Emergency\nNumbers</string>
+    <string name="pref_previously_started" translatable="false">Previously started</string>
     <string name="pref_auto_location">Always use current location</string>
     <string name="pref_auto_location_summary">Set the country automatically using your current location</string>
     <string name="pref_call_confirmation">Call confirmation</string>
@@ -66,6 +66,7 @@
     <string name="CLOSE">CLOSE</string>
     <string name="OK">OK</string>
     <string name="DISABLE">DISABLE</string>
+    <string name="CLEAR">CLEAR</string>
 
     <string-array name="faq_titles">
         <item>Disclaimer</item>
@@ -90,7 +91,10 @@
     <string name="map_description">is displayed on the map.</string>
 
     <string name="contact_us">Contact us</string>
-    <string name="contact_us_description">Send us an an email with your feedback.</string>
-    <string name="contact_developer_uri">mailto:emergencyphonenumbers@gmail.com</string>
+    <string name="contact_us_description">Send us an email with your feedback.</string>
+    <string name="contact_developer_uri" translatable="false">mailto:emergencyphonenumbers@gmail.com</string>
+
+    <string name="ellipses" translatable="false">&#8230;</string>
+    <string name="contacts_toast">Deselected all contacts. Press CANCEL to undo.</string>
 
 </resources>

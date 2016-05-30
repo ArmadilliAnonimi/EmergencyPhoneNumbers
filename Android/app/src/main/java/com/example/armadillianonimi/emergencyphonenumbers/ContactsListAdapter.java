@@ -8,16 +8,14 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
-
-
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 
 public class ContactsListAdapter extends BaseAdapter {
 
     Context context;
     ContactsList contactsList,filteredContactsList;
-    HashMap<String, Contact> selectedContactsList;
+    LinkedHashMap<String, Contact> selectedContactsList;
     String filterContactName;
 
     ContactsListAdapter(Context context, ContactsList contactsList){
@@ -25,11 +23,11 @@ public class ContactsListAdapter extends BaseAdapter {
         this.context = context;
         this.contactsList = contactsList;
         this.filteredContactsList = new ContactsList();
-        this.selectedContactsList = new HashMap<>();
+        this.selectedContactsList = new LinkedHashMap<>();
         this.filterContactName = "";
     }
 
-    public void setSelectedContactsList(HashMap<String, Contact> alreadyAddedContacts) {
+    public void setSelectedContactsList(LinkedHashMap<String, Contact> alreadyAddedContacts) {
         selectedContactsList = alreadyAddedContacts;
     }
 

@@ -6,12 +6,19 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 
 public class ContactsPickerActivity extends AppCompatActivity {
 
@@ -20,6 +27,7 @@ public class ContactsPickerActivity extends AppCompatActivity {
     ListView contactsChooser;
     Button btnDone;
     Button btnCancel;
+    Button btnRemoveAll;
     EditText txtFilter;
     TextView txtLoadInfo;
     ContactsListAdapter contactsListAdapter;
@@ -33,6 +41,7 @@ public class ContactsPickerActivity extends AppCompatActivity {
         contactsChooser = (ListView) findViewById(R.id.lst_contacts_chooser);
         btnDone = (Button) findViewById(R.id.btn_done);
         btnCancel = (Button) findViewById(R.id.btn_cancel);
+        btnRemoveAll = (Button) findViewById(R.id.btn_remove_all);
         txtFilter = (EditText) findViewById(R.id.txt_filter);
         txtLoadInfo = (TextView) findViewById(R.id.txt_load_progress);
 
@@ -42,8 +51,10 @@ public class ContactsPickerActivity extends AppCompatActivity {
 
         loadContacts("");
 
-        Bundle extras = getIntent().getExtras();
-        final HashMap<String, Contact> alreadyAdded = (HashMap<String, Contact>) extras.get(EmergencyTab.ALREADY_ADDED);
+        String addedContactsList =  getIntent().getStringExtra(EmergencyTab.ALREADY_ADDED);
+        Gson gson = new Gson();
+        java.lang.reflect.Type type = new TypeToken<LinkedHashMap<String, Contact>>(){}.getType();
+        final LinkedHashMap<String, Contact> alreadyAdded = gson.fromJson(addedContactsList, type);
         contactsListAdapter.setSelectedContactsList(alreadyAdded);
 
         txtFilter.addTextChangedListener(new TextWatcher() {
@@ -65,7 +76,9 @@ public class ContactsPickerActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent resultIntent = new Intent();
-                resultIntent.putExtra(ContactsPickerActivity.SELECTED, contactsListAdapter.selectedContactsList);
+                Gson gson = new Gson();
+                String addedContactsList = gson.toJson(contactsListAdapter.selectedContactsList);
+                resultIntent.putExtra(ContactsPickerActivity.SELECTED, addedContactsList);
                 setResult(RESULT_OK, resultIntent);
                 finish();
             }
@@ -77,6 +90,17 @@ public class ContactsPickerActivity extends AppCompatActivity {
                 Intent resultIntent = new Intent();
                 setResult(RESULT_CANCELED, resultIntent);
                 finish();
+            }
+        });
+
+        btnRemoveAll.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                contactsListAdapter.selectedContactsList = new LinkedHashMap<>();
+                CharSequence message = getResources().getString(R.string.contacts_toast);
+                Toast toast = Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG);
+                toast.setGravity(Gravity.CENTER,0,-100);
+                toast.show();
             }
         });
     }
