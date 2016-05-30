@@ -86,8 +86,20 @@ public class ContactsLoader extends AsyncTask<String,Void,Void> {
                             String phNo = phoneCursor.getString(phoneCursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
                             boolean flag = true;
                             if (tempContactHolder.size() > 0) {
+                                String pl; //FATTI GLI AFFARI TUOI
+                                String al;
                                 Contact c = tempContactHolder.get(tempContactHolder.size() - 1);
-                                if ((c.phone.replaceAll("\\s+", "").equals(phNo.replaceAll("\\s+", ""))) && (c.name.replaceAll("\\s+", "").equals(name.replaceAll("\\s+", "")))) {
+                                if (c.phone.replaceAll("\\s+", "").startsWith("+")){
+                                    pl = c.phone.replaceAll("\\s+", "").substring(3);
+                                }else {
+                                    pl = c.phone.replaceAll("\\s+", "");
+                                }
+                                if (phNo.replaceAll("\\s+", "").startsWith("+")){
+                                    al = phNo.replaceAll("\\s+", "").substring(3);
+                                }else {
+                                    al = phNo.replaceAll("\\s+", "");
+                                }
+                                if ((pl.equals(al)) && (c.name.replaceAll("\\s+", "").equals(name.replaceAll("\\s+", "")))) {
                                     flag = false;
                                 }
                                 if (flag) {
