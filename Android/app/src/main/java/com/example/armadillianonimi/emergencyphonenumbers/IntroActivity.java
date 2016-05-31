@@ -1,8 +1,10 @@
 package com.example.armadillianonimi.emergencyphonenumbers;
 
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
-import android.view.View;
+import android.view.Window;
 
 import com.chyrta.onboarder.OnboarderActivity;
 import com.chyrta.onboarder.OnboarderPage;
@@ -16,7 +18,13 @@ public class IntroActivity extends OnboarderActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        onboarderPages = new ArrayList<OnboarderPage>();
+        onboarderPages = new ArrayList<>();
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            Window window = getWindow();
+            window.setNavigationBarColor(getResources().getColor(R.color.colorPrimarySettingsDark));
+            window.setStatusBarColor(getResources().getColor(R.color.colorPrimarySettingsDark));
+        }
 
         // Each page of the tutorial is created here
         OnboarderPage onboarderPage1 = new OnboarderPage(R.string.welcome, R.string.thanks,R.mipmap.ic_launcher);

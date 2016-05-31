@@ -27,6 +27,7 @@ public class DisclaimerActivity extends AppCompatActivity {
             Window window = getWindow();
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
             window.setStatusBarColor(getResources().getColor(R.color.colorPrimarySettingsDark));
+            window.setNavigationBarColor(getResources().getColor(R.color.colorPrimarySettingsDark));
         }
 
         disclaimerToolbar.setNavigationOnClickListener(new View.OnClickListener() {
