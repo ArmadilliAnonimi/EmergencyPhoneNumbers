@@ -1,5 +1,5 @@
 # Emergency Phone Numbers
-![](Resources/header.png)
+![](Resources/Header.png)
 
 An Android app that displays the world emergency phone numbers developed @ USI.
 
