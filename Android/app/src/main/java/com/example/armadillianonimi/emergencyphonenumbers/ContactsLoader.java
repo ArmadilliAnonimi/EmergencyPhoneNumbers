@@ -103,11 +103,11 @@ public class ContactsLoader extends AsyncTask<String,Void,Void> {
                                     flag = false;
                                 }
                                 if (flag) {
-                                    tempContactHolder.add(new Contact(phId, name, phNo, label));
+                                    tempContactHolder.add(new Contact(phId, name, phNo.replaceAll("\\s+", ""), label));
                                 }
                             }
                             else{
-                                tempContactHolder.add(new Contact(phId, name, phNo, label));
+                                tempContactHolder.add(new Contact(phId, name, phNo.replaceAll("\\s+", ""), label));
                             }
                     }
 

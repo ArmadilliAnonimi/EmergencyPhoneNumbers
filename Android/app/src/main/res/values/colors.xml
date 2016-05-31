@@ -7,8 +7,12 @@
     <color name="colorPrimaryLocation">#2196F3</color>
     <color name="colorPrimaryLocationDark">#1976D2</color>
     <color name="colorPrimarySettings">#607D8B</color>
-    <color name="colorPrimarySettingsDark">#455A64</color>
+    <color name="colorPrimarySettingsDark">#546E7A</color>
     <color name="colorAccent">#ffffff</color>
     <color name="colorEmergencyCardsText">#616161</color>
+
+    <color name="colorDoneContacts">#00C853</color>
+    <color name="colorCancelContacts">#FF6D00</color>
+    <color name="colorClearContacts">#D50000</color>
 
 </resources>

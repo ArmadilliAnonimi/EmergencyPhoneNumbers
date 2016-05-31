@@ -70,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
         if(!previouslyStarted) {
             SharedPreferences.Editor edit = prefs.edit();
             edit.putBoolean(getString(R.string.pref_previously_started), Boolean.TRUE);
-            edit.commit();
+            edit.apply();
             startActivityForResult(new Intent(this, IntroActivity.class), 0);
         }
 
@@ -111,6 +111,7 @@ public class MainActivity extends AppCompatActivity {
 
         // Setting the ViewPager For the TabLayout
         tabs.setupWithViewPager(pager);
+        selectAppBarColour(tabs.getSelectedTabPosition());
 
         // Tabs Listener
         tabs.setOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(pager) {
@@ -243,6 +244,7 @@ public class MainActivity extends AppCompatActivity {
             Window window = getWindow();
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
             window.setStatusBarColor(primaryColourDark);
+            window.setNavigationBarColor(primaryColourDark);
         }
         // change appbar, toolbar and tabs colour
         toolbar.setBackgroundColor(primaryColour);
