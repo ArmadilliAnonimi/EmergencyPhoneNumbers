@@ -101,7 +101,7 @@ public class EmergencyTab extends Fragment {
 
 
 
-        System.out.println("EmergencyFragment: onCreateView");
+        System.out.println("EmergencyFragment: AJJHDIH onCreateView");
         return view;
     }
 
