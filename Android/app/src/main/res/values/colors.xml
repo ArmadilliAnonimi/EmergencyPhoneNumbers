@@ -11,8 +11,8 @@
     <color name="colorAccent">#ffffff</color>
     <color name="colorEmergencyCardsText">#616161</color>
 
-    <color name="colorDoneContacts">#00C853</color>
-    <color name="colorCancelContacts">#FF6D00</color>
-    <color name="colorClearContacts">#D50000</color>
+    <color name="colorDoneContacts">#2979FF</color>
+    <color name="colorCancelContactsText">#FF6D00</color>
+    <color name="colorClearContactsText">#D50000</color>
 
 </resources>

@@ -107,7 +107,7 @@ public class ContactsPickerActivity extends AppCompatActivity {
                 contactsListAdapter.selectedContactsList = new LinkedHashMap<>();
                 contactsListAdapter.notifyDataSetChanged();
                 CharSequence message = getResources().getString(R.string.contacts_toast);
-                Toast toast = Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG);
+                Toast toast = Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT);
                 toast.setGravity(Gravity.CENTER,0,-100);
                 toast.show();
             }

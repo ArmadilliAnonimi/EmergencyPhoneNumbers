@@ -96,5 +96,7 @@
 
     <string name="ellipses" translatable="false">&#8230;</string>
     <string name="contacts_toast">Deselected all contacts. Press CANCEL to undo.</string>
+    <string name="contacts_loading">Loading&#8230;</string>
+    <string name="search_hint">Search</string>
 
 </resources>

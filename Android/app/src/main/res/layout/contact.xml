@@ -14,65 +14,67 @@
         android:layout_height="wrap_content"
         android:id="@+id/txt_filter"
         android:contentDescription="@string/search_contact"
-        android:hint="Search"
+        android:hint="@string/search_hint"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"/>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/txt_load_progress"
         android:layout_below="@+id/txt_filter"
-        android:text="Loading..."
-        android:contentDescription="Loading..."/>
+        android:text="@string/contacts_loading"
+        android:contentDescription="@string/contacts_loading"/>
 
     <ListView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/txt_load_progress"
         android:layout_above="@+id/buttonPanel"
-        android:id="@+id/lst_contacts_chooser" />
+        android:id="@+id/lst_contacts_chooser"/>
 
-    <LinearLayout
+    <RelativeLayout
         android:id="@+id/buttonPanel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:orientation="horizontal"
-        android:weightSum="1"
         android:paddingTop="@dimen/activity_half_margin">
 
         <Button
+            android:id="@+id/btn_remove_all"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/btn_remove_all"
+            android:layout_gravity="start"
+            style="?android:attr/borderlessButtonStyle"
             android:contentDescription="@string/CLEAR"
             android:text="@string/CLEAR"
-            android:layout_weight="0.02"
-            android:textColor="@color/colorAccent"
-            android:backgroundTint="@color/colorClearContacts"/>
+            android:textColor="@color/colorClearContactsText"/>
 
         <Button
+            android:id="@+id/btn_cancel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/btn_cancel"
+            android:layout_gravity="start"
+            android:layout_toRightOf="@+id/btn_remove_all"
+            android:layout_toEndOf="@+id/btn_remove_all"
+            style="?android:attr/borderlessButtonStyle"
             android:contentDescription="@string/CANCEL"
             android:text="@string/CANCEL"
-            android:layout_weight="0.5"
-            android:textColor="@color/colorAccent"
-            android:backgroundTint="@color/colorCancelContacts"/>
+            android:textColor="@color/colorEmergencyCardsText"/>
 
         <Button
+            android:id="@+id/btn_done"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/btn_done"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:textColor="@color/colorAccent"
             android:contentDescription="@string/DONE"
             android:text="@string/DONE"
-            android:layout_weight="0.5"
-            android:textColor="@color/colorAccent"
             android:backgroundTint="@color/colorDoneContacts"/>
 
-    </LinearLayout>
+    </RelativeLayout>
 
 </RelativeLayout>
